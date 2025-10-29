@@ -92,67 +92,6 @@ export default function SiteNav() {
                         <SiteNavCloseIcon />
                       </button>
                     </div>
-
-                    {/* big menu */}
-                    <nav className="mt-10 mb-16 text-white">
-                      <ul className="space-y-6">
-                        {NAV.map((it) => {
-                          const isParent = "children" in it;
-                          if (!isParent) {
-                            const link = it as DefaultLinkType;
-                            return (
-                              <li key={link.label}>
-                                <NavLinkBig
-                                  href={link.href}
-                                  external={link.external}
-                                  onClick={() => setOpen(false)}
-                                >
-                                  {link.label}
-                                </NavLinkBig>
-                              </li>
-                            );
-                          }
-                          const id = it.label;
-                          const openNow = !!exp[id];
-                          return (
-                            <li key={id} className="space-y-2">
-                              <button
-                                type="button"
-                                aria-expanded={openNow}
-                                onClick={() =>
-                                  setExp((m) => ({ ...m, [id]: !m[id] }))
-                                }
-                                className="flex w-full items-center gap-3 text-left text-white"
-                              >
-                                <span className="text-2xl leading-[1.1]">
-                                  {it.label}
-                                </span>
-                                <SiteNavChevronIcon
-                                  className={`mt-2 h-6 w-6 transition-transform ${openNow ? "rotate-180" : ""}`}
-                                />
-                              </button>
-                              <ul
-                                className={`overflow-hidden pl-1 ${
-                                  openNow ? "max-h-[1000px]" : "max-h-0"
-                                } transition-[max-height] duration-300`}
-                              >
-                                {(it.children ?? []).map((c) => (
-                                  <li key={c.href}>
-                                    <Link
-                                      href={c.href}
-                                      className="block py-2 text-lg text-white/85 hover:text-white"
-                                      onClick={() => setOpen(false)}
-                                    >
-                                      {c.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </>,
@@ -172,167 +111,50 @@ export default function SiteNav() {
           background: "#1f1f1f",
         }}
       >
-        <div className="mx-auto flex h-14 w-full items-center justify-between px-6 md:px-10">
-          <button
-            type="button"
-            aria-label="메뉴 열기"
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-            className="hidden items-center rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
-          >
-            <SiteNavHamburgerIcon className="h-12 w-14 text-gray-900" />
-          </button>
-
-          <div aria-hidden className="flex-1" />
+        <div className="mx-auto flex h-14 w-full items-center justify-center px-6 md:px-10">
+          <div className="flex flex-row items-center gap-4">
+            {NAV.map((it) => {
+              return (
+                <div key={it.label}>
+                  <NavLinkBig href={it.href} onClick={() => setOpen(false)}>
+                    {it.label}
+                  </NavLinkBig>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </header>
-
-      {open &&
-        typeof window !== "undefined" &&
-        createPortal(
-          <>
-            <div
-              aria-hidden="true"
-              className="fixed inset-0 z-[59] bg-gradient-to-b from-[#9A16D8] via-[#561BAA] to-[#4B16A3]"
-            />
-            <div
-              role="dialog"
-              aria-modal="true"
-              className="fixed inset-0 z-[60] overflow-y-auto"
-            >
-              {/* gradient backdrop */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#9A16D8] via-[#561BAA] to-[#4B16A3]" />
-
-              {/* content */}
-              <div className="relative mx-auto flex min-h-full w-full max-w-[1440px] flex-col px-6 pt-6 md:px-10">
-                {/* top bar inside overlay */}
-                <div className="flex items-center justify-between">
-                  <button
-                    aria-label="닫기"
-                    onClick={() => setOpen(false)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/60 text-white/90 backdrop-blur-sm hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-                  >
-                    <SiteNavCloseIcon />
-                  </button>
-                </div>
-
-                {/* big menu */}
-                <nav className="mt-10 mb-16 text-white">
-                  <ul className="space-y-8">
-                    {NAV.map((it) => {
-                      const isParent = "children" in it;
-                      if (!isParent) {
-                        const link = it as DefaultLinkType;
-                        return (
-                          <li key={link.label}>
-                            <NavLinkBig
-                              href={link.href}
-                              external={link.external}
-                              onClick={() => setOpen(false)}
-                            >
-                              {link.label}
-                            </NavLinkBig>
-                          </li>
-                        );
-                      }
-                      const id = it.label;
-                      const openNow = !!exp[id];
-                      return (
-                        <li key={id} className="space-y-2">
-                          <button
-                            type="button"
-                            aria-expanded={openNow}
-                            onClick={() =>
-                              setExp((m) => ({ ...m, [id]: !m[id] }))
-                            }
-                            className="flex w-full items-center gap-3 text-left text-white"
-                          >
-                            <span className="text-[44px] leading-[1.1] sm:text-[56px]">
-                              {it.label}
-                            </span>
-                            <SiteNavChevronIcon
-                              className={`mt-2 h-6 w-6 transition-transform ${openNow ? "rotate-180" : ""}`}
-                            />
-                          </button>
-                          <ul
-                            className={`overflow-hidden pl-1 ${
-                              openNow ? "max-h-[1000px]" : "max-h-0"
-                            } transition-[max-height] duration-300`}
-                          >
-                            {(it.children ?? []).map((c) => (
-                              <li key={c.href}>
-                                <Link
-                                  href={c.href}
-                                  className="block py-2 text-lg text-white/85 hover:text-white"
-                                  onClick={() => setOpen(false)}
-                                >
-                                  {c.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </>,
-          document.body
-        )}
     </>
   );
 }
 
 function NavLinkBig({
   href,
-  external,
   onClick,
   children,
 }: {
   href: string;
-  external?: boolean;
   onClick?: () => void;
   children: React.ReactNode;
 }) {
   const { isMobile, isTablet } = useResponsive();
 
   const mobileCls =
-    "inline-block text-2xl leading-normal text-white hover:text-white/90 focus:outline-none";
+    "inline-block text-xl leading-normal text-white hover:text-white/90 focus:outline-none";
 
   const cls =
-    "inline-block text-[44px] leading-[1.1] sm:text-[56px] text-white hover:text-white/90 focus:outline-none";
+    "inline-block text-2xl leading-[1.1] text-white hover:text-white/90 focus:outline-none";
 
   if (isMobile || isTablet) {
-    return external ? (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={mobileCls}
-        onClick={onClick}
-      >
-        {children}
-      </a>
-    ) : (
+    return (
       <Link href={href} className={mobileCls} onClick={onClick}>
         {children}
       </Link>
     );
   }
 
-  return external ? (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cls}
-      onClick={onClick}
-    >
-      {children}
-    </a>
-  ) : (
+  return (
     <Link href={href} className={cls} onClick={onClick}>
       {children}
     </Link>

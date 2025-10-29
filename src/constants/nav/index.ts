@@ -1,6 +1,4 @@
-type Item =
-  | { label: string; href: string; external?: boolean }
-  | { label: string; children: { label: string; href: string }[] };
+type Item = { label: string; href: string };
 
 export type DefaultLinkType = {
   label: string;
@@ -9,9 +7,7 @@ export type DefaultLinkType = {
 };
 
 export const NAV: Item[] = [
-  { label: "Home", href: "/" },
-  { label: "Company", href: "/company" },
-  { label: "Work", href: "/work" },
-  { label: "News", href: "/news" },
-  { label: "Contact", href: "/contact" },
+  { label: "회사소개", href: "/" },
+  { label: "상품소개", href: "/company" },
+  { label: "프로세스", href: "/work" },
 ];
