@@ -1,302 +1,91 @@
 "use client";
-import React, { useRef, useEffect, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useResponsive } from "../../lib/useResponsive";
-import {
-  LandingBottomArrowIcon,
-  MobileLandingBottomArrowIcon,
-} from "../../icons";
-import { NEXT_PUBLIC_CDN_BASE } from "../../lib/env";
-
-// hello
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-interface AnimatedSectionProps {
-  children: ReactNode;
-  index: number;
-}
-
-const AnimatedSection = ({ children, index }: AnimatedSectionProps) => {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const section = sectionRef.current;
-    const textElements = section.querySelectorAll(".animate-text");
-    const imageElements = section.querySelectorAll(".animate-image");
-
-    // 초기 상태 설정
-    gsap.set(textElements, { y: 100, opacity: 0 });
-    gsap.set(imageElements, { y: 100, opacity: 0 });
-
-    // 페이지 로드 시 첫 번째 섹션만 즉시 애니메이션
-    if (index === 0) {
-      const tl = gsap.timeline();
-
-      textElements.forEach((element, i) => {
-        tl.to(
-          element,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          i * 0.1
-        );
-      });
-
-      imageElements.forEach((element, i) => {
-        tl.to(
-          element,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          textElements.length * 0.1 + i * 0.1
-        );
-      });
-    }
-
-    // 스크롤 트리거 설정 - 스크롤 기반 애니메이션
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        end: "bottom 15%",
-        toggleActions: "play none none reverse",
-        markers: false,
-      },
-    });
-
-    // 텍스트 요소들을 순차적으로 애니메이션
-    textElements.forEach((element, i) => {
-      tl.to(
-        element,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        i * 0.08
-      );
-    });
-
-    // 이미지 애니메이션
-    imageElements.forEach((element, i) => {
-      tl.to(
-        element,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        textElements.length * 0.08 + i * 0.08
-      );
-    });
-
-    return () => {
-      tl.scrollTrigger?.kill();
-    };
-  }, [index]);
-
-  return (
-    <div ref={sectionRef} className="min-h-screen flex items-center">
-      {children}
-    </div>
-  );
-};
 
 export default function LandingPage() {
   const { isMobile, isTablet } = useResponsive();
-  const secondSectionRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
 
-  const handleArrowClick = () => {
-    if (secondSectionRef.current) {
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: {
-          y: secondSectionRef.current,
-          offsetY: 0,
-        },
-        ease: "power2.inOut",
-      });
-    }
-  };
+  useEffect(() => {
+    // Add any animations here if needed
+  }, []);
 
   if (isMobile || isTablet) {
     return (
-      <div className="min-h-screen bg-white">
-        {/* First Section - Collage Layout */}
-        <div className="p-6">
-          <div className="items-center flex flex-col">
-            <AnimatedSection index={0}>
-              <div className="min-h-screen grid grid-cols-1 gap-12">
-                {/* Top Left Text Block */}
-                <div className="animate-text">
-                  <p className="font-sans font-normal text-3xl text-gray-800 leading-[56px] tracking-normal"></p>
-                </div>
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-20">
+        {/* Hero Section */}
+        <div className="w-full max-w-4xl space-y-8 text-center">
+          {/* Repeated Text */}
+          <div ref={heroTextRef} className="space-y-2">
+            <h1 className="text-3xl font-bold text-gray-900 leading-tight">
+              성과를 만드는 디지털 마케팅
+            </h1>
+          </div>
 
-                {/* Top Right Image - Fisheye Effect */}
-                <div className="animate-image">
-                  <div className="relative max-w-96 h-72 overflow-hidden">
-                    <img
-                      src={`${NEXT_PUBLIC_CDN_BASE}/images/jessica.png`}
-                      alt="Person with fisheye lens effect"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
+          {/* Main Tagline */}
+          <div className="pt-8">
+            <h3 className="text-2xl font-bold text-gray-900 leading-relaxed">
+              # High & Dynamic
+              <br />
+              모두의 성장이 시작되는 곳
+            </h3>
+          </div>
 
-                {/* Middle Left Image - Social Woman */}
-                <div className="animate-image mt-8">
-                  <div className="relative max-w-96 h-72 md:w-80 md:h-[400px] overflow-hidden">
-                    <img
-                      src={`${NEXT_PUBLIC_CDN_BASE}/images/social.png`}
-                      alt="Smiling man with hands on cheeks"
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-
-                {/* Middle Right Text Block - Purple Gradient */}
-                <div className="animate-text mt-16 md:row-start-2 md:col-start-2 md:justify-self-end">
-                  <p className="font-sans font-normal text-[28px] leading-[42px] md:text-[40px] md:leading-[70px] bg-gradient-to-r from-[#FF0169] via-[#D300C5] to-[#7638FA] bg-clip-text text-transparent tracking-normal text-right"></p>
-                </div>
-
-                {/* Bottom Right Image - Three People */}
-                <div className="animate-image md:row-start-3 md:col-start-2 md:justify-self-end mt-16">
-                  <div className="relative max-w-96 h-72 md:w-[500px] md:h-80 overflow-hidden">
-                    <img
-                      src={`${NEXT_PUBLIC_CDN_BASE}/images/good-face.png`}
-                      alt="Three people looking down"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-
-                {/* Bottom Arrow */}
-                <button
-                  type="button"
-                  onClick={handleArrowClick}
-                  className="animate-text justify-self-start self-end -mt-12 md:row-start-4 md:col-start-1 hover:scale-110 transition-transform duration-200"
-                  aria-label="Scroll Down"
-                >
-                  {isMobile ? (
-                    <MobileLandingBottomArrowIcon />
-                  ) : (
-                    <LandingBottomArrowIcon />
-                  )}
-                </button>
-              </div>
-            </AnimatedSection>
+          {/* CTA Button */}
+          <div className="pt-8">
+            <Link
+              href="/contact"
+              className="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded-full hover:bg-gray-800 transition-colors duration-200"
+            >
+              문의하기
+            </Link>
           </div>
         </div>
-
-        <div ref={secondSectionRef} className="min-h-screen bg-black">
-          <AnimatedSection index={1}>
-            <div className="relative w-full h-screen">
-              <div className="flex w-full h-full">
-                <div className="flex-1 relative animate-image">
-                  <img
-                    src={`${NEXT_PUBLIC_CDN_BASE}/images/Background.png`}
-                    alt="Person with hands over eyes peeking through fingers"
-                    className="object-cover max-w-full h-full"
-                  />
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
-              </div>
-
-              {/* Overlay Text */}
-              <div className="absolute inset-0 flex items-center justify-center animate-text">
-                <div className="text-left px-8">
-                  <p className="text-2xl font-montserrat font-semibold text-white leading-loose tracking-normal"></p>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* First Section - Collage Layout */}
-      <div className="p-16">
-        <div className="max-w-full items-center flex flex-col">
-          <AnimatedSection index={0}>
-            <div className="min-h-screen grid grid-cols-1 gap-8 md:grid-cols-2 md:grid-rows-[auto_auto_auto]">
-              {/* Top Left Text Block */}
-              <div className="animate-text">
-                <p className="font-arial font-normal text-[80px] text-gray-800 leading-tight md:text-[64px] md:leading-[90px] tracking-normal"></p>
-              </div>
+    <main
+      className="min-h-screen flex flex-col items-center justify-center px-16 py-32"
+      style={{
+        background:
+          "radial-gradient(circle at 50% 50%, #3355b8 0%, #232b40 50%, #1f1f1f 100%)",
+      }}
+    >
+      {/* Hero Section */}
+      <div className="w-full space-y-12 text-center flex flex-col items-center justify-center">
+        {/* Repeated Text with gradient effect */}
+        <div
+          ref={heroTextRef}
+          className="space-y-4 rounded-3xl bg-white/10 p-2 w-1/6"
+        >
+          <h4 className="text-lg font-bold text-white leading-tight">
+            성과를 만드는 디지털 마케팅
+          </h4>
+        </div>
 
-              {/* Top Right Image - Fisheye Effect */}
-              <div className="animate-image justify-self-end md:row-start-1 md:col-start-2">
-                <div className="relative w-64 h-64 md:w-[450px] md:h-[400px] overflow-hidden">
-                  <img
-                    src={`${NEXT_PUBLIC_CDN_BASE}/images/jessica.png`}
-                    alt="Person with fisheye lens effect"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+        {/* Main Tagline */}
+        <div className="pt-12 space-y-12">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-relaxed">
+            High & Dynamic
+          </h3>
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-relaxed">
+            모두의 성장이 시작되는 곳
+          </h3>
+        </div>
 
-              {/* Middle Left Image - Social Woman */}
-              <div className="animate-image md:row-start-2 md:col-start-1 mt-24">
-                <div className="relative w-full md:w-[450px] md:h-[700px] rounded-lg overflow-hidden">
-                  <img
-                    src={`${NEXT_PUBLIC_CDN_BASE}/images/social.png`}
-                    alt="Smiling man with hands on cheeks"
-                    className="object-cover rounded-lg"
-                  />
-                </div>
-              </div>
-
-              {/* Middle Right Text Block - Purple Gradient */}
-              <div className="animate-text mt-32 md:row-start-2 md:col-start-2 md:justify-self-end">
-                <p className="font-arial font-normal text-[28px] leading-tight md:text-[64px] md:leading-[90px] tracking-normal bg-gradient-to-r from-[#FF0169] via-[#D300C5] to-[#7638FA] bg-clip-text text-transparent text-right"></p>
-              </div>
-
-              {/* Bottom Right Image - Good Face Man */}
-              <div className="animate-image md:row-start-5 md:col-start-2 md:justify-self-end">
-                <div className="relative w-full h-56 md:w-[450px] md:h-[400px] rounded-lg overflow-hidden">
-                  <img
-                    src={`${NEXT_PUBLIC_CDN_BASE}/images/good-face.png`}
-                    alt="Three people looking down"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Bottom Arrow */}
-              <button
-                type="button"
-                onClick={handleArrowClick}
-                className="animate-text justify-self-start self-end mt-72 md:row-start-5 md:col-start-1 hover:scale-110 transition-transform duration-200"
-                aria-label="Scroll Down"
-              >
-                <LandingBottomArrowIcon />
-              </button>
-            </div>
-          </AnimatedSection>
+        {/* CTA Button */}
+        <div className="pt-16">
+          <Link
+            href="/contact"
+            className="inline-block px-12 py-5 bg-blue-500 text-white text-xl font-medium rounded-md hover:bg-gray-800 transition-colors duration-200"
+          >
+            문의하기
+          </Link>
         </div>
       </div>
-
-      <div ref={secondSectionRef} className="mt-56 bg-black/50">
-        <AnimatedSection index={1}>
-          <></>
-        </AnimatedSection>
-      </div>
-    </div>
+    </main>
   );
 }

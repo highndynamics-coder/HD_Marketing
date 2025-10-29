@@ -22,54 +22,24 @@ interface FooterSocial {
 export const footerLinks: FooterLink[] = [
   {
     id: "1",
-    text: "Home",
-    href: "/",
+    text: "회사소개",
+    href: "/company",
   },
   {
     id: "2",
-    text: "About Us",
-    href: "/about-us/we-are",
-    subItems: [
-      { id: "2-1", text: "We Are", href: "/about-us/we-are" },
-      { id: "2-2", text: "Teamwork", href: "/about-us/team-work" },
-      { id: "2-3", text: "Core Values", href: "/about-us/core-value" },
-      { id: "2-4", text: "Careers", href: "/about-us/careers" },
-    ],
+    text: "상품소개",
+    href: "/work",
   },
   {
     id: "3",
-    text: "Addeep Is",
-    href: "/addeep-is/digital-platform-innovation",
-    subItems: [
-      {
-        id: "3-1",
-        text: "Digital Platform Innovation",
-        href: "/addeep-is/digital-platform-innovation",
-      },
-      { id: "3-2", text: "Addeep GPR AI Summary", href: "/addeep-is/summary" },
-      {
-        id: "3-3",
-        text: "Addeep S2E Social Media Summary",
-        href: "/addeep-is/summary?type=sns",
-      },
-      {
-        id: "3-4",
-        text: "Addeep Social to Earn",
-        href: "/addeep-is/platform-to-earn",
-      },
-    ],
+    text: "프로세스",
+    href: "/process",
   },
   {
     id: "4",
-    text: "Blog & Social Media Channels",
-    href: "/blog-social-media-channel",
+    text: "문의하기",
+    href: "/contact",
   },
-  {
-    id: "5",
-    text: "Announcement",
-    href: "/announcement",
-  },
-  { id: "6", text: "Event", href: "/events" },
 ];
 
 export const socialIcons: FooterSocial[] = [
