@@ -86,6 +86,66 @@ export default function LandingPage() {
           </Link>
         </div>
       </div>
+
+      {/* Infinite Logo Slider */}
+      <div className="absolute top-full w-full overflow-hidden py-8 bg-white/5">
+        <div className="flex animate-scroll">
+          {/* First Set */}
+          <div className="flex items-center gap-16 min-w-max px-8">
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              Logoipsum
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              CompanyName
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              BrandStudio
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              DesignCo
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              TechLab
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              CreativeHub
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              InnoWorks
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              DigitalPro
+            </span>
+          </div>
+          {/* Second Set (Duplicate for seamless loop) */}
+          <div className="flex items-center gap-16 min-w-max px-8">
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              Logoipsum
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              CompanyName
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              BrandStudio
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              DesignCo
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              TechLab
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              CreativeHub
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              InnoWorks
+            </span>
+            <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
+              DigitalPro
+            </span>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
