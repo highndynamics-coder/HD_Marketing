@@ -64,6 +64,14 @@ export default function AppleDemoPage() {
   const cert1Ref = useRef<HTMLDivElement>(null);
   const cert2Ref = useRef<HTMLDivElement>(null);
   const cert3Ref = useRef<HTMLDivElement>(null);
+  const section8Ref = useRef<HTMLDivElement>(null);
+  const result1Ref = useRef<HTMLDivElement>(null);
+  const result2Ref = useRef<HTMLDivElement>(null);
+  const result3Ref = useRef<HTMLDivElement>(null);
+  const finalMessageRef = useRef<HTMLDivElement>(null);
+  const section9Ref = useRef<HTMLDivElement>(null);
+  const closingLine1Ref = useRef<HTMLDivElement>(null);
+  const closingLine2Ref = useRef<HTMLDivElement>(null);
   const [characters, setCharacters] = useState<CharacterWithDot[]>([]);
 
   useEffect(() => {
@@ -665,6 +673,130 @@ export default function AppleDemoPage() {
           { opacity: 0, x: -30 },
           { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
           2.2
+        );
+
+      // Section 7 fade out on scroll
+      gsap.to(section7Ref.current, {
+        opacity: 0,
+        scale: 0.95,
+        scrollTrigger: {
+          trigger: section7Ref.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: false,
+        },
+      });
+
+      // Section 8 fade in on scroll
+      gsap.fromTo(
+        section8Ref.current,
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: section8Ref.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Section 8 animations
+      const section8Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section8Ref.current,
+          start: "top center",
+          end: "bottom bottom",
+          toggleActions: "play none none none",
+        },
+      });
+
+      section8Timeline
+        .fromTo(
+          result1Ref.current,
+          { opacity: 0, scale: 0.8, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
+          0
+        )
+        .fromTo(
+          result2Ref.current,
+          { opacity: 0, scale: 0.8, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
+          0.3
+        )
+        .fromTo(
+          result3Ref.current,
+          { opacity: 0, scale: 0.8, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
+          0.6
+        )
+        .fromTo(
+          finalMessageRef.current,
+          { opacity: 0, scale: 0.9, y: 50 },
+          { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" },
+          1.5
+        );
+
+      // Section 8 fade out on scroll
+      gsap.to(section8Ref.current, {
+        opacity: 0,
+        scale: 0.95,
+        scrollTrigger: {
+          trigger: section8Ref.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: false,
+        },
+      });
+
+      // Section 9 fade in on scroll
+      gsap.fromTo(
+        section9Ref.current,
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: section9Ref.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Section 9 animations
+      const section9Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section9Ref.current,
+          start: "top center",
+          end: "bottom bottom",
+          toggleActions: "play none none none",
+        },
+      });
+
+      section9Timeline
+        .fromTo(
+          closingLine1Ref.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+          0
+        )
+        .fromTo(
+          closingLine2Ref.current,
+          { opacity: 0, scale: 0.95, y: 40 },
+          { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" },
+          0.8
         );
     });
 
@@ -1327,6 +1459,122 @@ export default function AppleDemoPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 8: Final CTA */}
+      <section
+        ref={section8Ref}
+        className="relative min-h-screen w-full flex items-center justify-center py-20"
+      >
+        {/* Dynamic background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+            <div
+              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse"
+              style={{ animationDelay: "1s" }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
+          {/* Results Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {/* Result 1 */}
+            <div ref={result1Ref} className="opacity-0">
+              <div className="text-center space-y-4">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-2xl">
+                  <span className="text-3xl">🏆</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                  플레이스 1 페이지
+                </h3>
+              </div>
+            </div>
+
+            {/* Result 2 */}
+            <div ref={result2Ref} className="opacity-0">
+              <div className="text-center space-y-4">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-2xl">
+                  <span className="text-3xl">📈</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                  꾸준한 매출 상승
+                </h3>
+              </div>
+            </div>
+
+            {/* Result 3 */}
+            <div ref={result3Ref} className="opacity-0">
+              <div className="text-center space-y-4">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-2xl">
+                  <span className="text-3xl">👥</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                  끊이지 않는 손님들
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional point */}
+          <div className="text-center py-8">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-light text-white/80">
+              끝이 안 보이는 웨이팅
+            </h3>
+          </div>
+
+          {/* Final strong message */}
+          <div ref={finalMessageRef} className="opacity-0 text-center py-16">
+            <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-1 shadow-2xl">
+              <div className="bg-gray-900 rounded-3xl px-12 md:px-16 py-12 md:py-16">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 leading-tight">
+                  이제 더 이상
+                  <br />남 이야기가 아닙니다
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 9: Final Closing */}
+      <section
+        ref={section9Ref}
+        className="relative min-h-screen w-full flex items-center justify-center py-20"
+      >
+        {/* Warm background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-50 via-yellow-50 to-white">
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-yellow-200 rounded-full blur-3xl"></div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
+          {/* First line - moderate emphasis */}
+          <div ref={closingLine1Ref} className="opacity-0">
+            <p className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-800 leading-relaxed">
+              '먹고 살만 해지는 것부터'
+            </p>
+          </div>
+
+          {/* Second line - strong emphasis */}
+          <div ref={closingLine2Ref} className="opacity-0 py-12">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+              우리는 모두가 사랑하는
+              <br />
+              방식으로 성장합니다.
+            </h1>
+          </div>
+
+          {/* Subtle accent */}
+          <div className="pt-8">
+            <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
           </div>
         </div>
       </section>
