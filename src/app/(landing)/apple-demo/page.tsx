@@ -24,12 +24,12 @@ export default function AppleDemoPage() {
   const [characters, setCharacters] = useState<CharacterWithDot[]>([]);
 
   useEffect(() => {
-    const textArray = ["먹", "고", "살", "만"];
-    let typingInterval: NodeJS.Timeout | null = null;
+    // const textArray = ["먹", "고", "살", "만"];
+    // let typingInterval: NodeJS.Timeout | null = null;
 
     const ctx = gsap.context(() => {
       // Reset states
-      setCharacters([]);
+      // setCharacters([]);
 
       // Timeline for precise control
       const tl = gsap.timeline();
@@ -64,21 +64,21 @@ export default function AppleDemoPage() {
         1.2
       );
 
-      // Line 2: "먹고 살만" typing effect
-      tl.add(() => {
-        let currentIndex = 0;
-        typingInterval = setInterval(() => {
-          if (currentIndex < textArray.length) {
-            setCharacters((prev) => [
-              ...prev,
-              { char: textArray[currentIndex], showDot: true },
-            ]);
-            currentIndex++;
-          } else {
-            if (typingInterval) clearInterval(typingInterval);
-          }
-        }, 450); // 한 글자당 450ms
-      }, 1.2);
+      // Line 2: "먹고 살만" typing effect (TEMPORARILY DISABLED)
+      // tl.add(() => {
+      //   let currentIndex = 0;
+      //   typingInterval = setInterval(() => {
+      //     if (currentIndex < textArray.length) {
+      //       setCharacters((prev) => [
+      //         ...prev,
+      //         { char: textArray[currentIndex], showDot: true },
+      //       ]);
+      //       currentIndex++;
+      //     } else {
+      //       if (typingInterval) clearInterval(typingInterval);
+      //     }
+      //   }, 450); // 한 글자당 450ms
+      // }, 1.2);
 
       // Line 3: "하십니까?" - 3.8s
       tl.fromTo(
@@ -95,12 +95,12 @@ export default function AppleDemoPage() {
           duration: 1.5,
           ease: "power2.out",
         },
-        3.8
+        1.8
       );
     });
 
     return () => {
-      if (typingInterval) clearInterval(typingInterval);
+      // if (typingInterval) clearInterval(typingInterval);
       ctx.revert();
     };
   }, []);
@@ -208,61 +208,30 @@ export default function AppleDemoPage() {
             </h2>
           </div>
 
-          {/* Line 2: "먹고 살만" with typing effect and dots */}
+          {/* Line 2: "먹고 살만" - simple text (typing effect disabled) */}
           <div
             ref={line2Ref}
-            className="opacity-0 min-h-[120px] flex flex-col items-center justify-center space-y-8"
+            className="opacity-0"
             style={{
               letterSpacing: "0.2em",
             }}
           >
-            <div className="flex items-center justify-center gap-4 md:gap-6 lg:gap-8">
-              {characters.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative flex flex-col items-center"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                  }}
-                >
-                  {/* Dot above character with bounce animation */}
-                  <span
-                    className="text-3xl md:text-4xl lg:text-5xl text-gray-500 mb-2 animate-bounceDot"
-                    style={{
-                      animationDelay: `${index * 0.05}s`,
-                    }}
-                  >
-                    ·
-                  </span>
-                  {/* Character with slide up animation */}
-                  <span
-                    className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-700 animate-slideUp"
-                    style={{
-                      animationDelay: `${index * 0.05 + 0.2}s`,
-                    }}
-                  >
-                    {item.char}
-                  </span>
-                </div>
-              ))}
-              {/* Typing cursor */}
-              {characters.length > 0 && characters.length < 4 && (
-                <span className="inline-block w-1 h-16 md:h-20 lg:h-24 bg-gray-700 ml-2 animate-pulse"></span>
-              )}
-            </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-700 text-center tracking-wider">
+              먹고 살만
+            </h2>
+          </div>
 
-            {/* Line 3: "하십니까?" */}
-            <div
-              ref={line3Ref}
-              className="opacity-0 pt-4"
-              style={{
-                letterSpacing: "0.2em",
-              }}
-            >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 text-center tracking-wider">
-                하십니까?
-              </h1>
-            </div>
+          {/* Line 3: "하십니까?" */}
+          <div
+            ref={line3Ref}
+            className="opacity-0"
+            style={{
+              letterSpacing: "0.2em",
+            }}
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 text-center tracking-wider">
+              하십니까?
+            </h1>
           </div>
         </div>
       </section>
@@ -301,12 +270,36 @@ export default function AppleDemoPage() {
             </p>
           </div>
 
-          {/* Line 7 */}
+          {/* Line 7 - Speech Bubbles */}
           <div ref={line7Ref} className="opacity-0 pt-8">
-            <p className="text-lg md:text-xl lg:text-2xl font-light text-gray-500 text-center leading-relaxed italic">
-              (맛이 없는 거 아니야? , 서비스가 별로 아닐까? , 인테리어가 문제
-              아니야?)
-            </p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+              {/* Bubble 1 */}
+              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
+                <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                  맛이 없는 거 아니야?
+                </p>
+                {/* Tail */}
+                <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+
+              {/* Bubble 2 */}
+              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
+                <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                  서비스가 별로 아닐까?
+                </p>
+                {/* Tail */}
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+
+              {/* Bubble 3 */}
+              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
+                <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                  인테리어가 문제 아니야?
+                </p>
+                {/* Tail */}
+                <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
