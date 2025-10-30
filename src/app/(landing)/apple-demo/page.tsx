@@ -56,6 +56,14 @@ export default function AppleDemoPage() {
   const story6Ref = useRef<HTMLDivElement>(null);
   const story7Ref = useRef<HTMLDivElement>(null);
   const successTitleRef = useRef<HTMLDivElement>(null);
+  const section7Ref = useRef<HTMLDivElement>(null);
+  const ceoQuestionRef = useRef<HTMLDivElement>(null);
+  const ceoGreetingRef = useRef<HTMLDivElement>(null);
+  const ceoNameRef = useRef<HTMLDivElement>(null);
+  const ceoPhotoRef = useRef<HTMLDivElement>(null);
+  const cert1Ref = useRef<HTMLDivElement>(null);
+  const cert2Ref = useRef<HTMLDivElement>(null);
+  const cert3Ref = useRef<HTMLDivElement>(null);
   const [characters, setCharacters] = useState<CharacterWithDot[]>([]);
 
   useEffect(() => {
@@ -571,6 +579,92 @@ export default function AppleDemoPage() {
           { opacity: 0, scale: 0.95 },
           { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.2)" },
           2.5
+        );
+
+      // Section 6 fade out on scroll
+      gsap.to(section6Ref.current, {
+        opacity: 0,
+        scale: 0.95,
+        scrollTrigger: {
+          trigger: section6Ref.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: false,
+        },
+      });
+
+      // Section 7 fade in on scroll
+      gsap.fromTo(
+        section7Ref.current,
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: section7Ref.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Section 7 animations
+      const section7Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section7Ref.current,
+          start: "top center",
+          end: "bottom bottom",
+          toggleActions: "play none none none",
+        },
+      });
+
+      section7Timeline
+        .fromTo(
+          ceoQuestionRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+          0
+        )
+        .fromTo(
+          ceoPhotoRef.current,
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
+          0.5
+        )
+        .fromTo(
+          ceoGreetingRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          1.0
+        )
+        .fromTo(
+          ceoNameRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          1.3
+        )
+        .fromTo(
+          cert1Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
+          1.8
+        )
+        .fromTo(
+          cert2Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
+          2.0
+        )
+        .fromTo(
+          cert3Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
+          2.2
         );
     });
 
@@ -1121,6 +1215,118 @@ export default function AppleDemoPage() {
               <br />
               성공을 도왔습니다
             </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 7: CEO Introduction */}
+      <section
+        ref={section7Ref}
+        className="relative min-h-screen w-full flex items-center justify-center py-20"
+      >
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-5xl px-8 space-y-12">
+          {/* Opening question */}
+          <div ref={ceoQuestionRef} className="opacity-0 text-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-600 italic">
+              그래서 제가 누구냐고요?
+            </h2>
+          </div>
+
+          {/* Main content card */}
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 lg:p-16 shadow-xl border border-gray-200">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              {/* Profile photo placeholder */}
+              <div ref={ceoPhotoRef} className="opacity-0 flex-shrink-0">
+                <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 border-4 border-white shadow-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <p className="text-6xl text-gray-400">👤</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Text content */}
+              <div className="flex-1 text-center md:text-left space-y-6">
+                {/* Greeting */}
+                <div ref={ceoGreetingRef} className="opacity-0">
+                  <p className="text-2xl md:text-3xl font-light text-gray-700">
+                    반갑습니다.
+                  </p>
+                </div>
+
+                {/* Name and title */}
+                <div ref={ceoNameRef} className="opacity-0 space-y-2">
+                  <h3 className="text-xl md:text-2xl font-normal text-gray-600">
+                    종합광고대행사 HD 컴퍼니
+                  </h3>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                    대표 홍도현
+                  </h2>
+                  <p className="text-lg md:text-xl text-gray-500">입니다.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Certifications */}
+            <div className="mt-12 pt-8 border-t border-gray-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                {/* Cert 1 */}
+                <div ref={cert1Ref} className="opacity-0">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border border-blue-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shadow-md">
+                        ✓
+                      </div>
+                      <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        검색광고 마케터
+                      </h4>
+                    </div>
+                    <p className="text-2xl font-bold text-blue-600 text-right">
+                      1급
+                    </p>
+                  </div>
+                </div>
+
+                {/* Cert 2 */}
+                <div ref={cert2Ref} className="opacity-0">
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold shadow-md">
+                        ✓
+                      </div>
+                      <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        SNS광고마케터
+                      </h4>
+                    </div>
+                    <p className="text-2xl font-bold text-purple-600 text-right">
+                      1급
+                    </p>
+                  </div>
+                </div>
+
+                {/* Cert 3 */}
+                <div ref={cert3Ref} className="opacity-0">
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold shadow-md">
+                        ✓
+                      </div>
+                      <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        마케팅 대행
+                      </h4>
+                    </div>
+                    <p className="text-2xl font-bold text-green-600 text-right">
+                      250+
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
