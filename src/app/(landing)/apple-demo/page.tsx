@@ -14,6 +14,7 @@ interface CharacterWithDot {
 export default function AppleDemoPage() {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
+  const section3Ref = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLDivElement>(null);
   const line2Ref = useRef<HTMLDivElement>(null);
   const line3Ref = useRef<HTMLDivElement>(null);
@@ -21,6 +22,11 @@ export default function AppleDemoPage() {
   const line5Ref = useRef<HTMLDivElement>(null);
   const line6Ref = useRef<HTMLDivElement>(null);
   const line7Ref = useRef<HTMLDivElement>(null);
+  const questionRef = useRef<HTMLDivElement>(null);
+  const answer1Ref = useRef<HTMLDivElement>(null);
+  const answer2Ref = useRef<HTMLDivElement>(null);
+  const answer3Ref = useRef<HTMLDivElement>(null);
+  const answer4Ref = useRef<HTMLDivElement>(null);
   const [characters, setCharacters] = useState<CharacterWithDot[]>([]);
 
   useEffect(() => {
@@ -140,6 +146,19 @@ export default function AppleDemoPage() {
         }
       );
 
+      // Section 2 fade out on scroll
+      gsap.to(section2Ref.current, {
+        opacity: 0,
+        scale: 0.95,
+        scrollTrigger: {
+          trigger: section2Ref.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: false,
+        },
+      });
+
       // Section 2 text animations
       const section2Timeline = gsap.timeline({
         scrollTrigger: {
@@ -174,6 +193,67 @@ export default function AppleDemoPage() {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
           1.5
+        );
+
+      // Section 3 fade in on scroll
+      gsap.fromTo(
+        section3Ref.current,
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: section3Ref.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Section 3 Q&A animations
+      const section3Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section3Ref.current,
+          start: "top center",
+          end: "bottom bottom",
+          toggleActions: "play none none none",
+        },
+      });
+
+      section3Timeline
+        .fromTo(
+          questionRef.current,
+          { opacity: 0, scale: 0.95, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 1.0, ease: "back.out(1.2)" },
+          0
+        )
+        .fromTo(
+          answer1Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+          0.8
+        )
+        .fromTo(
+          answer2Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+          1.3
+        )
+        .fromTo(
+          answer3Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+          1.8
+        )
+        .fromTo(
+          answer4Ref.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+          2.3
         );
     });
 
@@ -298,6 +378,74 @@ export default function AppleDemoPage() {
                 </p>
                 {/* Tail */}
                 <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Q&A */}
+      <section
+        ref={section3Ref}
+        className="relative min-h-screen w-full flex items-center justify-center"
+      >
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-green-200 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-yellow-200 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* Q&A content section */}
+        <div className="relative z-10 w-full max-w-5xl px-8 space-y-12">
+          {/* Question Box */}
+          <div ref={questionRef} className="opacity-0">
+            <div className="relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl px-8 md:px-12 py-8 md:py-10 shadow-2xl border-2 border-blue-200">
+              <div className="absolute -top-6 left-8 bg-blue-500 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg">
+                Q
+              </div>
+              <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-800 text-center leading-relaxed pt-4">
+                대표님! 저희 가게는 왜 사람이 안 올까요?
+              </p>
+            </div>
+          </div>
+
+          {/* Answer Section */}
+          <div className="space-y-6 md:space-y-8 pl-0 md:pl-8">
+            {/* A Badge */}
+            <div className="flex items-start gap-6">
+              <div className="flex-shrink-0 bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                A
+              </div>
+              <div className="flex-1 space-y-6">
+                {/* Answer 1 */}
+                <div ref={answer1Ref} className="opacity-0">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 leading-relaxed">
+                    잘 모르겠습니다..
+                  </p>
+                </div>
+
+                {/* Answer 2 */}
+                <div ref={answer2Ref} className="opacity-0">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 leading-relaxed">
+                    정말 몰라서 못 옵니다.
+                  </p>
+                </div>
+
+                {/* Answer 3 */}
+                <div ref={answer3Ref} className="opacity-0">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 leading-relaxed">
+                    현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만
+                  </p>
+                </div>
+
+                {/* Answer 4 */}
+                <div ref={answer4Ref} className="opacity-0">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 leading-relaxed">
+                    그만큼 종사자가 너무 많아졌고 인터넷의 발달로
+                    <br />
+                    잘되는 업체들이 더 잘될 수 밖에 없습니다.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
