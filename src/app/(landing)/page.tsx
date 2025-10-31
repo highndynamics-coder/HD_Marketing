@@ -600,27 +600,27 @@ export default function AppleDemoPage() {
       section4Timeline
         .fromTo(
           reason1Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          { opacity: 0, y: 40, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
           0
         )
         .fromTo(
           reason2Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.3
+          { opacity: 0, y: 40, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
+          0.2
         )
         .fromTo(
           reason3Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.6
+          { opacity: 0, y: 40, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
+          0.4
         )
         .fromTo(
           reason4Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.9
+          { opacity: 0, y: 40, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
+          0.6
         )
         .fromTo(
           emphasisRef.current,
@@ -1240,38 +1240,70 @@ export default function AppleDemoPage() {
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
-          {/* Reasons - with checkmark style */}
+          {/* Reasons - modern card style */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {/* Reason 1 */}
-            <div ref={reason1Ref} className="opacity-0 flex items-start gap-4">
-              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gray-400 mt-3"></div>
-              <p className="text-lg md:text-xl lg:text-2xl font-light text-gray-700 leading-relaxed">
-                비수기에도 안정적인 매출을 유지하고,
-              </p>
+            <div ref={reason1Ref} className="opacity-0">
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                    <span className="text-3xl">📊</span>
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
+                      손님이 뜸한 시기에도 안정적인 매출을 유지하고,
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Reason 2 */}
-            <div ref={reason2Ref} className="opacity-0 flex items-start gap-4">
-              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gray-400 mt-3"></div>
-              <p className="text-lg md:text-xl lg:text-2xl font-light text-gray-700 leading-relaxed">
-                위기에 대비하기 위해서
-              </p>
+            <div ref={reason2Ref} className="opacity-0">
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
+                    <span className="text-3xl">🛡️</span>
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
+                      위기에 대비하기 위해서
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Reason 3 */}
-            <div ref={reason3Ref} className="opacity-0 flex items-start gap-4">
-              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gray-400 mt-3"></div>
-              <p className="text-lg md:text-xl lg:text-2xl font-light text-gray-700 leading-relaxed">
-                내 가게를 찾고, 기억하게 하기 위해서
-              </p>
+            <div ref={reason3Ref} className="opacity-0">
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
+                    <span className="text-3xl">🔍</span>
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
+                      내 가게를 찾고, 기억하게 하기 위해서
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Reason 4 */}
-            <div ref={reason4Ref} className="opacity-0 flex items-start gap-4">
-              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gray-400 mt-3"></div>
-              <p className="text-lg md:text-xl lg:text-2xl font-light text-gray-700 leading-relaxed">
-                우리 가게만의 특별한 점을 어필하기 위해서
-              </p>
+            <div ref={reason4Ref} className="opacity-0">
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
+                    <span className="text-3xl">⭐</span>
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
+                      우리 가게만의 특별한 점을 어필하기 위해서
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
