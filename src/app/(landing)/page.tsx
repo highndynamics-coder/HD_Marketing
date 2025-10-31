@@ -340,6 +340,7 @@ export default function AppleDemoPage() {
   const result1Ref = useRef<HTMLDivElement>(null);
   const result2Ref = useRef<HTMLDivElement>(null);
   const result3Ref = useRef<HTMLDivElement>(null);
+  const result4Ref = useRef<HTMLDivElement>(null);
   const finalMessageRef = useRef<HTMLDivElement>(null);
   const section9Ref = useRef<HTMLDivElement>(null);
   const closingLine1Ref = useRef<HTMLDivElement>(null);
@@ -991,10 +992,16 @@ export default function AppleDemoPage() {
           0.6
         )
         .fromTo(
+          result4Ref.current,
+          { opacity: 0, scale: 0.8, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
+          0.9
+        )
+        .fromTo(
           finalMessageRef.current,
           { opacity: 0, scale: 0.9, y: 50 },
           { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" },
-          1.5
+          1.8
         );
 
       // Section 8 fade out on scroll
@@ -1887,14 +1894,14 @@ export default function AppleDemoPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
           {/* Results Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Result 1 */}
             <div ref={result1Ref} className="opacity-0">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-2xl">
                   <span className="text-3xl">🏆</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
                   플레이스 1 페이지
                 </h3>
               </div>
@@ -1906,7 +1913,7 @@ export default function AppleDemoPage() {
                 <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-2xl">
                   <span className="text-3xl">📈</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
                   꾸준한 매출 상승
                 </h3>
               </div>
@@ -1918,28 +1925,100 @@ export default function AppleDemoPage() {
                 <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-2xl">
                   <span className="text-3xl">👥</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
                   끊이지 않는 손님들
+                </h3>
+              </div>
+            </div>
+
+            {/* Result 4 */}
+            <div ref={result4Ref} className="opacity-0">
+              <div className="text-center space-y-4">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-2xl">
+                  <span className="text-3xl">⏰</span>
+                </div>
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                  끝이 안보이는 웨이팅
                 </h3>
               </div>
             </div>
           </div>
 
-          {/* Additional point */}
-          <div className="text-center py-8">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-light text-white/80">
-              끝이 안 보이는 웨이팅
-            </h3>
-          </div>
-
           {/* Final strong message */}
           <div ref={finalMessageRef} className="opacity-0 text-center py-16">
             <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-1 shadow-2xl">
-              <div className="bg-gray-900 rounded-3xl px-12 md:px-16 py-12 md:py-16">
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 leading-tight">
-                  이제 더 이상
-                  <br />남 이야기가 아닙니다
-                </h1>
+              <div className="relative bg-gray-900 rounded-3xl px-12 md:px-16 py-12 md:py-16 overflow-hidden">
+                {/* Background icons - diverse professions */}
+                <div className="absolute inset-0 opacity-30 pointer-events-none">
+                  <div
+                    className="absolute top-[10%] left-[5%] text-6xl animate-pulse"
+                    style={{ animationDelay: "0s" }}
+                  >
+                    👨‍👩‍👧‍👦
+                  </div>
+                  <div
+                    className="absolute top-[20%] right-[8%] text-5xl animate-pulse"
+                    style={{ animationDelay: "0.5s" }}
+                  >
+                    👨‍🍳
+                  </div>
+                  <div
+                    className="absolute top-[60%] left-[10%] text-5xl animate-pulse"
+                    style={{ animationDelay: "1s" }}
+                  >
+                    👨‍⚕️
+                  </div>
+                  <div
+                    className="absolute bottom-[15%] right-[12%] text-6xl animate-pulse"
+                    style={{ animationDelay: "1.5s" }}
+                  >
+                    👨‍⚖️
+                  </div>
+                  <div
+                    className="absolute top-[40%] right-[5%] text-5xl animate-pulse"
+                    style={{ animationDelay: "2s" }}
+                  >
+                    👨‍💼
+                  </div>
+                  <div
+                    className="absolute bottom-[20%] left-[8%] text-5xl animate-pulse"
+                    style={{ animationDelay: "2.5s" }}
+                  >
+                    👨‍🔧
+                  </div>
+                  <div
+                    className="absolute top-[15%] left-[50%] text-5xl animate-pulse"
+                    style={{ animationDelay: "3s" }}
+                  >
+                    👨‍🏫
+                  </div>
+                  <div
+                    className="absolute bottom-[40%] left-[15%] text-6xl animate-pulse"
+                    style={{ animationDelay: "3.5s" }}
+                  >
+                    👨‍🌾
+                  </div>
+                  <div
+                    className="absolute top-[50%] right-[18%] text-5xl animate-pulse"
+                    style={{ animationDelay: "4s" }}
+                  >
+                    👨‍💻
+                  </div>
+                  <div
+                    className="absolute bottom-[10%] left-[40%] text-5xl animate-pulse"
+                    style={{ animationDelay: "4.5s" }}
+                  >
+                    👨‍🎨
+                  </div>
+                </div>
+
+                {/* Text with enhanced visibility */}
+                <div className="relative z-10 bg-transparent backdrop-blur-xs rounded-2xl py-8 px-6">
+                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 leading-tight drop-shadow-[0_0_40px_rgba(147,51,234,0.8)]">
+                    이제 더 이상
+                    <br />남 이야기가 아닙니다
+                  </h1>
+                </div>
               </div>
             </div>
           </div>
