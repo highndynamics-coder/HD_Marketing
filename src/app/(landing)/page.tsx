@@ -1766,92 +1766,104 @@ export default function AppleDemoPage() {
       {/* Section 7: CEO Introduction */}
       <section
         ref={section7Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
+        className="relative min-h-screen w-full flex items-center justify-center py-32 bg-gradient-to-b from-gray-50 to-white"
       >
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl"></div>
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl px-8 space-y-12">
+        <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
           {/* Opening question */}
-          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-600 italic">
+          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-400 italic tracking-wide">
               그래서 제가 누구냐고요?
             </h2>
           </div>
 
+          {/* Greeting Section */}
+          <div
+            ref={ceoGreetingRef}
+            className="opacity-0 text-center mb-20 space-y-3"
+          >
+            <h3 className="text-xl md:text-2xl font-light text-gray-600">
+              반갑습니다.
+            </h3>
+            <h4 className="text-lg md:text-xl font-normal text-gray-500">
+              종합광고대행사 HD 컴퍼니
+            </h4>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mt-2">
+              대표 홍도현입니다.
+            </h2>
+          </div>
+
           {/* Main content - Two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left Column: CEO Info */}
-            <div className="space-y-8">
-              {/* Greeting and Name */}
+            <div className="space-y-6">
+              {/* CEO Profile Photo */}
               <div
-                ref={ceoGreetingRef}
-                className="opacity-0 bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-200"
+                ref={ceoPhotoRef}
+                className="opacity-0 flex justify-center lg:justify-start mb-8"
               >
-                <h3 className="text-xl md:text-2xl font-light text-gray-700 mb-4">
-                  반갑습니다
-                </h3>
-                <h4 className="text-lg md:text-xl font-normal text-gray-600 mb-2">
-                  종합광고대행사
-                </h4>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  대표 홍도현
-                </h2>
-                <p className="text-lg md:text-xl text-gray-500 mt-2">입니다.</p>
+                <div className="relative group">
+                  <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-lg ring-4 ring-white ring-offset-4 ring-offset-gray-50 group-hover:shadow-xl transition-all duration-300">
+                    <span className="text-7xl">👤</span>
+                  </div>
+                </div>
               </div>
 
               {/* Certifications - Vertical Layout */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Cert 1 */}
                 <div ref={cert1Ref} className="opacity-0">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border border-blue-200 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shadow-md">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg shadow-sm">
                           ✓
                         </div>
-                        <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
                           검색광고 마케터
                         </h4>
                       </div>
-                      <p className="text-2xl font-bold text-blue-600">1급</p>
+                      <p className="text-2xl md:text-3xl font-bold text-blue-500">
+                        1급
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Cert 2 */}
                 <div ref={cert2Ref} className="opacity-0">
-                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-200 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold shadow-md">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white text-lg shadow-sm">
                           ✓
                         </div>
-                        <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
                           SNS광고마케터
                         </h4>
                       </div>
-                      <p className="text-2xl font-bold text-purple-600">1급</p>
+                      <p className="text-2xl md:text-3xl font-bold text-purple-500">
+                        1급
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Cert 3 */}
                 <div ref={cert3Ref} className="opacity-0">
-                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold shadow-md">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-lg shadow-sm">
                           ✓
                         </div>
-                        <h4 className="text-lg md:text-xl font-bold text-gray-900">
+                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
                           마케팅 대행
                         </h4>
                       </div>
-                      <p className="text-2xl font-bold text-green-600">250+</p>
+                      <p className="text-2xl md:text-3xl font-bold text-green-500">
+                        250+
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1859,15 +1871,15 @@ export default function AppleDemoPage() {
             </div>
 
             {/* Right Column: CEO Message Preview with Hover Effect */}
-            <div ref={ceoPhotoRef} className="opacity-0">
-              <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-200 h-full group hover:shadow-2xl transition-all duration-300">
+            <div ref={ceoNameRef} className="opacity-0">
+              <div className="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg border border-gray-200 h-full group hover:shadow-xl transition-all duration-300">
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-100">
                   High 그리고, dynamics의 시작
                 </h3>
 
                 {/* Scrollable Message Content */}
-                <div className="h-[400px] overflow-y-auto scrollbar-hidden pr-4 text-gray-700 leading-relaxed space-y-4">
+                <div className="h-[400px] overflow-y-auto scrollbar-hidden pr-4 text-gray-700 leading-relaxed space-y-5">
                   <p className="text-base md:text-lg">
                     단순히 빠르고 크게 성장하는 것만이 목표가 아닙니다.
                   </p>
@@ -1904,8 +1916,8 @@ export default function AppleDemoPage() {
                 </div>
 
                 {/* Hover overlay with "더 보기" button */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-end justify-center pb-8">
-                  <button className="bg-white text-gray-900 font-bold px-8 py-4 rounded-full shadow-2xl hover:bg-gray-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl flex items-end justify-center pb-10">
+                  <button className="bg-white text-gray-900 font-semibold px-10 py-4 rounded-full shadow-2xl hover:bg-gray-50 transition-all duration-300 transform translate-y-6 group-hover:translate-y-0">
                     더 보기
                   </button>
                 </div>
