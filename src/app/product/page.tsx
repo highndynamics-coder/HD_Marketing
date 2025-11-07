@@ -3,6 +3,8 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +57,16 @@ export default function ProductPage() {
     },
   ];
 
+  const { data: ProductData, isLoading } = useQuery<any[]>({
+    queryKey: ["product"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("product").select("*");
+
+      if (error) throw error;
+      return data;
+    },
+  });
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animations
@@ -93,6 +105,8 @@ export default function ProductPage() {
 
   const cardRefs = [card1Ref, card2Ref, card3Ref, card4Ref];
 
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100">
       {/* Background pattern */}
@@ -117,34 +131,22 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {products.map((product, index) => (
+          {ProductData?.map((product, index) => (
             <div key={product.id} ref={cardRefs[index]} className="opacity-0">
               <a
                 href="#"
                 className="group block bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
               >
-                {/* Icon */}
-                <div className="mb-6">
-                  <div
-                    className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <span className="text-4xl">{product.emoji}</span>
-                  </div>
-                </div>
-
-                {/* Content */}
                 <div className="space-y-4">
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                     {product.title}
                   </h2>
                   <p className="text-lg md:text-xl font-light text-gray-600 leading-relaxed">
-                    {product.description}
+                    {product.content}
                   </p>
                 </div>
 
-                {/* Arrow indicator */}
                 <div className="mt-6 flex items-center text-blue-500 font-medium">
                   <span className="group-hover:translate-x-2 transition-transform duration-300">
                     자세히 보기
