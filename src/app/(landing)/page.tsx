@@ -6,6 +6,162 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface Reason {
+  emoji: string;
+  text: string;
+  gradient: string;
+}
+
+const reasons: Reason[] = [
+  {
+    emoji: "📊",
+    text: "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
+    gradient: "from-blue-500 to-blue-600",
+  },
+  {
+    emoji: "🛡️",
+    text: "위기에 대비하기 위해서",
+    gradient: "from-purple-500 to-purple-600",
+  },
+  {
+    emoji: "🔍",
+    text: "내 가게를 찾고, 기억하게 하기 위해서",
+    gradient: "from-green-500 to-green-600",
+  },
+  {
+    emoji: "⭐",
+    text: "우리 가게만의 특별한 점을 어필하기 위해서",
+    gradient: "from-orange-500 to-orange-600",
+  },
+];
+
+function WheelPickerReasons() {
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScrollOffset((prev) => prev + 1);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Create an extended array for infinite circular effect based on current scrollOffset
+  const getExtendedReasons = () => {
+    // Show 3 items before and after current scrollOffset
+    const extended = [];
+    for (let i = scrollOffset - 3; i <= scrollOffset + 3; i++) {
+      const actualIndex =
+        ((i % reasons.length) + reasons.length) % reasons.length;
+      extended.push({
+        ...reasons[actualIndex],
+        displayIndex: i,
+      });
+    }
+    return extended;
+  };
+
+  function getItemStyle(displayIndex: number) {
+    const diff = displayIndex - scrollOffset;
+    const isCenter = diff === 0;
+
+    // Center item
+    if (isCenter) {
+      return {
+        scale: 1,
+        opacity: 1,
+        translateY: 0,
+        zIndex: 10,
+      };
+    }
+
+    // Items above and below
+    if (Math.abs(diff) === 1) {
+      return {
+        scale: 0.75,
+        opacity: 0.4,
+        translateY: diff * 80,
+        zIndex: 5,
+      };
+    }
+
+    // Far items
+    return {
+      scale: 0.6,
+      opacity: 0.2,
+      translateY: diff * 120,
+      zIndex: 1,
+    };
+  }
+
+  const extendedReasons = getExtendedReasons();
+
+  return (
+    <div className="relative w-full max-w-3xl mx-auto py-20">
+      <div
+        ref={containerRef}
+        className="relative h-[400px] flex items-center justify-center overflow-hidden"
+      >
+        {extendedReasons.map((reason, idx) => {
+          const style = getItemStyle(reason.displayIndex);
+          const isCenter = reason.displayIndex === scrollOffset;
+
+          // Only render visible items for performance
+          if (Math.abs(reason.displayIndex - scrollOffset) > 2) {
+            return null;
+          }
+
+          return (
+            <div
+              key={`${reason.displayIndex}-${idx}`}
+              className="absolute w-full transition-all duration-700 ease-out"
+              style={{
+                transform: `translateY(${style.translateY}px) scale(${style.scale})`,
+                opacity: style.opacity,
+                zIndex: style.zIndex,
+              }}
+            >
+              <div className="flex items-center justify-center gap-6 px-8">
+                <div
+                  className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${reason.gradient} flex items-center justify-center shadow-lg transition-all duration-700`}
+                >
+                  <span className="text-3xl">{reason.emoji}</span>
+                </div>
+                <p
+                  className={`text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed transition-all duration-700 ${
+                    isCenter
+                      ? "text-gray-900 font-bold"
+                      : "text-gray-400 font-normal"
+                  }`}
+                >
+                  {reason.text}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Navigation dots */}
+      <div className="justify-center gap-2 mt-8 hidden">
+        {reasons.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setScrollOffset(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              scrollOffset % reasons.length === index
+                ? "bg-gray-900 w-8"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+            aria-label={`Go to reason ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
@@ -21,10 +177,6 @@ export default function LandingPage() {
   const line7Ref = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
   const answer1Ref = useRef<HTMLDivElement>(null);
-  const reason1Ref = useRef<HTMLDivElement>(null);
-  const reason2Ref = useRef<HTMLDivElement>(null);
-  const reason3Ref = useRef<HTMLDivElement>(null);
-  const reason4Ref = useRef<HTMLDivElement>(null);
   const emphasisRef = useRef<HTMLDivElement>(null);
   const finalQuestionRef = useRef<HTMLDivElement>(null);
   const doubt1Ref = useRef<HTMLDivElement>(null);
@@ -312,40 +464,16 @@ export default function LandingPage() {
 
       section4Timeline
         .fromTo(
-          reason1Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0
-        )
-        .fromTo(
-          reason2Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.2
-        )
-        .fromTo(
-          reason3Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.4
-        )
-        .fromTo(
-          reason4Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.6
-        )
-        .fromTo(
           emphasisRef.current,
           { opacity: 0, scale: 0.9 },
           { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
-          1.5
+          0
         )
         .fromTo(
           finalQuestionRef.current,
           { opacity: 0, scale: 0.95, y: 30 },
           { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" },
-          2.5
+          1.0
         );
 
       // Section 4 fade out on scroll
@@ -956,72 +1084,8 @@ export default function LandingPage() {
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
-          {/* Reasons - modern card style */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {/* Reason 1 */}
-            <div ref={reason1Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">📊</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      손님이 뜸한 시기에도 안정적인 매출을 유지하고,
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 2 */}
-            <div ref={reason2Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">🛡️</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      위기에 대비하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 3 */}
-            <div ref={reason3Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">🔍</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      내 가게를 찾고, 기억하게 하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 4 */}
-            <div ref={reason4Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">⭐</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      우리 가게만의 특별한 점을 어필하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* WheelPicker Style Reasons */}
+          <WheelPickerReasons />
 
           {/* Marketing emphasis */}
           <div ref={emphasisRef} className="opacity-0 text-center py-12">
