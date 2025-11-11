@@ -1,278 +1,3 @@
-// "use client";
-// import React, { useEffect, useRef } from "react";
-// import Link from "next/link";
-// import { useResponsive } from "../../lib/useResponsive";
-// import { gsap } from "gsap";
-
-// export default function LandingPage() {
-//   const { isMobile, isTablet } = useResponsive();
-//   const heroTextRef = useRef<HTMLDivElement>(null);
-//   const titleRef = useRef<HTMLHeadingElement>(null);
-//   const subtitleRef = useRef<HTMLHeadingElement>(null);
-//   const ctaRef = useRef<HTMLDivElement>(null);
-
-//   useEffect(() => {
-//     const ctx = gsap.context(() => {
-//       // Animate hero text badge
-//       gsap.from(heroTextRef.current, {
-//         y: 50,
-//         opacity: 0,
-//         duration: 0.8,
-//         ease: "power3.out",
-//       });
-
-//       // Animate title "High & Dynamic"
-//       gsap.from(titleRef.current, {
-//         y: 100,
-//         opacity: 0,
-//         duration: 1,
-//         delay: 0.3,
-//         ease: "power3.out",
-//       });
-
-//       // Animate subtitle "모두의 성장이 시작되는 곳"
-//       gsap.from(subtitleRef.current, {
-//         y: 100,
-//         opacity: 0,
-//         duration: 1,
-//         delay: 0.5,
-//         ease: "power3.out",
-//       });
-
-//       // Animate CTA button
-//       gsap.from(ctaRef.current, {
-//         y: 50,
-//         opacity: 0,
-//         duration: 0.8,
-//         delay: 0.7,
-//         ease: "power3.out",
-//       });
-//     });
-
-//     return () => ctx.revert();
-//   }, []);
-
-//   if (isMobile || isTablet) {
-//     return (
-//       <main
-//         className="min-h-screen flex flex-col items-center justify-center px-6 py-20"
-//         style={{
-//           background:
-//             "radial-gradient(circle at 50% 50%, #3355b8 0%, #232b40 50%, #1f1f1f 100%)",
-//         }}
-//       >
-//         {/* Hero Section */}
-//         <div className="w-full space-y-8 text-center flex flex-col items-center justify-center">
-//           {/* Repeated Text with gradient effect */}
-//           <div
-//             ref={heroTextRef}
-//             className="space-y-4 rounded-3xl bg-white/10 p-2 w-2/3 md:w-1/2"
-//           >
-//             <h4 className="text-sm md:text-base font-bold text-white leading-tight">
-//               성과를 만드는 디지털 마케팅
-//             </h4>
-//           </div>
-
-//           {/* Main Tagline */}
-//           <div className="pt-8 space-y-8">
-//             <h3
-//               ref={titleRef}
-//               className="text-3xl md:text-4xl font-bold text-white leading-relaxed"
-//             >
-//               High & Dynamic
-//             </h3>
-//             <h3
-//               ref={subtitleRef}
-//               className="text-3xl md:text-4xl font-bold text-white leading-relaxed"
-//             >
-//               모두의 성장이 시작되는 곳
-//             </h3>
-//           </div>
-
-//           {/* CTA Button */}
-//           <div ref={ctaRef} className="pt-12">
-//             <Link
-//               href="/contact"
-//               className="inline-block px-8 py-4 bg-blue-500 text-white text-lg font-medium rounded-md hover:bg-gray-800 transition-colors duration-200"
-//             >
-//               문의하기
-//             </Link>
-//           </div>
-//         </div>
-
-//         {/* Infinite Logo Slider */}
-//         <div className="absolute top-full w-full overflow-hidden py-6 bg-white/5">
-//           <div className="flex animate-scroll">
-//             {/* First Set */}
-//             <div className="flex items-center gap-12 min-w-max px-6">
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 Logoipsum
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 CompanyName
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 BrandStudio
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 DesignCo
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 TechLab
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 CreativeHub
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 InnoWorks
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 DigitalPro
-//               </span>
-//             </div>
-//             {/* Second Set (Duplicate for seamless loop) */}
-//             <div className="flex items-center gap-12 min-w-max px-6">
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 Logoipsum
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 CompanyName
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 BrandStudio
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 DesignCo
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 TechLab
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 CreativeHub
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 InnoWorks
-//               </span>
-//               <span className="text-lg font-bold text-white/80 whitespace-nowrap">
-//                 DigitalPro
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </main>
-//     );
-//   }
-
-//   return (
-//     <main
-//       className="min-h-screen flex flex-col items-center justify-center px-16 py-32"
-//       style={{
-//         background:
-//           "radial-gradient(circle at 50% 50%, #3355b8 0%, #232b40 50%, #1f1f1f 100%)",
-//       }}
-//     >
-//       {/* Hero Section */}
-//       <div className="w-full space-y-12 text-center flex flex-col items-center justify-center">
-//         {/* Repeated Text with gradient effect */}
-//         <div
-//           ref={heroTextRef}
-//           className="space-y-4 rounded-3xl bg-white/10 p-2 w-1/6"
-//         >
-//           <h4 className="text-lg font-bold text-white leading-tight">
-//             성과를 만드는 디지털 마케팅
-//           </h4>
-//         </div>
-
-//         {/* Main Tagline */}
-//         <div className="pt-12 space-y-8">
-//           <h3
-//             ref={titleRef}
-//             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-relaxed"
-//           >
-//             HIGH & DYNAMIC
-//           </h3>
-//           <h3
-//             ref={subtitleRef}
-//             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-relaxed"
-//           >
-//             모두의 성장이 시작되는 곳
-//           </h3>
-//         </div>
-
-//         {/* CTA Button */}
-//         <div ref={ctaRef} className="pt-16">
-//           <Link
-//             href="/contact"
-//             className="inline-block px-12 py-5 bg-blue-500 text-white text-xl font-medium rounded-md hover:bg-gray-800 transition-colors duration-200"
-//           >
-//             문의하기
-//           </Link>
-//         </div>
-//       </div>
-
-//       {/* Infinite Logo Slider */}
-//       <div className="absolute top-full w-full overflow-hidden py-8 bg-white/5">
-//         <div className="flex animate-scroll">
-//           {/* First Set */}
-//           <div className="flex items-center gap-16 min-w-max px-8">
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               Logoipsum
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               CompanyName
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               BrandStudio
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               DesignCo
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               TechLab
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               CreativeHub
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               InnoWorks
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               DigitalPro
-//             </span>
-//           </div>
-//           {/* Second Set (Duplicate for seamless loop) */}
-//           <div className="flex items-center gap-16 min-w-max px-8">
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               Logoipsum
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               CompanyName
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               BrandStudio
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               DesignCo
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               TechLab
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               CreativeHub
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               InnoWorks
-//             </span>
-//             <span className="text-2xl font-bold text-white/80 whitespace-nowrap">
-//               DigitalPro
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
-
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -281,12 +6,163 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface CharacterWithDot {
-  char: string;
-  showDot: boolean;
+interface Reason {
+  emoji: string;
+  text: string;
+  gradient: string;
 }
 
-export default function AppleDemoPage() {
+const reasons: Reason[] = [
+  {
+    emoji: "📊",
+    text: "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
+    gradient: "from-blue-500 to-blue-600",
+  },
+  {
+    emoji: "🛡️",
+    text: "위기에 대비하기 위해서",
+    gradient: "from-purple-500 to-purple-600",
+  },
+  {
+    emoji: "🔍",
+    text: "내 가게를 찾고, 기억하게 하기 위해서",
+    gradient: "from-green-500 to-green-600",
+  },
+  {
+    emoji: "⭐",
+    text: "우리 가게만의 특별한 점을 어필하기 위해서",
+    gradient: "from-orange-500 to-orange-600",
+  },
+];
+
+function WheelPickerReasons() {
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScrollOffset((prev) => prev + 1);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Create an extended array for infinite circular effect based on current scrollOffset
+  const getExtendedReasons = () => {
+    // Show 3 items before and after current scrollOffset
+    const extended = [];
+    for (let i = scrollOffset - 3; i <= scrollOffset + 3; i++) {
+      const actualIndex =
+        ((i % reasons.length) + reasons.length) % reasons.length;
+      extended.push({
+        ...reasons[actualIndex],
+        displayIndex: i,
+      });
+    }
+    return extended;
+  };
+
+  function getItemStyle(displayIndex: number) {
+    const diff = displayIndex - scrollOffset;
+    const isCenter = diff === 0;
+
+    // Center item
+    if (isCenter) {
+      return {
+        scale: 1,
+        opacity: 1,
+        translateY: 0,
+        zIndex: 10,
+      };
+    }
+
+    // Items above and below
+    if (Math.abs(diff) === 1) {
+      return {
+        scale: 0.75,
+        opacity: 0.4,
+        translateY: diff * 80,
+        zIndex: 5,
+      };
+    }
+
+    // Far items
+    return {
+      scale: 0.6,
+      opacity: 0.2,
+      translateY: diff * 120,
+      zIndex: 1,
+    };
+  }
+
+  const extendedReasons = getExtendedReasons();
+
+  return (
+    <div className="relative w-full max-w-3xl mx-auto py-20">
+      <div
+        ref={containerRef}
+        className="relative h-[400px] flex items-center justify-center overflow-hidden"
+      >
+        {extendedReasons.map((reason, idx) => {
+          const style = getItemStyle(reason.displayIndex);
+          const isCenter = reason.displayIndex === scrollOffset;
+
+          // Only render visible items for performance
+          if (Math.abs(reason.displayIndex - scrollOffset) > 2) {
+            return null;
+          }
+
+          return (
+            <div
+              key={`${reason.displayIndex}-${idx}`}
+              className="absolute w-full transition-all duration-700 ease-out"
+              style={{
+                transform: `translateY(${style.translateY}px) scale(${style.scale})`,
+                opacity: style.opacity,
+                zIndex: style.zIndex,
+              }}
+            >
+              <div className="flex items-center justify-center gap-6 px-8">
+                <div
+                  className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${reason.gradient} flex items-center justify-center shadow-lg transition-all duration-700`}
+                >
+                  <span className="text-3xl">{reason.emoji}</span>
+                </div>
+                <p
+                  className={`text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed transition-all duration-700 ${
+                    isCenter
+                      ? "text-gray-900 font-bold"
+                      : "text-gray-400 font-normal"
+                  }`}
+                >
+                  {reason.text}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Navigation dots */}
+      <div className="justify-center gap-2 mt-8 hidden">
+        {reasons.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setScrollOffset(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              scrollOffset % reasons.length === index
+                ? "bg-gray-900 w-8"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+            aria-label={`Go to reason ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function LandingPage() {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
   const section3Ref = useRef<HTMLDivElement>(null);
@@ -301,10 +177,6 @@ export default function AppleDemoPage() {
   const line7Ref = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
   const answer1Ref = useRef<HTMLDivElement>(null);
-  const reason1Ref = useRef<HTMLDivElement>(null);
-  const reason2Ref = useRef<HTMLDivElement>(null);
-  const reason3Ref = useRef<HTMLDivElement>(null);
-  const reason4Ref = useRef<HTMLDivElement>(null);
   const emphasisRef = useRef<HTMLDivElement>(null);
   const finalQuestionRef = useRef<HTMLDivElement>(null);
   const doubt1Ref = useRef<HTMLDivElement>(null);
@@ -345,20 +217,12 @@ export default function AppleDemoPage() {
   const section9Ref = useRef<HTMLDivElement>(null);
   const closingLine1Ref = useRef<HTMLDivElement>(null);
   const closingLine2Ref = useRef<HTMLDivElement>(null);
-  const [characters, setCharacters] = useState<CharacterWithDot[]>([]);
+  const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
-    // const textArray = ["먹", "고", "살", "만"];
-    // let typingInterval: NodeJS.Timeout | null = null;
-
     const ctx = gsap.context(() => {
-      // Reset states
-      // setCharacters([]);
-
-      // Timeline for precise control
       const tl = gsap.timeline();
 
-      // Line 1: "혹시 지금" - 0.0s Fade-in
       tl.fromTo(
         line1Ref.current,
         {
@@ -374,49 +238,31 @@ export default function AppleDemoPage() {
         0
       );
 
-      // Fade in the line 2 container
+      // Fade in the line 2 container with slide from right to left
       tl.fromTo(
         line2Ref.current,
         {
           opacity: 0,
+          x: 100,
         },
         {
           opacity: 1,
-          duration: 0.3,
-          ease: "power1.inOut",
+          x: 0,
+          duration: 1.0,
+          ease: "power2.out",
         },
         1.2
       );
 
-      // Line 2: "먹고 살만" typing effect (TEMPORARILY DISABLED)
-      // tl.add(() => {
-      //   let currentIndex = 0;
-      //   typingInterval = setInterval(() => {
-      //     if (currentIndex < textArray.length) {
-      //       setCharacters((prev) => [
-      //         ...prev,
-      //         { char: textArray[currentIndex], showDot: true },
-      //       ]);
-      //       currentIndex++;
-      //     } else {
-      //       if (typingInterval) clearInterval(typingInterval);
-      //     }
-      //   }, 450); // 한 글자당 450ms
-      // }, 1.2);
-
-      // Line 3: "하십니까?" - 3.8s
+      // line3Ref - 타이핑 애니메이션은 별도로 처리
       tl.fromTo(
         line3Ref.current,
         {
           opacity: 0,
-          y: 30,
-          scale: 0.95,
         },
         {
           opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
+          duration: 0.5,
           ease: "power2.out",
         },
         1.8
@@ -424,15 +270,34 @@ export default function AppleDemoPage() {
     });
 
     return () => {
-      // if (typingInterval) clearInterval(typingInterval);
       ctx.revert();
     };
   }, []);
 
-  // Parallax scroll effect
+  useEffect(() => {
+    const fullText = "내일은 우리가 함께합니다";
+    let currentIndex = 0;
+
+    const startDelay = setTimeout(() => {
+      const typingInterval = setInterval(() => {
+        if (currentIndex <= fullText.length) {
+          setTypedText(fullText.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 200);
+
+      return () => clearInterval(typingInterval);
+    }, 2300);
+
+    return () => {
+      clearTimeout(startDelay);
+    };
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Section 1 fade out on scroll
       gsap.to(section1Ref.current, {
         opacity: 0,
         scale: 0.95,
@@ -445,7 +310,6 @@ export default function AppleDemoPage() {
         },
       });
 
-      // Section 2 fade in on scroll
       gsap.fromTo(
         section2Ref.current,
         {
@@ -600,40 +464,16 @@ export default function AppleDemoPage() {
 
       section4Timeline
         .fromTo(
-          reason1Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0
-        )
-        .fromTo(
-          reason2Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.2
-        )
-        .fromTo(
-          reason3Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.4
-        )
-        .fromTo(
-          reason4Ref.current,
-          { opacity: 0, y: 40, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.3)" },
-          0.6
-        )
-        .fromTo(
           emphasisRef.current,
           { opacity: 0, scale: 0.9 },
           { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
-          1.5
+          0
         )
         .fromTo(
           finalQuestionRef.current,
           { opacity: 0, scale: 0.95, y: 30 },
           { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" },
-          2.5
+          1.0
         );
 
       // Section 4 fade out on scroll
@@ -1066,33 +906,22 @@ export default function AppleDemoPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100">
-      {/* Section 1: 혹시 지금 ~ 하십니까? */}
       <section
         ref={section1Ref}
         className="relative min-h-screen w-full flex items-center justify-center"
       >
-        {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl"></div>
         </div>
 
-        {/* Main content */}
         <div className="relative z-10 w-full max-w-5xl px-8 py-10 flex flex-col items-center justify-center space-y-16">
-          {/* Line 1: "혹시 지금" */}
-          <div
-            ref={line1Ref}
-            className="opacity-0"
-            style={{
-              letterSpacing: "0.15em",
-            }}
-          >
+          <div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-700 text-center tracking-widest">
-              혹시 지금
+              오늘도
             </h2>
           </div>
 
-          {/* Line 2: "먹고 살만" - simple text (typing effect disabled) */}
           <div
             ref={line2Ref}
             className="opacity-0"
@@ -1101,11 +930,10 @@ export default function AppleDemoPage() {
             }}
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-700 text-center tracking-wider">
-              먹고 살만
+              버티셨다면,
             </h2>
           </div>
 
-          {/* Line 3: "하십니까?" */}
           <div
             ref={line3Ref}
             className="opacity-0"
@@ -1113,8 +941,11 @@ export default function AppleDemoPage() {
               letterSpacing: "0.2em",
             }}
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 text-center tracking-wider">
-              하십니까?
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 text-center tracking-wider min-h-[1.2em]">
+              {typedText}
+              {typedText.length > 0 && typedText.length < 12 && (
+                <span className="animate-pulse">|</span>
+              )}
             </h1>
           </div>
         </div>
@@ -1219,11 +1050,17 @@ export default function AppleDemoPage() {
           <div ref={answer1Ref} className="opacity-0">
             <div className="flex items-start gap-4 justify-end">
               <div className="flex-1 max-w-md">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl rounded-tr-none px-6 py-4 shadow-md ml-auto">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl rounded-tr-none px-6 py-4 shadow-md ml-auto flex flex-col gap-4">
+                  <h2 className="text-2xl font-semibold text-white">
+                    잘 모르겠습니다..
+                  </h2>
+                  <h2 className="text-2xl font-semibold text-white">
+                    정말 몰라서 못 옵니다.
+                  </h2>
                   <p className="text-lg md:text-xl font-normal text-white leading-relaxed">
-                    잘 모르겠습니다.. 네, 맞습니다. 현시점 모든 가게와 스토어의
-                    제품은 상향 평준화 됐지만 그만큼 종사자가 너무 많아졌고
-                    인터넷의 발달로 잘되는 업체들이 더 잘될 수 밖에 없습니다.
+                    현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
+                    종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
+                    잘될 수 밖에 없습니다.
                   </p>
                 </div>
               </div>
@@ -1247,72 +1084,8 @@ export default function AppleDemoPage() {
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
-          {/* Reasons - modern card style */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {/* Reason 1 */}
-            <div ref={reason1Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">📊</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      손님이 뜸한 시기에도 안정적인 매출을 유지하고,
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 2 */}
-            <div ref={reason2Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">🛡️</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      위기에 대비하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 3 */}
-            <div ref={reason3Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">🔍</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      내 가게를 찾고, 기억하게 하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reason 4 */}
-            <div ref={reason4Ref} className="opacity-0">
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl">⭐</span>
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
-                      우리 가게만의 특별한 점을 어필하기 위해서
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* WheelPicker Style Reasons */}
+          <WheelPickerReasons />
 
           {/* Marketing emphasis */}
           <div ref={emphasisRef} className="opacity-0 text-center py-12">
@@ -1366,27 +1139,27 @@ export default function AppleDemoPage() {
           {/* Doubts - speech bubble style */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
             {/* Doubt 1 */}
-            <div ref={doubt1Ref} className="opacity-0">
+            <div ref={doubt1Ref} className="opacity-0 animate-float-1">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   정말 효과 있을까..?
                 </p>
               </div>
             </div>
 
             {/* Doubt 2 */}
-            <div ref={doubt2Ref} className="opacity-0">
+            <div ref={doubt2Ref} className="opacity-0 animate-float-2">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   평생 광고비 써야하는거 아니야…?
                 </p>
               </div>
             </div>
 
             {/* Doubt 3 */}
-            <div ref={doubt3Ref} className="opacity-0">
+            <div ref={doubt3Ref} className="opacity-0 animate-float-3">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   한다고 정말 달라질까..?
                 </p>
               </div>
@@ -2092,13 +1865,6 @@ export default function AppleDemoPage() {
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
-          {/* First line - moderate emphasis */}
-          <div ref={closingLine1Ref} className="opacity-0">
-            <p className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-800 leading-relaxed">
-              '먹고 살만 해지는 것부터'
-            </p>
-          </div>
-
           {/* Second line - strong emphasis */}
           <div ref={closingLine2Ref} className="opacity-0 py-12">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">

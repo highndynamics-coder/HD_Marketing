@@ -17,9 +17,10 @@
   "packageManager": "yarn@4.10.3",
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@supabase/supabase-js": "^2.77.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.80.0",
     "@tanstack/react-query": "^5.90.5",
-    "axios": "^1.13.1",
+    "axios": "^1.13.2",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "gsap": "^3.13.0",
