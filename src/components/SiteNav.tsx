@@ -114,7 +114,7 @@ export default function SiteNav() {
         <Link href="/" className="flex items-center">
           <img src="/images/HDLogo.png" alt="HD Logo" className="h-32 w-auto" />
         </Link>
-        <div className="flex h-14 items-center justify-center">
+        <div className="flex flex-row items-center gap-8">
           <div className="flex flex-row items-center gap-4">
             {NAV.map((it) => {
               return (
@@ -126,8 +126,6 @@ export default function SiteNav() {
               );
             })}
           </div>
-        </div>
-        <div>
           <Link
             href="/inquiry"
             className="inline-block w-32 p-4 bg-blue-500 text-white text-xl font-medium rounded-md transition-colors duration-200 text-center"
