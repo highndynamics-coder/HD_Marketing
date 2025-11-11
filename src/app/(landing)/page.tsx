@@ -1139,27 +1139,27 @@ export default function LandingPage() {
           {/* Doubts - speech bubble style */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
             {/* Doubt 1 */}
-            <div ref={doubt1Ref} className="opacity-0">
+            <div ref={doubt1Ref} className="opacity-0 animate-float-1">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   정말 효과 있을까..?
                 </p>
               </div>
             </div>
 
             {/* Doubt 2 */}
-            <div ref={doubt2Ref} className="opacity-0">
+            <div ref={doubt2Ref} className="opacity-0 animate-float-2">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   평생 광고비 써야하는거 아니야…?
                 </p>
               </div>
             </div>
 
             {/* Doubt 3 */}
-            <div ref={doubt3Ref} className="opacity-0">
+            <div ref={doubt3Ref} className="opacity-0 animate-float-3">
               <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-light text-gray-600 text-center">
+                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
                   한다고 정말 달라질까..?
                 </p>
               </div>
@@ -1865,13 +1865,6 @@ export default function LandingPage() {
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
-          {/* First line - moderate emphasis */}
-          <div ref={closingLine1Ref} className="opacity-0">
-            <p className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-800 leading-relaxed">
-              '먹고 살만 해지는 것부터'
-            </p>
-          </div>
-
           {/* Second line - strong emphasis */}
           <div ref={closingLine2Ref} className="opacity-0 py-12">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
