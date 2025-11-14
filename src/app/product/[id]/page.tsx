@@ -21,31 +21,81 @@ export default function ProductDetailPage() {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <main className="relative w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100">
+        <div className="relative z-10 w-full flex items-center justify-center min-h-screen">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin"></div>
+            <p className="text-lg font-light text-gray-600">로딩 중...</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const product = productData?.[0];
+
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100">
-      <div className="relative z-10 w-full flex flex-col gap-6 max-w-7xl mx-auto px-6 md:px-8 py-20 md:py-32">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
-          {productData?.[0]?.title}
-        </h1>
-        <p className="text-lg md:text-xl font-light text-gray-600 leading-relaxed">
-          {productData?.[0]?.content}
-        </p>
-
-        <div className="flex flex-col gap-8 mt-12">
-          {productData?.[0]?.product &&
-            productData?.[0].product.map((pro: any, idx: number) => {
-              return (
-                <div key={idx} className="flex flex-col gap-2">
-                  <Accordion
-                    title={pro.title}
-                    content={pro.content ?? "내용 예시"}
-                  />
-                </div>
-              );
-            })}
-        </div>
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
       </div>
+
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] w-full flex items-center justify-center py-20 md:py-32">
+        <div className="relative z-10 w-full max-w-6xl px-6 md:px-8">
+          <div className="flex flex-col gap-8 md:gap-12">
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
+                {product?.title}
+              </h1>
+              {product?.content && (
+                <p className="text-xl md:text-2xl font-light text-gray-600 leading-relaxed max-w-4xl">
+                  {product.content}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Details Section */}
+      {product?.product && product.product.length > 0 && (
+        <section className="relative w-full py-10 md:py-20">
+          <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                상세 정보
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-400 mx-auto"></div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {product.product.map((pro: any, idx: number) => {
+                const contentArray = Array.isArray(pro.content)
+                  ? pro.content
+                  : typeof pro.content === "string"
+                    ? [pro.content]
+                    : ["내용 예시"];
+
+                return (
+                  <Accordion
+                    key={idx}
+                    title={pro.title}
+                    content={contentArray}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Bottom Spacing */}
+      <div className="h-20 md:h-32"></div>
     </main>
   );
 }
