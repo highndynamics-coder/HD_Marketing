@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
 export default function ProductPage() {
+  const router = useRouter();
   const { data: ProductData, isLoading } = useQuery<any[]>({
     queryKey: ["product"],
     queryFn: async () => {
@@ -53,11 +55,11 @@ export default function ProductPage() {
             </div>
           ) : (
             ProductData.map((product, index) => (
-              <div key={product.id}>
-                <a
-                  href="#"
-                  className="group block bg-white/50 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
-                >
+              <div
+                key={product.id}
+                onClick={() => router.push(`/product/${product.id}`)}
+              >
+                <a className="group block bg-white/50 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
                   <div className="space-y-4">
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                       {product.title}

@@ -1,126 +1,109 @@
 "use client";
 import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useResponsive } from "../lib/useResponsive";
-import { footerLinks, socialIcons } from "../constants/footer";
 
 export default function Footer() {
-  const { isMobile, isTablet } = useResponsive();
-  const pathname = usePathname();
-
-  const isLandingPage = pathname === "/";
-
-  if (isMobile || isTablet) {
-    return (
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="mx-auto px-6 py-12">
-          {/* Top navigation columns */}
-          <div className="grid grid-cols-1 gap-2">
-            {footerLinks.map((link) => (
-              <div key={link.id} className="flex flex-col">
-                <Link
-                  href={link.href}
-                  className="block w-full text-left p-2 rounded-lg transition-colors duration-200 group"
-                >
-                  <span className="text-black cursor-pointer font-medium">
-                    {link.text}
-                  </span>
-                </Link>
-                {link.subItems && (
-                  <div className="ml-2 mt-2 space-y-1">
-                    {link.subItems.map((subItem) => (
-                      <Link
-                        key={subItem.id}
-                        href={subItem.href}
-                        className="block text-sm text-gray-400 hover:text-black transition-colors duration-200"
-                      >
-                        {subItem.text}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          {/* Social icons */}
-          <div className="mt-24 grid grid-cols-3 justify-center items-center gap-2 p-2">
-            {socialIcons.map((social) => (
-              <a
-                key={social.name}
-                href={social.link || "#"}
-                rel="noopener noreferrer"
-                target="_blank"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white hover:opacity-80 transition-opacity duration-200"
-              >
-                <span className="sr-only">{social.name}</span>
-                {typeof social.icon === "string" ? (
-                  <span className="text-xs font-medium">{social.icon}</span>
-                ) : (
-                  React.createElement(social.icon)
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      </footer>
-    );
-  }
-
   return (
-    <footer
-      className={`border-t border-gray-200 bg-white ${
-        isLandingPage ? "hidden" : ""
-      }`}
-    >
-      <div className="mx-auto max-w-screen-2xl px-6 py-12 md:px-10">
-        {/* Top navigation columns */}
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:grid-cols-6">
-          {footerLinks.map((link) => (
-            <div key={link.id} className="flex flex-col">
-              <Link
-                href={link.href}
-                className="block w-full text-left p-2 rounded-lg transition-colors duration-200 group"
-              >
-                <span className="text-black cursor-pointer font-medium">
-                  {link.text}
-                </span>
-              </Link>
-              {link.subItems && (
-                <div className="ml-2 mt-2 space-y-3">
-                  {link.subItems.map((subItem) => (
-                    <Link
-                      key={subItem.id}
-                      href={subItem.href}
-                      className="block text-sm text-gray-400 hover:text-black transition-colors duration-200"
-                    >
-                      {subItem.text}
-                    </Link>
-                  ))}
-                </div>
-              )}
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:px-8">
+        {/* Logo Section */}
+        <div className="mb-8 flex items-center justify-center md:justify-start">
+          <div className="flex items-center space-x-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+              <span className="text-xl font-bold text-white">HD</span>
             </div>
-          ))}
+            <span className="text-2xl font-bold text-white">HD Company</span>
+          </div>
         </div>
 
-        {/* Social icons */}
-        <div className="mt-12 flex justify-center space-x-4">
-          {socialIcons.map((social) => (
-            <Link
-              key={social.name}
-              href={social.link || "#"}
-              rel="noopener noreferrer"
-              target="_blank"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white hover:opacity-80 transition-opacity duration-200"
-            >
-              <span className="sr-only">{social.name}</span>
-              {typeof social.icon === "string" ? (
-                <span className="text-xs font-medium">{social.icon}</span>
-              ) : (
-                React.createElement(social.icon)
-              )}
-            </Link>
-          ))}
+        {/* Company Information */}
+        <div className="border-t border-gray-700 pt-8">
+          <div className="grid grid-cols-1 gap-3 text-sm md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">회사명:</span>
+                <span className="ml-2 text-gray-300">홍도현</span>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">대표자명:</span>
+                <span className="ml-2 text-gray-300">HD company</span>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">사업자번호:</span>
+                <span className="ml-2 text-gray-300">-</span>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">이메일:</span>
+                <a
+                  href="mailto:ceo@highdynamics.kr"
+                  className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  ceo@highdynamics.kr
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">주소:</span>
+                <span className="ml-2 text-gray-300">-</span>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">전화번호:</span>
+                <a
+                  href="tel:044-000-000"
+                  className="ml-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  044-000-000
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">개인정보관리책임자:</span>
+                <span className="ml-2 text-gray-300">홍도현</span>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <span className="text-gray-500">ㅣ</span>
+              <div>
+                <span className="text-gray-400">개인정보관리책임자 메일:</span>
+                <a
+                  href="mailto:hsmenok@naver.com"
+                  className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  hsmenok@naver.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-8 border-t border-gray-700 pt-6 text-center">
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} HD Company. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
