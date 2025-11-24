@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContactBanner } from "@/components/ContactBanner";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1834,6 +1835,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Banner - Fixed at bottom */}
+      <ContactBanner />
     </main>
   );
 }
