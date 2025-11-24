@@ -1501,7 +1501,7 @@ export default function LandingPage() {
           {/* Opening question */}
           <div ref={ceoQuestionRef} className="opacity-0 text-center mb-8">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-400 italic tracking-wide">
-              그래서 제가 누구냐고요?
+              이 모든 이야기의 시작점, 누구였을까요?
             </h2>
           </div>
 
