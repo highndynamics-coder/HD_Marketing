@@ -25,7 +25,15 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <SiteNav />
-          <main className="min-h-screen">{children}</main>
+          <main
+            className="min-h-screen"
+            style={{
+              scrollBehavior: "smooth",
+              backgroundColor: "#171a52",
+            }}
+          >
+            {children}
+          </main>
           <Footer />
         </QueryProvider>
       </body>

@@ -1,13 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { useParams } from "next/navigation";
 import Accordion from "@/shared/ui/Accordion";
+import MindMap from "@/components/MindMap";
+
+interface SelectedNode {
+  title: string;
+  content: string[];
+}
 
 export default function WorkDetailPage() {
   const { id } = useParams();
+  const [selectedNode, setSelectedNode] = useState<SelectedNode | null>(null);
   const { data: workData, isLoading } = useQuery<any[]>({
     queryKey: ["work", id],
     queryFn: async () => {
@@ -89,6 +96,63 @@ export default function WorkDetailPage() {
                   />
                 );
               })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {work?.analysis &&
+        work.analysis.data &&
+        Array.isArray(work.analysis.data) &&
+        work.analysis.data.length > 0 && (
+          <section className="relative w-full py-10 md:py-20">
+            <h4 className="text-2xl font-bold text-gray-900 mb-4 text-center tracking-tight">
+              {work?.analysis?.title}
+            </h4>
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 mt-8">
+              <div className="flex flex-row gap-6">
+                {work.analysis.data.map((item: any, idx: number) => {
+                  const branchNodes = Array.isArray(item.content)
+                    ? item.content.map((contentItem: string) => ({
+                        title: contentItem,
+                        content: [],
+                      }))
+                    : [];
+
+                  return (
+                    <div key={idx} className="flex-1 min-w-0">
+                      <MindMap
+                        title={item.title}
+                        data={branchNodes}
+                        onNodeClick={(node) => {
+                          if (selectedNode?.title === node.title) {
+                            setSelectedNode(null);
+                          } else {
+                            setSelectedNode(node);
+                          }
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+      {/* Node Description Section */}
+      {selectedNode && (
+        <section className="relative w-full py-10 md:py-20">
+          <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8">
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-300">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                {selectedNode.title}
+              </h3>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                {selectedNode.title}에 대한 상세 설명입니다. 이 영역에는 해당
+                노드의 역할과 책임, 주요 기능 등에 대한 정보를 표시할 수
+                있습니다.
+              </p>
             </div>
           </div>
         </section>

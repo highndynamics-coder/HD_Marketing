@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { HdAcronym } from "@/components/HdAcronym";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,55 +138,561 @@ export default function CompanyPage() {
   }, []);
 
   return (
-    <main className="relative w-full overflow-x-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100">
+    <main className="relative w-full overflow-x-hidden bg-black">
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen w-full flex items-center justify-center"
+        className="relative min-h-screen w-full flex flex-col"
       >
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center mt-24">
+            <div>
+              <h4 className="text-[#7CB342] text-md block mb-4 tracking-widest ml-1">
+                ABOUT US
+              </h4>
+              <h2 className="text-4xl md:text-6xl text-white mb-2">
+                성장을 만드는
+              </h2>
+              <h2 className="text-4xl md:text-6xl text-[#7CB342] mb-8">
+                마케팅 파트너
+              </h2>
+              <p className="text-white/60 text-lg mb-8 leading-relaxed">
+                "High & Dynamics는 브랜드의 잠재력을 발견하고 극대화하는 마케팅
+                에이전시입니다. 데이터 기반의 전략적 사고와 창의적인 실행력으로
+                고객사의 비즈니스 목표 달성을 돕습니다."
+              </p>
+              <div className="flex flex-col space-y-4 mb-12">
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
+                  <div className="w-2 h-2 bg-[#7CB342] rounded-full group-hover:scale-150 transition-transform" />
+                  <span className="text-white/80 group-hover:text-white transition-colors">
+                    데이터 기반 의사결정으로 ROI 극대화
+                  </span>
+                </div>
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
+                  <div className="w-2 h-2 bg-[#7CB342] rounded-full group-hover:scale-150 transition-transform" />
+                  <span className="text-white/80 group-hover:text-white transition-colors">
+                    통합 마케팅 솔루션으로 시너지 창출
+                  </span>
+                </div>
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
+                  <div className="w-2 h-2 bg-[#7CB342] rounded-full group-hover:scale-150 transition-transform" />
+                  <span className="text-white/80 group-hover:text-white transition-colors">
+                    각 분야 전문가들의 협업으로 최상의 결과 도출
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="relative opacity-100 transform-none">
+                <div className="relative rounded-3xl overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                    alt="TEAM"
+                    className="w-full h-[500px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  <div className="bg-graident-to-br from-[#1A3A5C] to-[#0D1F33] p-6 rounded-2xl border border-white/5 relative overflow-hidden group cursor-pointer opacity-100 transform-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-target text-[#7cb342] mb-3"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <circle cx="12" cy="12" r="6"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <div className="text-3xl text-white mb-1">200+</div>
+                    <div className="text-white/50 text-sm">성공 프로젝트</div>
+                  </div>
+                  <div className="bg-graident-to-br from-[#1A3A5C] to-[#0D1F33] p-6 rounded-2xl border border-white/5 relative overflow-hidden group cursor-pointer opacity-100 transform-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-target text-[#7cb342] mb-3"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <circle cx="12" cy="12" r="6"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <div className="text-3xl text-white mb-1">150+</div>
+                    <div className="text-white/50 text-sm">파트너 기업</div>
+                  </div>
+                  <div className="bg-graident-to-br from-[#1A3A5C] to-[#0D1F33] p-6 rounded-2xl border border-white/5 relative overflow-hidden group cursor-pointer opacity-100 transform-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-target text-[#7cb342] mb-3"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <circle cx="12" cy="12" r="6"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <div className="text-3xl text-white mb-1">98%</div>
+                    <div className="text-white/50 text-sm">고객 만족도</div>
+                  </div>
+                  <div className="bg-graident-to-br from-[#1A3A5C] to-[#0D1F33] p-6 rounded-2xl border border-white/5 relative overflow-hidden group cursor-pointer opacity-100 transform-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-target text-[#7cb342] mb-3"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <circle cx="12" cy="12" r="6"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <div className="text-3xl text-white mb-1">10년+</div>
+                    <div className="text-white/50 text-sm">평균 경력</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-5xl px-8 py-20 flex flex-col items-center justify-center space-y-12">
-          {/* Opening Quote */}
-          <div ref={openingQuoteRef} className="opacity-0 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-700 leading-relaxed">
-              "잘되는 가게보다 중요한 건,
-            </h2>
-          </div>
-
-          {/* Sub Quote */}
-          <div ref={openingSubQuoteRef} className="opacity-0 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-800 leading-relaxed">
-              사람의 이야기를 이해하는 일이었습니다."
-            </h2>
-          </div>
-
-          {/* Main Title */}
-          <div ref={mainTitleRef} className="opacity-0 text-center pt-12">
-            <div className="inline-block bg-white/70 backdrop-blur-sm rounded-3xl px-12 py-8 shadow-lg border border-gray-200">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                High 그리고, dynamics의 시작
+      </section>
+      {/* Section 1: Our Solution */}
+      <section className="relative z-10 min-h-screen flex">
+        <div className="w-full lg:w-2/5 flex flex-col justify-center p-8 lg:p-16 border-r border-white/5">
+          <div className="mb-12 opacity-100 transform-none">
+            <h4 className="text-[#7CB342] text-md block mb-4 tracking-widest ml-6">
+              OUR SOLUTION
+            </h4>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 mb-6 opacity-100 transform-none">
+              <h1 className="text-5xl lg:text-6xl text-white mb-4">
+                우리의 <br /> <span className="text-[#7cb342]">솔루션</span>
               </h1>
+            </div>
+            <p className="text-white/60 text-lg">
+              성장을 위한 최선의 마케팅 솔루션
+            </p>
+          </div>
+          <div className="space-y-3 flex flex-col">
+            <button className="w-full group opacity-100 transform-none">
+              <div className="relative p-6 rounded-2xl border transition-all duration-500 bg-white/10 border-white/20 backdrop-blur-xl">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 rounded-r-full opacity-100 transform-none" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-trending-up w-6 h-6 text-white"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 7h6v6"></path>
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className="text-lg mb-1 transition-colors duration-300 text-white">
+                      네이버 마케팅
+                    </h3>
+                    <p className="text-sm text-white/50">Search Domination</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-chevron-right w-5 h-5 transition-all duration-300 text-white translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button className="w-full group opacity-100 transform-none">
+              <div className="relative p-6 rounded-2xl border transition-all duration-500 bg-white/10 border-white/20 backdrop-blur-xl">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 rounded-r-full opacity-100 transform-none" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-trending-up w-6 h-6 text-white"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 7h6v6"></path>
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className="text-lg mb-1 transition-colors duration-300 text-white">
+                      META 마케팅
+                    </h3>
+                    <p className="text-sm text-white/50">Social Excellence</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-chevron-right w-5 h-5 transition-all duration-300 text-white translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button className="w-full group opacity-100 transform-none">
+              <div className="relative p-6 rounded-2xl border transition-all duration-500 bg-white/10 border-white/20 backdrop-blur-xl">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 rounded-r-full opacity-100 transform-none" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-trending-up w-6 h-6 text-white"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 7h6v6"></path>
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className="text-lg mb-1 transition-colors duration-300 text-white">
+                      MCN
+                    </h3>
+                    <p className="text-sm text-white/50">Content Creation</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-chevron-right w-5 h-5 transition-all duration-300 text-white translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button className="w-full group opacity-100 transform-none">
+              <div className="relative p-6 rounded-2xl border transition-all duration-500 bg-white/10 border-white/20 backdrop-blur-xl">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 rounded-r-full opacity-100 transform-none" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-trending-up w-6 h-6 text-white"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 7h6v6"></path>
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className="text-lg mb-1 transition-colors duration-300 text-white">
+                      인플루언서 협찬
+                    </h3>
+                    <p className="text-sm text-white/50">Authentic Voice</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-chevron-right w-5 h-5 transition-all duration-300 text-white translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button className="w-full group opacity-100 transform-none">
+              <div className="relative p-6 rounded-2xl border transition-all duration-500 bg-white/10 border-white/20 backdrop-blur-xl">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 rounded-r-full opacity-100 transform-none" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-trending-up w-6 h-6 text-white"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 7h6v6"></path>
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className="text-lg mb-1 transition-colors duration-300 text-white">
+                      당근마켓 마케팅
+                    </h3>
+                    <p className="text-sm text-white/50">Local Power</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-chevron-right w-5 h-5 transition-all duration-300 text-white translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+          </div>
+          <button className="mt-12 w-full py-5 px-8 bg-gradient-to-r from-[#7CB342] to-[#1EC800] text-white rounded-2xl hover:shadow-[0_0_40px_rgba(124,179,66,0.4)] transition-all flex items-center justify-center gap-3 group">
+            <span className="text-lg">무료 상담 신청하기</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+        <div className="hidden lg:flex w-3/5 items-center justify-center p-16">
+          <div className="w-full max-w-3xl opacity-100 transform-none">
+            <div className="relative mb-12 rounded-3xl overflow-hidden opacity-100 transform-none">
+              <div className="aspect-[16/10] relative group">
+                <img
+                  src="https://images.unsplash.com/photo-1762330467019-f38839ad4b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXZlciUyMHNlYXJjaCUyMGVuZ2luZXxlbnwxfHx8fDE3NjQ0MTU4NzB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                  alt="네이버 마케팅"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute top-6 right-6 w-16 h-16 rounded-2xl bg-graident-to-br from-[#1EC800] via-[#7CB342] to-[#9DD158] flex items-center justify-center shadow-2x transform-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-trending-up w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 7h6v6"></path>
+                    <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                  </svg>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-2xl text-white opacity-100 transform-none">
+                    4400만명을 사로잡는 당신의 예술이 시작되는 곳
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col space-y-8">
+              <div className="opacity-100 transform-none" />
+              <p className="text-xl text-white/80 leading-relaxed">
+                네이버 검색광고, 파워링크, 브랜드 검색을 통해 고객이 당신을
+                찾도록 만듭니다. 검색 의도가 명확한 고객을 타겟팅하여 높은
+                전환율을 실현합니다.
+              </p>
+              <div className="flex flex-col space-y-3 opacity-100 transform-none">
+                <div className="flex items-start gap-3 group/feature opacity-100 transform-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-check w-6 h-6 flex-shrink-0 mt-0.5 transition-colors duration-300"
+                    aria-hidden="true"
+                    style={{ color: "rgb(124, 179, 66)" }}
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span className="text-white/80 group-hover/feature:text-white transition-colors">
+                    네이버 검색광고 전략 수립 및 집행
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group/feature opacity-100 transform-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-check w-6 h-6 flex-shrink-0 mt-0.5 transition-colors duration-300"
+                    aria-hidden="true"
+                    style={{ color: "rgb(124, 179, 66)" }}
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span className="text-white/80 group-hover/feature:text-white transition-colors">
+                    네이버 검색광고 전략 수립 및 집행
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group/feature opacity-100 transform-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-check w-6 h-6 flex-shrink-0 mt-0.5 transition-colors duration-300"
+                    aria-hidden="true"
+                    style={{ color: "rgb(124, 179, 66)" }}
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span className="text-white/80 group-hover/feature:text-white transition-colors">
+                    키워드 분석 및 입찰 전략
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group/feature opacity-100 transform-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-check w-6 h-6 flex-shrink-0 mt-0.5 transition-colors duration-300"
+                    aria-hidden="true"
+                    style={{ color: "rgb(124, 179, 66)" }}
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span className="text-white/80 group-hover/feature:text-white transition-colors">
+                    실시간 성과 분석 및 리포팅
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 1: Company Story */}
-      <section
-        ref={section1Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
-        {/* Subtle background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
-        </div>
-
+      <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         {/* Content */}
         <div className="relative z-10 w-full max-w-4xl px-8 space-y-8">
           <div ref={para1Ref} className="opacity-0">

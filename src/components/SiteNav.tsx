@@ -105,33 +105,39 @@ export default function SiteNav() {
   return (
     <>
       {/* 상단 얇은 바 + 햄버거(좌) / 로그인+IG(우) */}
-      <header
-        className="sticky top-0 left-0 flex items-center justify-between w-full h-24 px-16 text-xl text-[#1c1e21] z-50"
-        style={{
-          background: "rgba(35, 43, 64, 0.85)",
-        }}
-      >
-        <Link href="/" className="flex items-center">
-          <img src="/images/HDLogo.png" alt="HD Logo" className="h-32 w-auto" />
-        </Link>
-        <div className="flex flex-row items-center gap-8">
-          <div className="flex flex-row items-center gap-4">
-            {NAV.map((it) => {
-              return (
-                <div key={it.label}>
-                  <NavLinkBig href={it.href} onClick={() => setOpen(false)}>
-                    {it.label}
-                  </NavLinkBig>
-                </div>
-              );
-            })}
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between h-24">
+            <Link href="/" className="flex items-center">
+              <img
+                src="/images/HDLogo.png"
+                alt="HD Logo"
+                className="h-32 w-auto"
+              />
+            </Link>
+            <div className="flex-shrink-0 cursor-pointer transform-none">
+              <nav className="hidden lg:flex items-center gap-12">
+                {NAV.map((it) => {
+                  return (
+                    <button
+                      key={it.label}
+                      className="text-white/80 hover:text-[#7CB342] transition-colors relative group opacity-100 transform-none"
+                    >
+                      <NavLinkBig href={it.href} onClick={() => setOpen(false)}>
+                        {it.label}
+                      </NavLinkBig>
+                    </button>
+                  );
+                })}
+                <Link
+                  href="/inquiry"
+                  className="inline-block w-32 p-4 text-white text-xl font-medium rounded-md transition-colors duration-200 text-center"
+                >
+                  문의하기
+                </Link>
+              </nav>
+            </div>
           </div>
-          <Link
-            href="/inquiry"
-            className="inline-block w-32 p-4 bg-blue-500 text-white text-xl font-medium rounded-md transition-colors duration-200 text-center"
-          >
-            문의하기
-          </Link>
         </div>
       </header>
     </>
@@ -153,7 +159,7 @@ function NavLinkBig({
     "inline-block text-xl leading-normal text-white hover:text-white/90 focus:outline-none";
 
   const cls =
-    "inline-block text-2xl leading-[1.1] text-white hover:text-white/90 focus:outline-none";
+    "inline-block text-xl leading-[1.1] text-white hover:text-white/90 focus:outline-none";
 
   if (isMobile || isTablet) {
     return (
