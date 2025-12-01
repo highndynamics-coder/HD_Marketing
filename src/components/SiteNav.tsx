@@ -41,7 +41,7 @@ export default function SiteNav() {
   if (isMobile || isTablet) {
     return (
       <>
-        <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none">
+        <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none h-28">
           <div className="container mx-auto">
             <div className="flex flex-row items-center justify-between">
               <Link href="/" className="flex items-center">
@@ -67,18 +67,12 @@ export default function SiteNav() {
             typeof window !== "undefined" &&
             createPortal(
               <>
-                <div
-                  aria-hidden="true"
-                  className="fixed inset-0 z-[59] bg-gradient-to-b from-[#9A16D8] via-[#561BAA] to-[#4B16A3]"
-                />
+                <div aria-hidden="true" className="fixed inset-0 z-50" />
                 <div
                   role="dialog"
                   aria-modal="true"
-                  className="fixed inset-0 z-[60] overflow-y-auto"
+                  className="fixed inset-0 z-50 overflow-y-auto bg-black/90"
                 >
-                  {/* gradient backdrop */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#9A16D8] via-[#561BAA] to-[#4B16A3]" />
-
                   {/* content */}
                   <div className="relative mx-auto flex min-h-full w-full max-w-[1440px] flex-col px-6 pt-6 md:px-10">
                     {/* top bar inside overlay */}
@@ -86,10 +80,27 @@ export default function SiteNav() {
                       <button
                         aria-label="닫기"
                         onClick={() => setOpen(false)}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/60 text-white/90 backdrop-blur-sm hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/60 text-white/90 backdrop-blur-sm hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 mt-4"
                       >
                         <SiteNavCloseIcon />
                       </button>
+                    </div>
+                    <div className="flex flex-col gap-8">
+                      {NAV.map((it) => {
+                        return (
+                          <button
+                            key={it.label}
+                            className="text-white/80 hover:text-[#7CB342] transition-colors relative group opacity-100 transform-none"
+                          >
+                            <NavLinkBig
+                              href={it.href}
+                              onClick={() => setOpen(false)}
+                            >
+                              {it.label}
+                            </NavLinkBig>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -128,12 +139,6 @@ export default function SiteNav() {
                     </button>
                   );
                 })}
-                <Link
-                  href="/inquiry"
-                  className="inline-block w-32 p-4 text-white text-xl font-medium rounded-md transition-colors duration-200 text-center"
-                >
-                  문의하기
-                </Link>
               </nav>
             </div>
           </div>

@@ -9,5 +9,6 @@ export type DefaultLinkType = {
 export const NAV: Item[] = [
   { label: "회사소개", href: "/company" },
   { label: "상품소개", href: "/product" },
-  { label: "프로세스", href: "/work" },
+  { label: "업종별 전략", href: "/work" },
+  { label: "상담문의", href: "/inquiry" },
 ];
