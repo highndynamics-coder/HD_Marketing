@@ -139,12 +139,6 @@ export default function SiteNav() {
                     </button>
                   );
                 })}
-                <Link
-                  href="/inquiry"
-                  className="inline-block w-32 p-4 text-white text-xl font-medium rounded-md transition-colors duration-200 text-center"
-                >
-                  문의하기
-                </Link>
               </nav>
             </div>
           </div>
