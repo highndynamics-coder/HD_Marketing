@@ -1113,7 +1113,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 5: 5T Timeline */}
-      <section ref={section5Ref}>
+      <section ref={section5Ref} className="container mx-auto px-6 lg:px-12">
         {/* Content */}
         <div className="space-y-8 mb-24">
           <div className="text-2xl md:text-3xl text-white text-left opacity-100 transform-none">
@@ -1128,22 +1128,23 @@ export default function LandingPage() {
           <div className="text-2xl md:text-3xl text-white text-right opacity-100 transform-none">
             한다고 정말 달라질까..?
           </div>
-
-          {/* Marketing definition - emphasized */}
-          <div className="text-center space-y-6 py-12">
-            <div ref={marketingTitleRef} className="opacity-0">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
-                마케팅,
-              </h2>
-            </div>
-            <div ref={marketingSubRef} className="opacity-0">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-800">
-                매출 성장의 원동력이 되어야 합니다.
-              </h3>
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* Marketing definition - emphasized */}
+      <div className="text-center space-y-6 py-12 bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A]/40 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-[#7CB342]/30 mt-16 container mx-auto px-6 lg:px-12">
+        <div ref={marketingTitleRef}>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight text-white">
+            마케팅,
+          </h2>
+        </div>
+        <div ref={marketingSubRef}>
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white">
+            <span className="text-[#7CB342]">매출 성장의 원동력</span>이 되어야
+            합니다.
+          </h3>
+        </div>
+      </div>
 
       {/* Section 6: Success Stories */}
       <section
@@ -1401,163 +1402,187 @@ export default function LandingPage() {
       {/* Section 7: CEO Introduction */}
       <section
         ref={section7Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-32 bg-gradient-to-b from-gray-50 to-white"
+        className="relative min-h-screen w-full flex items-center justify-center py-32"
       >
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
           {/* Opening question */}
           <div ref={ceoQuestionRef} className="opacity-0 text-center mb-8">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-400 italic tracking-wide">
-              이 모든 이야기의 시작점, 누구였을까요?
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-wide">
+              그래서 제가 누구냐고요?
             </h2>
           </div>
 
-          {/* Greeting Section */}
           <div
             ref={ceoGreetingRef}
-            className="opacity-0 text-center mb-20 space-y-3"
+            className="grid lg:grid-cols-2 gap-12 items-center"
           >
-            <h3 className="text-xl md:text-2xl font-light text-gray-600">
-              반갑습니다.
-            </h3>
-            <h4 className="text-lg md:text-xl font-normal text-gray-500">
-              종합광고대행사 HD 컴퍼니
-            </h4>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mt-2">
-              대표 홍도현입니다.
-            </h2>
-          </div>
-
-          {/* Main content - Two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left Column: CEO Info */}
-            <div className="space-y-6">
-              {/* CEO Profile Photo */}
-              <div
-                ref={ceoPhotoRef}
-                className="opacity-0 flex justify-center lg:justify-start mb-8"
-              >
-                <div className="relative group">
-                  <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-lg ring-4 ring-white ring-offset-4 ring-offset-gray-50 group-hover:shadow-xl transition-all duration-300">
-                    <span className="text-7xl">👤</span>
-                  </div>
+            <div className="relative rounded-3xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Founder"
+                className="w-full h-[600px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 bg-black/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                <div className="text-5xl mb-4">👤</div>
+                <div className="text-white text-sm mb-2">
+                  종합광고대행사 HD 컴퍼니
+                </div>
+                <div className="text-2xl text-white font-medium mb-4">
+                  대표 홍도현
                 </div>
               </div>
-
-              {/* Certifications - Vertical Layout */}
+            </div>
+            <div className="flex flex-col space-y-8 opacity-100 transform-none">
+              <h3 className="text-3xl md:text-5xl text-white mb-8 leading-tight">
+                반갑습니다.
+              </h3>
               <div className="space-y-3">
                 {/* Cert 1 */}
-                <div ref={cert1Ref} className="opacity-0">
-                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg shadow-sm">
-                          ✓
-                        </div>
-                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
-                          검색광고 마케터
-                        </h4>
-                      </div>
-                      <p className="text-2xl md:text-3xl font-bold text-blue-500">
-                        1급
-                      </p>
-                    </div>
+                <div
+                  ref={cert1Ref}
+                  className="flex items-center gap-4 group opacity-100 transform-none"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-check text-white"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
                   </div>
+                  <span className="text-xl text-white group-hover:text-white transition-colors">
+                    검색광고 마케터 1급
+                  </span>
                 </div>
 
                 {/* Cert 2 */}
-                <div ref={cert2Ref} className="opacity-0">
-                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white text-lg shadow-sm">
-                          ✓
-                        </div>
-                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
-                          SNS광고마케터
-                        </h4>
-                      </div>
-                      <p className="text-2xl md:text-3xl font-bold text-purple-500">
-                        1급
-                      </p>
-                    </div>
+                <div
+                  ref={cert2Ref}
+                  className="flex items-center gap-4 group opacity-100 transform-none"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-check text-white"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
                   </div>
+                  <span className="text-xl text-white group-hover:text-white transition-colors">
+                    SNS광고마케터 1급
+                  </span>
                 </div>
 
                 {/* Cert 3 */}
-                <div ref={cert3Ref} className="opacity-0">
-                  <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-lg shadow-sm">
-                          ✓
-                        </div>
-                        <h4 className="text-lg md:text-xl font-semibold text-gray-800">
-                          마케팅 대행
-                        </h4>
-                      </div>
-                      <p className="text-2xl md:text-3xl font-bold text-green-500">
-                        250+
-                      </p>
-                    </div>
+                <div
+                  ref={cert3Ref}
+                  className="flex items-center gap-4 group opacity-100 transform-none"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-check text-white"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
                   </div>
+                  <span className="text-xl text-white group-hover:text-white transition-colors">
+                    마케팅 대행 250+
+                  </span>
                 </div>
               </div>
-            </div>
-
-            {/* Right Column: CEO Message Preview with Hover Effect */}
-            <div ref={ceoNameRef} className="opacity-0">
-              <div className="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg border border-gray-200 h-full group hover:shadow-xl transition-all duration-300">
-                {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-100">
-                  High 그리고, dynamics의 시작
-                </h3>
-
-                {/* Scrollable Message Content */}
-                <div className="h-[400px] overflow-y-auto scrollbar-hidden pr-4 text-gray-700 leading-relaxed space-y-5">
-                  <p className="text-base md:text-lg">
-                    단순히 빠르고 크게 성장하는 것만이 목표가 아닙니다.
-                  </p>
-                  <p className="text-base md:text-lg">
-                    성장하는 과정에 있어 서로의 이야기를 듣고,
-                    <br />
-                    진심으로 공감하며, 정확한 해결방안을 찾고,
-                    <br />
-                    신속히 적용시키는 것에 대해 진짜 의미가 있습니다.
-                  </p>
-                  <p className="text-base md:text-lg">
-                    이렇듯 소비자의 대한 존중과 가치를 바라며
-                    <br />
-                    함께 감에 있어 공존된 성장을 추구하고
-                    <br />
-                    지금 이 순간도 여전히 우리는 성장하고 있습니다.
-                  </p>
-                  <p className="text-base md:text-lg">
-                    이어서 우리의 문제가 나의 삶, 나의 가족에게
-                    <br />
-                    행복을 가져다주기 위해 HD컴퍼니는 존재합니다.
-                  </p>
-                  <p className="text-base md:text-lg">
-                    단순한 광고상품과 혜택을 제공하는 것이 아닌,
-                    <br />
-                    힘들 때 한번이라도 이겨낼 수 있는 힘을 부여하고,
-                    <br />
-                    그럼에도 웃을 수 있는 행복을 판매하는 것이며,
-                    <br />
-                    그동안 여러분의 힘들고 우울했던 날들은
-                    <br />
-                    HD컴퍼니가 구매합니다.
-                  </p>
-                </div>
-
-                {/* Hover overlay with "더 보기" button */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl flex items-end justify-center pb-10">
-                  <button className="bg-white text-gray-900 font-semibold px-10 py-4 rounded-full shadow-2xl hover:bg-gray-50 transition-all duration-300 transform translate-y-6 group-hover:translate-y-0">
-                    더 보기
-                  </button>
-                </div>
+              <div className="bg-gradient-to-br from-[#1A3A5C]/50 to-[#7CB342]/10 rounded-2xl p-8 border border-[#&CB342]/20 opacity-100 transform-none">
+                <p className="text-lg text-white leading-relaxed italic">
+                  수많은 소상공인과 자영업자분들의 성공을 돕는 것이 저의
+                  사명입니다. 단순한 광고가 아닌, 진정한 성장을 함께
+                  만들어갑니다.
+                </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/*Section : High and Dynamics*/}
+      <section className="container mx-auto px-6 lg:px-12 flex flex-col gap-8">
+        <div className="text-center mb-20 opacity-100 transform-none">
+          <h2 className="text-5xl md:text-7xl mb-6">
+            <span className="text-white">High </span>
+            <span className="text-white/40">그리고, </span>
+            <span className="text-[#7CB342]">Dynamics</span>
+            <span className="text-white">의 시작</span>
+          </h2>
+        </div>
+
+        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 md:p-16 border border-white/10">
+          <p className="text-2xl md:text-3xl text-white leading-relaxed mb-8">
+            단순히 빠르고 크게 성장하는 것만이 목표가 아닙니다.
+          </p>
+          <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
+            성장하는 과정에 있어 서로의 이야기를 듣고, 진심으로 공감하며, 정확한
+            해결방안을 찾고, 신속히 적용시키는 것에 대해 진짜 의미가 있습니다.
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 md:p-16 border border-white/10">
+          <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
+            이렇듯 소비자의 대한 존중과 가치를 바라며 함께 감에 있어 공존된
+            성장을 추구하고 지금 이 순간도 여전히 우리는 성장하고 있습니다.
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A] backdrop-blur-sm rounded-3xl p-12 md:p-20 border border-[#7CB342]/30 text-center">
+          <p className="text-2xl md:text-4xl text-white leading-relaxed mb-8">
+            이어서 우리의 문제가 나의 삶, 나의 가족에게
+            <br />
+            <span className="text-[#7CB342]">행복을 가져다주기 위해</span>
+            <br />
+            HD컴퍼니는 존재합니다.
+          </p>
+          <div className="h-px bg-gradient-to-r from-transparent via-[#7CB342]/50 to-transparent my-12" />
+          <div className="space-y-6 text-lg md:text-xl text-white leading-relaxed">
+            <p>단순한 광고상품과 혜택을 제공하는 것이 아닌,</p>
+            <p className="text-[#7CB342]">
+              힘들 때 한번이라도 이겨낼 수 있는 힘을 부여하고,
+            </p>
+            <p>그럼에도 웃을 수 있는 행복을 판매하는 것이며,</p>
+            <p className="text-white text-2xl md:text-3xl mt-8">
+              그동안 여러분의 힘들고 우울했던 날들은
+              <br />
+              <span className="text-[#7CB342]">HD컴퍼니가 구매합니다.</span>
+            </p>
           </div>
         </div>
       </section>
@@ -1717,29 +1742,20 @@ export default function LandingPage() {
         ref={section9Ref}
         className="relative min-h-screen w-full flex items-center justify-center py-20"
       >
-        {/* Warm background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-50 via-yellow-50 to-white">
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-yellow-200 rounded-full blur-3xl"></div>
-          </div>
-        </div>
-
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
           {/* Second line - strong emphasis */}
           <div ref={closingLine2Ref} className="opacity-0 py-12">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed mb-4">
               우리는 모두가 사랑하는
-              <br />
+            </h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#7CB342] leading-relaxed">
               방식으로 성장합니다.
             </h1>
           </div>
-
-          {/* Subtle accent */}
-          <div className="pt-8">
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
-          </div>
+          <button className="bg-gradient-to-r from-[#7CB342] to-[#1EC800] text-white text-xl font-medium rounded-full hover:shadow-[0_0_40px_rgba(124,179,66,0.4)] transition-all duration-300 px-8 py-4">
+            더 알아보기
+          </button>
         </div>
       </section>
 
