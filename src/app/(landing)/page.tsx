@@ -1690,29 +1690,20 @@ export default function LandingPage() {
         ref={section9Ref}
         className="relative min-h-screen w-full flex items-center justify-center py-20"
       >
-        {/* Warm background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-50 via-yellow-50 to-white">
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-yellow-200 rounded-full blur-3xl"></div>
-          </div>
-        </div>
-
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
           {/* Second line - strong emphasis */}
           <div ref={closingLine2Ref} className="opacity-0 py-12">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed mb-4">
               우리는 모두가 사랑하는
-              <br />
+            </h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#7CB342] leading-relaxed">
               방식으로 성장합니다.
             </h1>
           </div>
-
-          {/* Subtle accent */}
-          <div className="pt-8">
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
-          </div>
+          <button className="bg-gradient-to-r from-[#7CB342] to-[#1EC800] text-white text-xl font-medium rounded-full hover:shadow-[0_0_40px_rgba(124,179,66,0.4)] transition-all duration-300 px-8 py-4">
+            더 알아보기
+          </button>
         </div>
       </section>
 
