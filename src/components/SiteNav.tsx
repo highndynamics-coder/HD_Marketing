@@ -41,28 +41,27 @@ export default function SiteNav() {
   if (isMobile || isTablet) {
     return (
       <>
-        <header
-          className="sticky top-0 left-0 backdrop-blur-md flex items-center justify-between w-full h-[82px] p-8 text-[12px] leading-[16.08px] font-sans transition-transform duration-500 [transition-timing-function:cubic-bezier(0,0.61,0.28,0.92)] z-50"
-          style={{
-            background: "rgba(35, 43, 64, 0.85)",
-          }}
-        >
-          <Link href="/" className="flex items-center">
-            <img
-              src="/images/HDLogo.png"
-              alt="HD Logo"
-              className="h-28 w-auto"
-            />
-          </Link>
-          <button
-            type="button"
-            aria-label="메뉴 열기"
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-            className="inline-flex items-center rounded-lg p-2 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
-          >
-            <SiteNavHamburgerIcon className="h-8 w-8 text-white" />
-          </button>
+        <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none">
+          <div className="container mx-auto">
+            <div className="flex flex-row items-center justify-between">
+              <Link href="/" className="flex items-center">
+                <img
+                  src="/images/HDLogo.png"
+                  alt="HD Logo"
+                  className="h-28 w-auto"
+                />
+              </Link>
+              <button
+                type="button"
+                aria-label="메뉴 열기"
+                aria-expanded={open}
+                onClick={() => setOpen(true)}
+                className="inline-flex items-center rounded-lg p-2 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+              >
+                <SiteNavHamburgerIcon className="h-8 w-8 text-white" />
+              </button>
+            </div>
+          </div>
           {/* 오버레이는 Portal로 띄워서 나머지 레이아웃에 영향 X */}
           {open &&
             typeof window !== "undefined" &&

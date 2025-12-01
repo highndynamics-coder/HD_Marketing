@@ -920,43 +920,31 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <main className="relative w-full overflow-x-hidden">
-      <section
-        ref={section1Ref}
-        className="relative min-h-screen w-full flex items-center justify-center"
-      >
-        <div className="relative z-10 w-full max-w-5xl px-8 py-10 flex flex-col items-center justify-center space-y-16">
-          <div className="flex flex-row items-center justify-center gap-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-700 text-center tracking-widest">
+    <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
+      <section className="relative min-h-screen w-full flex items-center justify-center">
+        <div className="absolute inset-0 transform-none">
+          <img
+            src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1920&q=80"
+            alt="Hero Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
+        </div>
+        <div className="relative z-10 w-full text-center px-6 mx-auto opacity-100 transform-none">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4 leading-tight tracking-tight">
               오늘도
             </h2>
-            <div
-              ref={line2Ref}
-              className="opacity-0"
-              style={{
-                letterSpacing: "0.2em",
-              }}
-            >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-700 text-center tracking-wider">
-                버티셨다면,
-              </h2>
-            </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4 tracking-tight leading-tight">
+              버티셨다면,
+            </h2>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight leading-tight">
+              내일은 <span className="text-[#7CB342]">우리가 함께</span>합니다.
+            </h2>
           </div>
-
-          <div
-            ref={line3Ref}
-            className="opacity-0"
-            style={{
-              letterSpacing: "0.2em",
-            }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 text-center tracking-wider min-h-[1.2em]">
-              {typedText}
-              {typedText.length > 0 && typedText.length < 12 && (
-                <span className="animate-pulse">|</span>
-              )}
-            </h1>
-          </div>
+        </div>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-100">
+          <div className="text-white/30 text-xs tracking-[0.3em]">SCROLL</div>
         </div>
       </section>
 
@@ -965,58 +953,44 @@ export default function LandingPage() {
         ref={section2Ref}
         className="relative min-h-screen w-full flex items-center justify-center"
       >
-        {/* Additional content section */}
-        <div className="relative z-10 w-full max-w-4xl px-8 space-y-8">
-          {/* Line 4 */}
-          <div ref={line4Ref} className="opacity-0">
-            <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 text-center leading-relaxed">
-              과거부터 현재까지 수많은 자영업자와 소상공인들이 생겨났지만,
-            </p>
-          </div>
-
-          {/* Line 5 */}
-          <div ref={line5Ref} className="opacity-0">
-            <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 text-center leading-relaxed">
-              반대로 그만큼 많이 망했습니다.
-            </p>
-          </div>
-
-          {/* Line 6 */}
-          <div ref={line6Ref} className="opacity-0 pt-4">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 text-center leading-relaxed">
-              이유가 뭘까요?
-            </p>
-          </div>
-
-          {/* Line 7 - Speech Bubbles */}
-          <div ref={line7Ref} className="opacity-0 pt-8">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-              {/* Bubble 1 */}
-              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
-                <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                  맛이 없는 거 아니야?
-                </p>
-                {/* Tail */}
-                <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
-              </div>
-
-              {/* Bubble 2 */}
-              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
-                <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                  서비스가 별로 아닐까?
-                </p>
-                {/* Tail */}
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
-              </div>
-
-              {/* Bubble 3 */}
-              <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
-                <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                  인테리어가 문제 아니야?
-                </p>
-                {/* Tail */}
-                <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
-              </div>
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto">
+            <div ref={line4Ref} className="opacity-100 mb-32">
+              <p className="text-2xl md:text-4xl font-medium text-white/80 leading-relaxed mb-16">
+                과거부터 현재까지 수많은 자영업자와 소상공인들이 생겨났지만,
+                <br />
+                <br />
+                반대로 그만큼 많이 망했습니다.
+              </p>
+            </div>
+            {/* <div ref={line6Ref} className="opacity-0 pt-4">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 text-center leading-relaxed">
+                이유가 뭘까요?
+              </p>
+            </div> */}
+            {/* Bubble 1 */}
+            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8">
+              <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                맛이 없는 거 아니야?
+              </p>
+              {/* Tail */}
+              <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+            </div>
+            {/* Bubble 2 */}
+            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8">
+              <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                서비스가 별로 아닐까?
+              </p>
+              {/* Tail */}
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+            </div>
+            {/* Bubble 3 */}
+            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
+              <p className="text-base md:text-lg font-light text-gray-700 text-center">
+                인테리어가 문제 아니야?
+              </p>
+              {/* Tail */}
+              <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
             </div>
           </div>
         </div>
@@ -1025,82 +999,83 @@ export default function LandingPage() {
       {/* Section 3: Q&A - Chat Style */}
       <section
         ref={section3Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
+        className="flex flex-col space-y-16 mb-32 opacity-100 container mx-auto"
       >
         {/* Chat content section */}
-        <div className="relative z-10 w-full max-w-4xl px-8 space-y-8">
+        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 border border-white/5 opacity-100 transform-none">
           {/* Question - 사장님들 (Left) */}
-          <div ref={questionRef} className="opacity-0 flex items-start gap-4">
-            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg">
-              <span className="text-2xl">👨‍👩‍👦</span>
+          <div ref={questionRef} className="flex items-start gap-6 mb-6">
+            <div className="text-4xl">👨‍👩‍👦</div>
+            <div>
+              <div className="text-white/40 text-sm mb-3">대표님</div>
+              <p className="text-2xl md:text-3xl text-white">
+                저희 가게는 왜 사람이 안올까요?
+              </p>
             </div>
-            <div className="flex-1 max-w-md">
-              <div className="bg-white rounded-3xl rounded-tl-none px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-lg md:text-xl font-normal text-gray-800 leading-relaxed">
-                  대표님! 저희 가게는 왜 사람이 안 올까요?
-                </p>
-              </div>
+          </div>
+          <div className="pl-20">
+            <p className="text-xl text-white/60">잘 모르겠습니다..</p>
+          </div>
+        </div>
+
+        {/* Final Answer - HD (Right) */}
+        <div
+          ref={answer1Ref}
+          className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none"
+        >
+          <div className="flex items-start gap-6 mb-8">
+            <div className="text-4xl">👨‍💼</div>
+            <div>
+              <h2 className="text-[#7CB342] text-sm mb-3">우리의 답변</h2>
+              <p className="text-3xl md:text-4xl text-white mb-6">
+                정말 몰라서 못옵니다.
+              </p>
+            </div>
+          </div>
+          <div className="pl-20">
+            <p className="text-xl text-white/60">
+              현 시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
+              종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더 잘될 수
+              밖에 없습니다.
+            </p>
+          </div>
+        </div>
+
+        <div
+          ref={answer2Ref}
+          className="opacity-100 transform-none text-center"
+        >
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
+              <div className="text-5xl mb-4">🔍</div>
+              <p className="text-lg text-white">
+                내 가게를 찾고, 기억하게 하기 위해서
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
+              <div className="text-5xl mb-4">⭐</div>
+              <p className="text-lg text-white">
+                우리 가게만의 특별한 점을 어필하기 위해서
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
+              <div className="text-5xl mb-4">📊</div>
+              <p className="text-lg text-white">
+                손님이 뜸한 시기에도 안정적인 매출을 유지하고,
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
+              <div className="text-5xl mb-4">🛡️</div>
+              <p className="text-lg text-white">위기에 대비하기 위해서</p>
             </div>
           </div>
 
-          {/* TODO: FIX */}
-          <div className="hidden">
-            <div className="flex items-center gap-4 justify-center">
-              <div className="flex-1 max-w-md">
-                <div>
-                  <h2 className="text-2xl font-semibold text-black">.</h2>
-                  <h2 className="text-2xl font-semibold text-black">.</h2>
-                  <h2 className="text-2xl font-semibold text-black">.</h2>
-                  <h2 className="text-2xl font-semibold text-black">🧐</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Final Answer - HD (Right) */}
-          <div ref={answer1Ref} className="opacity-0">
-            <div className="flex items-start gap-4 justify-end">
-              <div className="flex-1 max-w-md">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl rounded-tr-none px-6 py-4 shadow-md ml-auto flex flex-col gap-4">
-                  <h2 className="text-2xl font-semibold text-white">
-                    잘 모르겠습니다..
-                  </h2>
-                </div>
-              </div>
-              <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
-                <span className="text-2xl">👨‍💼</span>
-              </div>
-            </div>
-          </div>
-          <div ref={answer2Ref} className="opacity-0">
-            <div className="flex items-start gap-4 justify-end">
-              <div className="flex-1 max-w-md">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl rounded-tr-none px-6 py-4 shadow-md ml-auto flex flex-col gap-4">
-                  <h2 className="text-2xl font-semibold text-white">
-                    정말 몰라서 못 옵니다.
-                  </h2>
-                </div>
-              </div>
-              <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
-                <span className="text-2xl">👨‍💼</span>
-              </div>
-            </div>
-          </div>
-          <div ref={answer3Ref} className="opacity-0">
-            <div className="flex items-start gap-4 justify-end">
-              <div className="flex-1 max-w-md">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl rounded-tr-none px-6 py-4 shadow-md ml-auto flex flex-col gap-4">
-                  <p className="text-lg md:text-xl font-normal text-white leading-relaxed">
-                    현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
-                    종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
-                    잘될 수 밖에 없습니다.
-                  </p>
-                </div>
-              </div>
-              <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
-                <span className="text-2xl">👨‍💼</span>
-              </div>
-            </div>
+          <div className="opacity-100 transform-none">
+            <h2 className="text-5xl md:text-7xl mb-6">
+              <span className="text-white">마케팅은</span>
+              <span className="text-[#7CB342] ml-2 mr-2">필수</span>
+              <span className="text-white">입니다.</span>
+            </h2>
           </div>
         </div>
       </section>
@@ -1115,24 +1090,17 @@ export default function LandingPage() {
           {/* WheelPicker Style Reasons */}
           <WheelPickerReasons />
 
-          {/* Marketing emphasis */}
-          <div ref={emphasisRef} className="opacity-0 text-center py-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 leading-relaxed">
-              마케팅은 필수입니다.
-            </h2>
-          </div>
-
           {/* Consumer era statement */}
           <div className="text-center py-8">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-800 leading-relaxed">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-white leading-relaxed mb-8">
               이제는 소비자가 선택하는 시대입니다.
             </p>
           </div>
 
           {/* Final provocative question */}
           <div ref={finalQuestionRef} className="opacity-0 text-center py-16">
-            <div className="bg-white/50 backdrop-blur-sm rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-800 leading-relaxed">
+            <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-loose">
                 정말 사장님 가게가
                 <br />
                 맛이 없어서
@@ -1145,47 +1113,20 @@ export default function LandingPage() {
       </section>
 
       {/* Section 5: 5T Timeline */}
-      <section
-        ref={section5Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
+      <section ref={section5Ref}>
         {/* Content */}
-        <div className="relative z-10 w-full max-w-5xl px-8 space-y-16">
-          {/* Opening question */}
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8">
-              그럼 마케팅이란 무엇일까요?
-            </h2>
+        <div className="space-y-8 mb-24">
+          <div className="text-2xl md:text-3xl text-white text-left opacity-100 transform-none">
+            그럼 마케팅이란 무엇일까요?
           </div>
-
-          {/* Doubts - speech bubble style */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-            {/* Doubt 1 */}
-            <div ref={doubt1Ref} className="opacity-0 animate-float-1">
-              <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
-                  정말 효과 있을까..?
-                </p>
-              </div>
-            </div>
-
-            {/* Doubt 2 */}
-            <div ref={doubt2Ref} className="opacity-0 animate-float-2">
-              <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
-                  평생 광고비 써야하는거 아니야…?
-                </p>
-              </div>
-            </div>
-
-            {/* Doubt 3 */}
-            <div ref={doubt3Ref} className="opacity-0 animate-float-3">
-              <div className="relative bg-white rounded-2xl px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-base md:text-lg font-semibold text-gray-600 text-center">
-                  한다고 정말 달라질까..?
-                </p>
-              </div>
-            </div>
+          <div className="text-2xl md:text-3xl text-white text-right opacity-100 transform-none">
+            정말 효과 있을까..?
+          </div>
+          <div className="text-2xl md:text-3xl text-white text-left opacity-100 transform-none">
+            평생 광고비 써야하는거 아니야..?
+          </div>
+          <div className="text-2xl md:text-3xl text-white text-right opacity-100 transform-none">
+            한다고 정말 달라질까..?
           </div>
 
           {/* Marketing definition - emphasized */}
