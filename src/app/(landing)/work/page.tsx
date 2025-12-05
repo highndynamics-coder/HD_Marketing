@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
   const router = useRouter();
+
   const { data: WorkData, isLoading } = useQuery<any[]>({
     queryKey: ["work"],
     queryFn: async () => {
@@ -23,13 +23,14 @@ export default function WorkPage() {
     },
   });
 
-  console.log("Rendering with WorkData:", WorkData);
+  const [selectedWork, setSelectedWork] = useState<string | null>(null);
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <main className="relative w-full overflow-x-hidden">
-      {/* Hero Section */}
+    <main className="relative min-h-screen overflow-hidden py-20 lg:py-32">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001A4D] via-[#001529] to-[#000000]" />
+
       <section className="container mx-auto px-6 lg:px-16 relative z-10 my-32">
         {/* Content */}
         <div className="text-center mb-16 opacity-100 transform-none">
@@ -79,41 +80,52 @@ export default function WorkPage() {
       <section className="relative w-full py-10">
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 max-w-6xl mx-auto opacity-100 transform-none">
-            {WorkData?.map((work, index) => (
-              <div
-                key={work.id}
-                onClick={() => router.push(`/work/${work.id}`)}
-              >
-                <button className="group relative opacity-100 transform-cpu min-w-96">
-                  <div className="relative h-full p-8 max-w-2xl rounded-3xl border backdrop-blur-xl transition-all duration-500 bg-white/70 border-white/30 shadow-2xl">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-4">
-                      {work.title}
-                    </h2>
-                    <p className="text-lg md:text-xl font-light text-gray-600 leading-relaxed">
-                      {work.content}
-                    </p>
-                    <div className="mt-6 flex items-center text-blue-500 font-medium">
-                      <span className="group-hover:translate-x-2 transition-transform duration-300">
-                        자세히 보기
-                      </span>
-                      <svg
-                        className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+            {WorkData?.map((work, index) => {
+              const isSelected = selectedWork === work.title;
+
+              return (
+                <div
+                  key={work.id || index}
+                  onClick={() => {
+                    setSelectedWork(work.title);
+                  }}
+                >
+                  <button className="relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20">
+                    {isSelected && (
+                      <div className="absolute top-4 right-4 w-24 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-100 transform-none">
+                        <div className="flex flex-row items-center gap-1.5">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-zap w-3 h-3 text-[#7cb342]"
+                            aria-hidden="true"
+                          >
+                            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+                          </svg>
+                          <span className="text-sm text-white/80">Active</span>
+                        </div>
+                      </div>
+                    )}
+                    <div className="relative w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-white/10 group-hover:bg-white/15 transform-none"></div>
+                    <div className="relative">
+                      <h2 className="text-xl lg:text-2xl mb-2 transition-colors duration-300 text-white/80 group-hover:text-white">
+                        {work.title}
+                      </h2>
+                      <p className="text-sm text-white/50 mb-4">
+                        {work.sub_title}
+                      </p>
                     </div>
-                  </div>
-                </button>
-              </div>
-            ))}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
