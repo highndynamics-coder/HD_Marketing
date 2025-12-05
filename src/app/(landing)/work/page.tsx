@@ -164,6 +164,68 @@ export default function WorkPage() {
               </div>
             </div>
           )}
+          {selectedWork && (
+            <div className="max-w-6xl mx-auto opacity-100 transform-none">
+              <div className="relative rounded-3xl overflow-hidden mb-12 group opacity-100 transform-none">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 lg:p-12 mb-12 opacity-100 transform-none">
+                  <div className="text-center mb-12">
+                    <h3 className="text-3xl lg:text-4xl text-white mb-4">
+                      진행 프로세스
+                    </h3>
+                    <p className="text-lg text-white/60">
+                      체계적인 5단계 프로세스로 확실한 성과를 만들어냅니다
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col space-y-4">
+                    {selectedWork?.process.map((p: any, idx: number) => {
+                      const { title, description, content } = p;
+                      return (
+                        <div key={idx}>
+                          <button className="w-full text-left">
+                            <div className="relative p-6 lg:p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-gradient-to-br from-white/10 to-white/5 border-white/20 hover:from-white/15 hover:to-white/10 hover:border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                              <div
+                                className="absolute inset-0 bg-graident-to-r from-transparent via-white/10 to-transparent rounded-3xl pointer-events-none"
+                                style={{}}
+                              />
+                              {/* <div /> */}
+                              <div className="relative flex items-center justify-between gap-4 lg:gap-6">
+                                <div className="flex items-center gap-4 lg:gap-6 flex-1">
+                                  <div></div>
+                                  <div className="flex-1">
+                                    <h4 className="text-xl lg:text-2xl mb-2 transition-all duration-300 text-white/90 group-hover/card:text-white">
+                                      {title}
+                                    </h4>
+                                    <p className="text-sm lg:text-base text-white/70 group-hover/card:text-white/80 transition-colors">
+                                      {description}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="flex-shrink-0 transform-none">
+                                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-300 bg-white/10 group-hover/card:bg-white/15">
+                                    <span className="text-white/80 text-lg lg:text-xl font-medium">
+                                      {idx + 1}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="text-center opacity-100 transform-none">
+            <div className="relative inline-block">
+              <button className="relative px-16 py-6 bg-gradient-to-r from-[#001A4D] via-[#003D7A] to-[#0066CC] text-white rounded-full text-xl hover:shadow-2xl transition-all flex items-center gap-4 mx-auto group overflow-hidden">
+                <span className="relative z-10">무료 상담 신청하기</span>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </main>
