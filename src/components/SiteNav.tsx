@@ -122,7 +122,7 @@ export default function SiteNav() {
               <img
                 src="/images/HDLogo.png"
                 alt="HD Logo"
-                className="h-32 w-auto"
+                className="h-20 w-auto bg-white aspect-auto"
               />
             </Link>
             <div className="flex-shrink-0 cursor-pointer transform-none">

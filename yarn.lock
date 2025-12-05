@@ -2790,6 +2790,7 @@ __metadata:
     dotenv: "npm:^17.2.3"
     gsap: "npm:^3.13.0"
     lodash: "npm:^4.17.21"
+    lucide-react: "npm:^0.555.0"
     next: "npm:15.1"
     next-intl: "npm:^4.4.0"
     next-themes: "npm:^0.4.6"
@@ -3047,6 +3048,15 @@ __metadata:
   version: 11.2.2
   resolution: "lru-cache@npm:11.2.2"
   checksum: 10/fa7919fbf068a739f79a1ad461eb273514da7246cebb9dca68e3cd7ba19e3839e7e2aaecd9b72867e08038561eeb96941189e89b3d4091c75ced4f56c71c80db
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.555.0":
+  version: 0.555.0
+  resolution: "lucide-react@npm:0.555.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/3f6c7ea61df3927e43cb9251ceddec58382b6bddf266737ee2c8462fd80cc022e972f7a807ce594d17b75828579bea8363be069023062f78724ffa2a56184e42
   languageName: node
   linkType: hard
 

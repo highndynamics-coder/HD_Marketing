@@ -921,14 +921,14 @@ export default function LandingPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
-      <section className="relative min-h-screen w-full flex items-center justify-center">
+      <section className="relative min-h-screen w-full flex flex-col items-center justify-center">
         <div className="absolute inset-0 transform-none">
           <img
             src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1920&q=80"
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
         <div className="relative z-10 w-full text-center px-6 mx-auto opacity-100 transform-none">
           <div className="flex flex-col items-center justify-center gap-4">
@@ -939,11 +939,23 @@ export default function LandingPage() {
               버티셨다면,
             </h2>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight leading-tight">
-              내일은 <span className="text-[#7CB342]">우리가 함께</span>합니다.
+              내일은{" "}
+              <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
+                우리가 함께
+              </span>
+              합니다.
             </h2>
           </div>
         </div>
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-100">
+        <div className="relative opacity-100 transform-none mt-24">
+          <div className="inline-block px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl">
+            <p className="text-xl md:text-2xl text-white/80">
+              광고대행사 High & Dynamics와 함께 성장하세요
+            </p>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-full"></div>
+        </div>
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 opacity-100">
           <div className="text-white/30 text-xs tracking-[0.3em]">SCROLL</div>
         </div>
       </section>
@@ -957,7 +969,20 @@ export default function LandingPage() {
           <div className="max-w-5xl mx-auto">
             <div ref={line4Ref} className="opacity-100 mb-32">
               <p className="text-2xl md:text-4xl font-medium text-white/80 leading-relaxed mb-16">
-                과거부터 현재까지 수많은 자영업자와 소상공인들이 생겨났지만,
+                과거부터 현재까지 수많은{" "}
+                <span className="relative inline-block opacity-100">
+                  <span className="relative z-10 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] bg-clip-text text-transparent">
+                    자영업자와 소상공인
+                  </span>
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-graident-to-r from-[#7CB342] to-[#9DD65D] opacity-40"
+                    style={{
+                      transformOrigin: "left center",
+                      transform: "none",
+                    }}
+                  ></span>
+                </span>
+                들이 생겨났지만,
                 <br />
                 <br />
                 반대로 그만큼 많이 망했습니다.
