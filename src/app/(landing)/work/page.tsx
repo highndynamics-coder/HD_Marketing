@@ -10,8 +10,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
-  const router = useRouter();
-
   const { data: WorkData, isLoading } = useQuery<any[]>({
     queryKey: ["work"],
     queryFn: async () => {
@@ -23,7 +21,7 @@ export default function WorkPage() {
     },
   });
 
-  const [selectedWork, setSelectedWork] = useState<string | null>(null);
+  const [selectedWork, setSelectedWork] = useState<any | null>(null);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -81,13 +79,13 @@ export default function WorkPage() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 max-w-6xl mx-auto opacity-100 transform-none">
             {WorkData?.map((work, index) => {
-              const isSelected = selectedWork === work.title;
+              const isSelected = selectedWork?.title === work.title;
 
               return (
                 <div
                   key={work.id || index}
                   onClick={() => {
-                    setSelectedWork(work.title);
+                    setSelectedWork(work);
                   }}
                 >
                   <button className="relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20">
@@ -126,6 +124,45 @@ export default function WorkPage() {
                 </div>
               );
             })}
+          </div>
+          <div className="max-w-6xl mx-auto opacity-100 transform-none">
+            <div className="relative rounded-3xl overflow-hidden mb-12 group opacity-100 transform-none">
+              <div className="aspect-[21/9] relative">
+                <img
+                  src="https://images.unsplash.com/photo-1758887261865-a2b89c0f7ac5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYWZlJTIwcmVzdGF1cmFudCUyMG93bmVyfGVufDF8fHx8MTc2NDQ3MDkwMHww&ixlib=rb-4.1.0&q=80&w=1080"
+                  alt="Work Image"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-graident-to-r from-transparent via-white/20 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
+                  <div className="flex items-start gap-6 opacity-100 transform-none mt-36">
+                    <div className="w-20 h-20 rounded-2xl bg-graident-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
+                      Hello
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-4xl lg:text-5xl text-white mb-4">
+                      {selectedWork?.title}
+                    </h2>
+                    <p className="text-xl lg:text-2xl text-white/80 mb-6">
+                      우리 동네에서 가장 유명한 가게로 만들어드립니다.
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
+                        A
+                      </div>
+                      <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
+                        B
+                      </div>
+                      <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
+                        C
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
