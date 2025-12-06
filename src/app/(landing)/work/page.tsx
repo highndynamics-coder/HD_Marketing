@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SquareChevronDown, SquareChevronUp } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,9 @@ export default function WorkPage() {
   });
 
   const [selectedWork, setSelectedWork] = useState<any | null>(null);
+  const [expandedProcessIndex, setExpandedProcessIndex] = useState<
+    number | null
+  >(null);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -179,9 +183,16 @@ export default function WorkPage() {
                   <div className="flex flex-col space-y-4">
                     {selectedWork?.process.map((p: any, idx: number) => {
                       const { title, description, content } = p;
+                      const isExpanded = expandedProcessIndex === idx;
+
                       return (
                         <div key={idx}>
-                          <button className="w-full text-left">
+                          <button
+                            className="w-full text-left"
+                            onClick={() => {
+                              setExpandedProcessIndex(isExpanded ? null : idx);
+                            }}
+                          >
                             <div className="relative p-6 lg:p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-gradient-to-br from-white/10 to-white/5 border-white/20 hover:from-white/15 hover:to-white/10 hover:border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
                               <div
                                 className="absolute inset-0 bg-graident-to-r from-transparent via-white/10 to-transparent rounded-3xl pointer-events-none"
@@ -208,13 +219,44 @@ export default function WorkPage() {
                                 <div className="flex-shrink-0 transform-none">
                                   <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-300 bg-white/10 group-hover/card:bg-white/15">
                                     <span className="text-white/80 text-lg lg:text-xl font-medium">
-                                      {idx + 1}
+                                      {isExpanded ? (
+                                        <SquareChevronUp className="w-6 h-6 transition-transform duration-300" />
+                                      ) : (
+                                        <SquareChevronDown className="w-6 h-6 transition-transform duration-300" />
+                                      )}
                                     </span>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </button>
+
+                          {/* Accordion Content */}
+                          <div
+                            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                              isExpanded
+                                ? "max-h-[1000px] opacity-100 mt-4"
+                                : "max-h-0 opacity-0"
+                            }`}
+                          >
+                            <div className="p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-xl">
+                              <div className="space-y-3">
+                                {Array.isArray(content) &&
+                                  content.map(
+                                    (item: string, itemIdx: number) => (
+                                      <div
+                                        key={itemIdx}
+                                        className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
+                                      >
+                                        <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+                                          {item}
+                                        </p>
+                                      </div>
+                                    )
+                                  )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       );
                     })}
