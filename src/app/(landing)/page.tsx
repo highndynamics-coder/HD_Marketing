@@ -222,6 +222,12 @@ export default function LandingPage() {
   const closingLine2Ref = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState("");
 
+  const isReason = [
+    "맛이 없는 거 아니야?",
+    "서비스가 별로 아닐까?",
+    "인테리어가 문제 아니야?",
+  ];
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -921,7 +927,7 @@ export default function LandingPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
-      <section className="relative min-h-screen w-full flex flex-col items-center justify-center">
+      <section className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]">
         <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
           <div className="max-w-6xl mx-auto">
             <div className="mb-32 opacity-100 transform-none">
@@ -947,20 +953,45 @@ export default function LandingPage() {
                 하지만 중요한건
                 <span className="relative inline-block opacity-100 transform-none">
                   <span className="relative z-10 text-white px-4 py-2">
-                    노력
+                    '노력'
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-orange-500/30 rounded-lg"></span>
                   <span className="absolute inset-0 flex items-center justify-center transform-none">
                     <span className="w-full h-0.5 bg-red-500"></span>
                   </span>
                 </span>
+                이 아니라
                 <span className="relative inline-block opacity-100 transform-none">
-                  이 아니라
+                  <span className="relative z-10 bg-graident-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-[#7CB342] px-4 py-4">
+                    '방향'
+                  </span>
+                  <span className="absolute inset-0 bg-graident-to-r from-[#7CB342]/20 to-[#9DD65D]/20 rounded-lg blur-sm" />
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] rounded-full origin-left transform-none" />
                 </span>
-                <span className="relative z-10 bg-graident-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent px-4 py-2">
-                  방향
-                </span>
+                일수도 있습니다.
               </p>
+
+              <div className="mt-12 flex items-center gap-4 opacity-100 transform-none">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#7CB342] to-[#9DD65D] flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-arrow-right w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </div>
+                <div className="flex-1 h-0.5 bg-gradient-to-r from-[#7CB342]/50 to-transparent" />
+              </div>
             </div>
           </div>
         </div>
@@ -969,59 +1000,62 @@ export default function LandingPage() {
       {/* Section 2: 과거부터 현재까지... */}
       <section
         ref={section2Ref}
-        className="relative min-h-screen w-full flex items-center justify-center"
+        className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]"
       >
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12 py-24">
           <div className="max-w-5xl mx-auto">
             <div ref={line4Ref} className="opacity-100 mb-32">
-              <p className="text-2xl md:text-4xl font-medium text-white/80 leading-relaxed mb-16">
+              <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-16">
                 과거부터 현재까지 수많은{" "}
                 <span className="relative inline-block opacity-100">
                   <span className="relative z-10 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] bg-clip-text text-transparent">
                     자영업자와 소상공인
                   </span>
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-graident-to-r from-[#7CB342] to-[#9DD65D] opacity-40"
-                    style={{
-                      transformOrigin: "left center",
-                      transform: "none",
-                    }}
-                  ></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] rounded-full origin-left transform-none" />
                 </span>
                 들이 생겨났지만,
                 <br />
                 <br />
-                반대로 그만큼 많이 망했습니다.
+                반대로 그만큼 많이{" "}
+                <span className="relative inline-block opacity-100">
+                  <span className="relative z-10 text-red-400">
+                    망했습니다.
+                  </span>
+                  <span className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r bg-red-500" />
+                </span>
               </p>
             </div>
-            {/* <div ref={line6Ref} className="opacity-0 pt-4">
-              <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 text-center leading-relaxed">
-                이유가 뭘까요?
-              </p>
-            </div> */}
-            {/* Bubble 1 */}
-            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8">
-              <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                맛이 없는 거 아니야?
-              </p>
-              {/* Tail */}
-              <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
-            </div>
-            {/* Bubble 2 */}
-            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8">
-              <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                서비스가 별로 아닐까?
-              </p>
-              {/* Tail */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
-            </div>
-            {/* Bubble 3 */}
-            <div className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs">
-              <p className="text-base md:text-lg font-light text-gray-700 text-center">
-                인테리어가 문제 아니야?
-              </p>
-              {/* Tail */}
-              <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+
+            <div className="flex flex-col space-y-8 mb-16">
+              {isReason.map((reason, index) => (
+                <div
+                  className="relative group opacity-100 transform-none"
+                  key={index}
+                >
+                  <div className="flex items-center gap-4 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-red-400/30 transition-all">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-alert w-8 h-8 text-red-400/60 group-hover:text-red-400 transition-colors"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" x2="12" y1="8" y2="12"></line>
+                      <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                    <p className="text-2xl md:text-4xl text-white/60 group-hover:text-white/80 transition-colors">
+                      {reason}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
