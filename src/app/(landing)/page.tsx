@@ -922,41 +922,47 @@ export default function LandingPage() {
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
       <section className="relative min-h-screen w-full flex flex-col items-center justify-center">
-        <div className="absolute inset-0 transform-none">
-          <img
-            src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1920&q=80"
-            alt="Hero Background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/80" />
-        </div>
-        <div className="relative z-10 w-full text-center px-6 mx-auto opacity-100 transform-none">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4 leading-tight tracking-tight">
-              오늘도
-            </h2>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4 tracking-tight leading-tight">
-              버티셨다면,
-            </h2>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight leading-tight">
-              내일은{" "}
-              <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
-                우리가 함께
-              </span>
-              합니다.
-            </h2>
+        <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-32 opacity-100 transform-none">
+              <div className="relative">
+                <div className="h-1 bg-gradient-to-r from-[#7CB342] to-transparent mb-12 w-28" />
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white/90 mb-6 min-h-[1.2em]">
+                  오늘도 버티셨다면,
+                </h2>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 min-h-[1.2em]">
+                  <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
+                    내일은 우리가 함께 합니다.
+                  </span>
+                </h2>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="relative opacity-100 transform-none mt-24">
-          <div className="inline-block px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl">
-            <p className="text-xl md:text-2xl text-white/80">
-              광고대행사 High & Dynamics와 함께 성장하세요
-            </p>
+        <div className="relative opacity-100 transform-none">
+          <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 lg:p-16 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+            <div className="relative z-10">
+              <p className="text-2xl md:text-4xl lg:text-5xl text-white/90 leading-relaxed opacity-100 transform-none">
+                하지만 중요한건
+                <span className="relative inline-block opacity-100 transform-none">
+                  <span className="relative z-10 text-white px-4 py-2">
+                    노력
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-orange-500/30 rounded-lg"></span>
+                  <span className="absolute inset-0 flex items-center justify-center transform-none">
+                    <span className="w-full h-0.5 bg-red-500"></span>
+                  </span>
+                </span>
+                <span className="relative inline-block opacity-100 transform-none">
+                  이 아니라
+                </span>
+                <span className="relative z-10 bg-graident-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent px-4 py-2">
+                  방향
+                </span>
+              </p>
+            </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-full"></div>
-        </div>
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 opacity-100">
-          <div className="text-white/30 text-xs tracking-[0.3em]">SCROLL</div>
         </div>
       </section>
 
