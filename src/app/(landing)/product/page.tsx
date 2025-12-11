@@ -312,126 +312,180 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {ProductData?.slice(2).map((product, index) => (
-              <div className="col-span-1 group opacity-100 transform-none">
-                <div className="relative h-full min-h-[400px] rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 hover:border-white/40 transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)]">
-                  <div className="relative z-10 h-full flex flex-col">
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#4267B2] via-[#E1306C] to-[#833AB4] flex items-center justify-center shadow-2xl">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-users w-8 h-8 text-white"
-                          aria-hidden="true"
-                        >
-                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                          <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
-                          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                          <circle cx="9" cy="7" r="4"></circle>
-                        </svg>
-                      </div>
+            {ProductData?.slice(2).map((product, index) => {
+              const productIndex = index;
+              const colorList = [
+                "from-[#FF0000] via-[#FF4444] to-[#FF6666]",
+                "from-[#FF0080] via-[#FF4D94] to-[#FF80B3]",
+                "from-[#FF6F0F] via-[#FF8C3A] to-[#FFA05C]",
+              ];
 
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-zap w-3 h-3 text-[#7cb342]"
-                          aria-hidden="true"
-                        >
-                          <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-                        </svg>
-                        <span className="text-xs text-white/80">Live</span>
-                      </div>
-                    </div>
+              const svgList = [
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-users w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                </svg>,
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-sparkles w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
+                  <path d="M20 2v4"></path>
+                  <path d="M22 4h-4"></path>
+                  <circle cx="4" cy="20" r="2"></circle>
+                </svg>,
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-target w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>,
+              ];
 
-                    <div className="mb-4">
-                      <h3 className="text-xl lg:text-3xl mb-3 text-white">
-                        {product.title}
-                      </h3>
-                      <p className="text-lg text-white/60">
-                        {product.sub_title}
-                      </p>
-                    </div>
-
-                    <p className="text-lg text-white/70 mb-6 leading-relaxed">
-                      {product.content}
-                    </p>
-
-                    <div className="flex flex-wrap gap-3 mb-6 mt-auto">
-                      {product.metrics?.map((metric, index) => (
+              return (
+                <div className="col-span-1 group opacity-100 transform-none">
+                  <div className="relative h-full min-h-[400px] rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 hover:border-white/40 transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)]">
+                    <div className="relative z-10 h-full flex flex-col">
+                      <div className="flex items-start justify-between mb-6">
                         <div
-                          key={index}
-                          className="bg-black/30 backdrop-blur-sm rounded-xl p-3 border border-white/10 min-w-24"
+                          className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colorList[index]} flex items-center justify-center shadow-2xl`}
                         >
-                          <div className="flex items-center gap-2 mb-1">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-chart-column w-3 h-3"
-                              aria-hidden="true"
-                              style={{ color: "#E1306C" }}
-                            >
-                              <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
-                              <path d="M18 17V9"></path>
-                              <path d="M13 17V5"></path>
-                              <path d="M8 17v-3"></path>
-                            </svg>
-                            <div className="text-xl bg-gradient-to-r from-[#4267B2] via-[#E1306C] to-[#833AB4] bg-clip-text text-transparent">
-                              {metric.number}
+                          {svgList[index]}
+                        </div>
+
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-zap w-3 h-3 text-[#7cb342]"
+                            aria-hidden="true"
+                          >
+                            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+                          </svg>
+                          <span className="text-xs text-white/80">Live</span>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <h3 className="text-xl lg:text-3xl mb-3 text-white">
+                          {product.title}
+                        </h3>
+                        <p className="text-lg text-white/60">
+                          {product.sub_title}
+                        </p>
+                      </div>
+
+                      <p className="text-lg text-white/70 mb-6 leading-relaxed">
+                        {product.content}
+                      </p>
+
+                      <div className="flex flex-wrap gap-3 mb-6 mt-auto">
+                        {product.metrics?.map((metric, index) => (
+                          <div
+                            key={index}
+                            className="bg-black/30 backdrop-blur-sm rounded-xl p-3 border border-white/10 min-w-24"
+                          >
+                            <div className="flex items-center gap-2 mb-1">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-chart-column w-3 h-3"
+                                aria-hidden="true"
+                                style={{ color: "#E1306C" }}
+                              >
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                              </svg>
+                              <div
+                                className={`text-xl bg-gradient-to-r ${colorList[productIndex]} bg-clip-text text-transparent`}
+                              >
+                                {metric.number}
+                              </div>
+                            </div>
+                            <div className="text-xs text-white/50">
+                              {metric.name}
                             </div>
                           </div>
-                          <div className="text-xs text-white/50">
-                            {metric.name}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
 
-                    <button className="mt-6 py-4 px-8 text-lg w-full bg-gradient-to-r from-[#4267B2] via-[#E1306C] to-[#833AB4] text-white rounded-2xl hover:shadow-2xl transition-all flex items-center justify-center gap-2 relative overflow-hidden">
-                      <span className="relative z-10">자세히 보기</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right relative z-10 w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
-                        aria-hidden="true"
+                      <button
+                        className={`mt-6 py-4 px-8 text-lg w-full bg-gradient-to-r ${colorList[productIndex]} text-white rounded-2xl hover:shadow-2xl transition-all flex items-center justify-center gap-2 relative overflow-hidden`}
                       >
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                    </button>
+                        <span className="relative z-10">자세히 보기</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right relative z-10 w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                          aria-hidden="true"
+                        >
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
