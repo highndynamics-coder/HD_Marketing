@@ -1162,66 +1162,7 @@ export default function LandingPage() {
       </div>
 
       {/* Section 6: Success Stories */}
-      <section
-        ref={section6Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
-        {/* Floating animation styles */}
-        <style jsx>{`
-          @keyframes float {
-            0%,
-            100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-20px);
-            }
-          }
-
-          .float-1 {
-            animation: float 6s ease-in-out infinite;
-          }
-
-          .float-2 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 0.5s;
-          }
-
-          .float-3 {
-            animation: float 8s ease-in-out infinite;
-            animation-delay: 1s;
-          }
-
-          .float-4 {
-            animation: float 6.5s ease-in-out infinite;
-            animation-delay: 1.5s;
-          }
-
-          .float-5 {
-            animation: float 7.5s ease-in-out infinite;
-            animation-delay: 2s;
-          }
-
-          .float-6 {
-            animation: float 8.5s ease-in-out infinite;
-            animation-delay: 2.5s;
-          }
-
-          .float-7 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 3s;
-          }
-
-          .scrollbar-hidden::-webkit-scrollbar {
-            display: none;
-          }
-
-          .scrollbar-hidden {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-        `}</style>
-
+      <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Title */}
@@ -1402,14 +1343,12 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-
           {/* Success statement */}
-          <div ref={successTitleRef} className="opacity-0 text-center py-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-              실제로 많은 사장님들의
-              <br />
-              성공을 도왔습니다
-            </h2>
+          <div className="opacity-100 text-center py-16">
+            <div className="text-4xl md:text-6xl text-white flex flex-col gap-4">
+              <span className="text-white">실제로 많은 사장님들의</span>
+              <span className="text-[#7CB342]">성공을 도왔습니다</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1422,7 +1361,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
           {/* Opening question */}
-          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-8">
+          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-wide">
               그래서 제가 누구냐고요?
             </h2>
