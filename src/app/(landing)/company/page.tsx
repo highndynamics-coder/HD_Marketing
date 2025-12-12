@@ -1,18 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const fiveTItems = [
-  { label: "Trend", description: "트렌드" },
-  { label: "Tech", description: "기술" },
-  { label: "Tactics", description: "전략" },
-  { label: "Target", description: "목표" },
-  { label: "Talk", description: "소통" },
-];
 
 export default function CompanyPage() {
   const openingQuoteRef = useRef<HTMLDivElement>(null);
@@ -136,7 +129,7 @@ export default function CompanyPage() {
   }, []);
 
   return (
-    <main className="relative w-full overflow-x-hidden bg-black my-24">
+    <main className="relative w-full min-h-screen overflow-x-hidden bg-black mt-24">
       <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         {/* Content */}
         <div className="relative z-10 w-full max-w-4xl px-8 space-y-8">
@@ -189,30 +182,9 @@ export default function CompanyPage() {
                 HD컴퍼니가 구매합니다.
               </span>
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Closing Section */}
-      <section className="relative w-full py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-relaxed">
-            HD컴퍼니와 함께
-            <br />
-            새로운 내일을 만들어가세요
-          </h2>
-          <p className="text-xl md:text-2xl font-light text-gray-600">
-            여러분의 성공이 우리의 목표입니다
-          </p>
-
-          {/* CTA Button */}
-          <div className="pt-8">
-            <a
-              href="/inquiry"
-              className="inline-block px-12 py-5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xl font-medium rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300"
-            >
-              지금 시작하기
-            </a>
+            <div className="mt-6">
+              <Image src="/images/Sign.png" alt="Sign" width={300} height={300} priority className="opacity-50" />
+            </div>
           </div>
         </div>
       </section>
