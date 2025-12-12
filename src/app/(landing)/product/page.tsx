@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
@@ -205,7 +206,16 @@ export default function ProductPage() {
                 }
               )}
             </div>
-            <div className="w-full bg-red-500 p-4 h-96">Hello</div>
+            <div className="w-full p-4 min-h-96 flex items-center justify-center">
+              <Image
+                src="/images/NaverLogo.png"
+                alt="Product Logo"
+                width={300}
+                height={300}
+                priority
+                className="bg-transparent w-1/2 h-1/2 object-contain"
+              />
+            </div>
           </div>
         </div>
       </section>

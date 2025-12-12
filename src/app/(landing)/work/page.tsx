@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { gsap } from "gsap";
@@ -188,9 +189,12 @@ export default function WorkPage() {
             <div className="max-w-6xl mx-auto opacity-100 transform-none">
               <div className="relative rounded-3xl overflow-hidden mb-12 group opacity-100 transform-none">
                 <div className="aspect-[21/9] relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1758887261865-a2b89c0f7ac5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYWZlJTIwcmVzdGF1cmFudCUyMG93bmVyfGVufDF8fHx8MTc2NDQ3MDkwMHww&ixlib=rb-4.1.0&q=80&w=1080"
+                  <Image
+                    src={selectedWork?.image}
                     alt="Work Image"
+                    width={1000}
+                    height={1000}
+                    priority
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
