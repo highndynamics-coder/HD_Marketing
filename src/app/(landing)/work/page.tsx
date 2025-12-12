@@ -139,11 +139,17 @@ export default function WorkPage() {
                 </svg>,
               ];
 
+              const imageList = [
+                "/images/SelfWork.png",
+                "/images/OnlineCommerce.png",
+                "/images/Influencer.png",
+              ];
+
               return (
                 <div
                   key={work.id || index}
                   onClick={() => {
-                    setSelectedWork(work);
+                    setSelectedWork({ ...work, image: imageList[workIndex] });
                   }}
                 >
                   <button className="relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20">
@@ -192,8 +198,8 @@ export default function WorkPage() {
                   <Image
                     src={selectedWork?.image}
                     alt="Work Image"
-                    width={1000}
-                    height={1000}
+                    width={800}
+                    height={800}
                     priority
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
