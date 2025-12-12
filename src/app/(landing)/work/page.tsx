@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import clsx from "clsx";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { gsap } from "gsap";
@@ -10,6 +12,13 @@ import { SquareChevronDown, SquareChevronUp } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
+    const imageList = [
+                "/images/SelfWork.png",
+                "/images/OnlineCommerce.png",
+                "/images/Influencer.png",
+    ];
+  
+  const [selectedWork, setSelectedWork] = useState<any | null>(null);
   const { data: WorkData, isLoading } = useQuery<any[]>({
     queryKey: ["work"],
     queryFn: async () => {
@@ -17,11 +26,11 @@ export default function WorkPage() {
 
       if (error) throw error;
       console.log("WorkData from Supabase:", data);
+      setSelectedWork({ ...data[0], image: imageList[0] });
       return data;
     },
   });
-
-  const [selectedWork, setSelectedWork] = useState<any | null>(null);
+  
   const [expandedProcessIndex, setExpandedProcessIndex] = useState<
     number | null
   >(null);
@@ -82,16 +91,82 @@ export default function WorkPage() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 max-w-6xl mx-auto opacity-100 transform-none">
             {WorkData?.sort((a, b) => a.id - b.id).map((work, index) => {
+              const workIndex = index;
               const isSelected = selectedWork?.title === work.title;
+
+              const svgList = [
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-store w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"></path>
+                  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"></path>
+                  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"></path>
+                </svg>,
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-shopping-cart w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                </svg>,
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-briefcase w-8 h-8 text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                </svg>,
+              ];
+
+                const colorList = [
+                    "from-[#FF6F0F] via-[#FF8C3A] to-[#FFA05C]",
+                    "from-[#7CB342] via-[#9DD158] to-[#B8E986]",
+                    "from-[#001A4D] via-[#003D7A] to-[#0066CC]"
+                ];
+
+              const imageList = [
+                "/images/SelfWork.png",
+                "/images/OnlineCommerce.png",
+                "/images/Influencer.png",
+              ];
 
               return (
                 <div
                   key={work.id || index}
                   onClick={() => {
-                    setSelectedWork(work);
+                    setSelectedWork({ ...work, image: imageList[workIndex] });
                   }}
                 >
-                  <button className="relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20">
+                  <button className={clsx("relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20", isSelected && `bg-gradient-to-br ${colorList[workIndex]} border border-white/20  hover:border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]`)}>
                     {isSelected && (
                       <div className="absolute top-4 right-4 w-24 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-100 transform-none">
                         <div className="flex flex-row items-center gap-1.5">
@@ -114,7 +189,9 @@ export default function WorkPage() {
                         </div>
                       </div>
                     )}
-                    <div className="relative w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-white/10 group-hover:bg-white/15 transform-none"></div>
+                    <div className="relative w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-white/10 group-hover:bg-white/15 transform-none">
+                      {svgList[workIndex]}
+                    </div>
                     <div className="relative">
                       <h2 className="text-xl lg:text-2xl mb-2 transition-colors duration-300 text-white/80 group-hover:text-white">
                         {work.title}
@@ -122,6 +199,16 @@ export default function WorkPage() {
                       <p className="text-sm text-white/50 mb-4">
                         {work.sub_title}
                       </p>
+                      {isSelected && (
+                        <div className="flex flex-row gap-3 items-center justify-center">
+                          {work.metrics.map((metric: any, idx: number) => (
+                            <div key={idx} className="bg-white/10 backdrop-blur-md flex flex-col items-center gap-2 opacity-100 transform-none p-2">
+                              <span className="text-lg text-white">{metric.number}</span>
+                              <span className="text-sm text-white/80">{metric.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </button>
                 </div>
@@ -132,9 +219,12 @@ export default function WorkPage() {
             <div className="max-w-6xl mx-auto opacity-100 transform-none">
               <div className="relative rounded-3xl overflow-hidden mb-12 group opacity-100 transform-none">
                 <div className="aspect-[21/9] relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1758887261865-a2b89c0f7ac5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYWZlJTIwcmVzdGF1cmFudCUyMG93bmVyfGVufDF8fHx8MTc2NDQ3MDkwMHww&ixlib=rb-4.1.0&q=80&w=1080"
+                  <Image
+                    src={selectedWork?.image}
                     alt="Work Image"
+                    width={800}
+                    height={800}
+                    priority
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
@@ -151,15 +241,12 @@ export default function WorkPage() {
                         {selectedWork?.description}
                       </p>
                       <div className="flex flex-wrap gap-3">
-                        <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
-                          A
-                        </div>
-                        <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
-                          B
-                        </div>
-                        <div className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
-                          C
-                        </div>
+                        {selectedWork?.metrics.map((metric: any, idx: number) => (
+                          <div key={idx} className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
+                            <span className="text-lg text-white">{metric.number}</span>
+                            <span className="text-sm text-white/80">{metric.name}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
