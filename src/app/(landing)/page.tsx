@@ -175,6 +175,62 @@ export default function LandingPage() {
     };
   }, []);
 
+  const thirdSectionRef = useRef<HTMLDivElement>(null);
+  const thirdSectionQuestionRef = useRef<HTMLDivElement>(null);
+  const thirdSectionAnswerRefs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    if (!thirdSectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: thirdSectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      /* 1️⃣ 질문 (왼 → 오) */
+      tl.fromTo(
+        thirdSectionQuestionRef.current,
+        {
+          opacity: 0,
+          x: -50,
+          scale: 0.98,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.7,
+          ease: "power2.out",
+        }
+      );
+
+      /* 2️⃣ 답변들 (오 → 왼, 카톡처럼 순차) */
+      tl.fromTo(
+        thirdSectionAnswerRefs.current,
+        {
+          opacity: 0,
+          x: 60,
+          scale: 0.98,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.65,
+          ease: "power2.out",
+          stagger: 0.22,
+        },
+        "+=0.15"
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   const isReason = [
     "맛이 없는 거 아니야?",
     "서비스가 별로 아닐까?",
@@ -406,9 +462,15 @@ export default function LandingPage() {
       </section>
 
       {/* Section 3: Q&A - Chat Style */}
-      <section className="flex flex-col space-y-16 opacity-100 container mx-auto">
+      <section
+        ref={thirdSectionRef}
+        className="flex flex-col space-y-16 opacity-100 container mx-auto"
+      >
         {/* Question - 사장님들 (Left) */}
-        <div className="flex items-start gap-4 text-black">
+        <div
+          className="flex items-start gap-4 text-black"
+          ref={thirdSectionQuestionRef}
+        >
           <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg ">
             <span className="text-2xl">👨‍👩‍👦</span>
           </div>
@@ -425,17 +487,32 @@ export default function LandingPage() {
         <div>
           <div className="flex items-start gap-4 justify-end">
             <div className="flex-1 max-w-3xl flex flex-col gap-4">
-              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+              <div
+                ref={(el) => {
+                  if (el) thirdSectionAnswerRefs.current[0] = el;
+                }}
+                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+              >
                 <h2 className="text-2xl font-semibold text-white">
                   잘 모르겠습니다..
                 </h2>
               </div>
-              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+              <div
+                ref={(el) => {
+                  if (el) thirdSectionAnswerRefs.current[1] = el;
+                }}
+                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+              >
                 <h2 className="text-2xl font-semibold text-white">
                   정말 몰라서 못 옵니다.
                 </h2>
               </div>
-              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+              <div
+                ref={(el) => {
+                  if (el) thirdSectionAnswerRefs.current[2] = el;
+                }}
+                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+              >
                 <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
                   현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
                   종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
