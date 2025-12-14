@@ -178,12 +178,14 @@ export default function LandingPage() {
   const thirdSectionRef = useRef<HTMLDivElement>(null);
   const thirdSectionQuestionRef = useRef<HTMLDivElement>(null);
   const thirdSectionAnswerRefs = useRef<HTMLDivElement[]>([]);
+  const thirdSectionScrollListRef = useRef<HTMLDivElement>(null);
+  const thirdSectionScrollItemRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     if (!thirdSectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      const qaTl = gsap.timeline({
         scrollTrigger: {
           trigger: thirdSectionRef.current,
           start: "top 70%",
@@ -191,46 +193,63 @@ export default function LandingPage() {
         },
       });
 
-      /* 1️⃣ 질문 (왼 → 오) */
-      tl.fromTo(
+      qaTl.fromTo(
         thirdSectionQuestionRef.current,
         {
           opacity: 0,
-          x: -50,
-          scale: 0.98,
+          x: -60,
+          scale: 0.97,
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
-          duration: 0.7,
-          ease: "power2.out",
+          duration: 0.75,
+          ease: "power3.out",
         }
       );
 
-      /* 2️⃣ 답변들 (오 → 왼, 카톡처럼 순차) */
-      tl.fromTo(
+      qaTl.fromTo(
         thirdSectionAnswerRefs.current,
         {
           opacity: 0,
-          x: 60,
-          scale: 0.98,
+          x: 80,
+          scale: 0.97,
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
           duration: 0.65,
-          ease: "power2.out",
-          stagger: 0.22,
+          ease: "power3.out",
+          stagger: 0.25,
         },
-        "+=0.15"
+        "+=0.2"
       );
-    });
+
+      gsap.fromTo(
+        thirdSectionScrollItemRefs.current,
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          stagger: 0.25,
+          scrollTrigger: {
+            trigger: thirdSectionScrollListRef.current,
+            start: "top 75%",
+            end: "bottom 40%",
+            scrub: true,
+          },
+        }
+      );
+    }, thirdSectionRef);
 
     return () => ctx.revert();
   }, []);
-
   const isReason = [
     "맛이 없는 거 아니야?",
     "서비스가 별로 아닐까?",
@@ -526,26 +545,27 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="opacity-100 transform-none text-center">
+        <div
+          ref={thirdSectionScrollListRef}
+          className="opacity-100 transform-none text-center"
+        >
           <div className="flex flex-col gap-8 my-16">
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                내 가게를 찾고, 기억하게 하기 위해서
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                우리 가게만의 특별한 점을 어필하기 위해서
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                손님이 뜸한 시기에도 안정적인 매출을 유지하고,
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">위기에 대비하기 위해서</p>
-            </div>
+            {[
+              "내 가게를 찾고, 기억하게 하기 위해서",
+              "우리 가게만의 특별한 점을 어필하기 위해서",
+              "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
+              "위기에 대비하기 위해서",
+            ].map((text, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) thirdSectionScrollItemRefs.current[index] = el;
+                }}
+                className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5"
+              >
+                <p className="text-lg text-white">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
 
