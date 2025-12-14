@@ -593,7 +593,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 3: Q&A - Chat Style */}
-      <section className="flex flex-col space-y-16 mb-32 opacity-100 container mx-auto py-20">
+      <section className="flex flex-col space-y-16 opacity-100 container mx-auto">
         {/* Question - 사장님들 (Left) */}
         <div ref={questionRef} className="flex items-start gap-4 text-black">
           <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg ">
@@ -611,12 +611,19 @@ export default function LandingPage() {
         {/* Final Answer - HD (Right) */}
         <div ref={answer1Ref}>
           <div className="flex items-start gap-4 justify-end">
-            <div className="flex-1 max-w-3xl">
+            <div className="flex-1 max-w-3xl flex flex-col gap-4">
+              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+                <h2 className="text-2xl font-semibold text-white">
+                  잘 모르겠습니다..
+                </h2>
+              </div>
               <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
                 <h2 className="text-2xl font-semibold text-white">
                   정말 몰라서 못 옵니다.
                 </h2>
-                <p className="text-lg md:text-xl font-normal text-white/60 leading-relaxed">
+              </div>
+              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
                   현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
                   종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
                   잘될 수 밖에 없습니다.
