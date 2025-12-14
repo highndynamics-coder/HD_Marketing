@@ -7,162 +7,6 @@ import { ContactBanner } from "@/components/ContactBanner";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Reason {
-  emoji: string;
-  text: string;
-  gradient: string;
-}
-
-const reasons: Reason[] = [
-  {
-    emoji: "📊",
-    text: "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
-    gradient: "from-blue-500 to-blue-600",
-  },
-  {
-    emoji: "🛡️",
-    text: "위기에 대비하기 위해서",
-    gradient: "from-purple-500 to-purple-600",
-  },
-  {
-    emoji: "🔍",
-    text: "내 가게를 찾고, 기억하게 하기 위해서",
-    gradient: "from-green-500 to-green-600",
-  },
-  {
-    emoji: "⭐",
-    text: "우리 가게만의 특별한 점을 어필하기 위해서",
-    gradient: "from-orange-500 to-orange-600",
-  },
-];
-
-function WheelPickerReasons() {
-  const [scrollOffset, setScrollOffset] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setScrollOffset((prev) => prev + 1);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Create an extended array for infinite circular effect based on current scrollOffset
-  const getExtendedReasons = () => {
-    // Show 3 items before and after current scrollOffset
-    const extended = [];
-    for (let i = scrollOffset - 3; i <= scrollOffset + 3; i++) {
-      const actualIndex =
-        ((i % reasons.length) + reasons.length) % reasons.length;
-      extended.push({
-        ...reasons[actualIndex],
-        displayIndex: i,
-      });
-    }
-    return extended;
-  };
-
-  function getItemStyle(displayIndex: number) {
-    const diff = displayIndex - scrollOffset;
-    const isCenter = diff === 0;
-
-    // Center item
-    if (isCenter) {
-      return {
-        scale: 1,
-        opacity: 1,
-        translateY: 0,
-        zIndex: 10,
-      };
-    }
-
-    // Items above and below
-    if (Math.abs(diff) === 1) {
-      return {
-        scale: 0.75,
-        opacity: 0.4,
-        translateY: diff * 80,
-        zIndex: 5,
-      };
-    }
-
-    // Far items
-    return {
-      scale: 0.6,
-      opacity: 0.2,
-      translateY: diff * 120,
-      zIndex: 1,
-    };
-  }
-
-  const extendedReasons = getExtendedReasons();
-
-  return (
-    <div className="relative w-full max-w-3xl mx-auto py-20">
-      <div
-        ref={containerRef}
-        className="relative h-[400px] flex items-center justify-center overflow-hidden"
-      >
-        {extendedReasons.map((reason, idx) => {
-          const style = getItemStyle(reason.displayIndex);
-          const isCenter = reason.displayIndex === scrollOffset;
-
-          // Only render visible items for performance
-          if (Math.abs(reason.displayIndex - scrollOffset) > 2) {
-            return null;
-          }
-
-          return (
-            <div
-              key={`${reason.displayIndex}-${idx}`}
-              className="absolute w-full transition-all duration-700 ease-out"
-              style={{
-                transform: `translateY(${style.translateY}px) scale(${style.scale})`,
-                opacity: style.opacity,
-                zIndex: style.zIndex,
-              }}
-            >
-              <div className="flex items-center justify-center gap-6 px-8">
-                <div
-                  className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${reason.gradient} flex items-center justify-center shadow-lg transition-all duration-700`}
-                >
-                  <span className="text-3xl">{reason.emoji}</span>
-                </div>
-                <p
-                  className={`text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed transition-all duration-700 ${
-                    isCenter
-                      ? "text-gray-900 font-bold"
-                      : "text-gray-400 font-normal"
-                  }`}
-                >
-                  {reason.text}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Navigation dots */}
-      <div className="justify-center gap-2 mt-8 hidden">
-        {reasons.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setScrollOffset(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-              scrollOffset % reasons.length === index
-                ? "bg-gray-900 w-8"
-                : "bg-gray-300 hover:bg-gray-400"
-            }`}
-            aria-label={`Go to reason ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function LandingPage() {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
@@ -195,13 +39,7 @@ export default function LandingPage() {
   const timeline5Ref = useRef<HTMLDivElement>(null);
   const section6Ref = useRef<HTMLDivElement>(null);
   const storyTitleRef = useRef<HTMLDivElement>(null);
-  const story1Ref = useRef<HTMLDivElement>(null);
-  const story2Ref = useRef<HTMLDivElement>(null);
-  const story3Ref = useRef<HTMLDivElement>(null);
-  const story4Ref = useRef<HTMLDivElement>(null);
-  const story5Ref = useRef<HTMLDivElement>(null);
-  const story6Ref = useRef<HTMLDivElement>(null);
-  const story7Ref = useRef<HTMLDivElement>(null);
+  const storyRefs = useRef<(HTMLDivElement | null)[]>([]);
   const successTitleRef = useRef<HTMLDivElement>(null);
   const section7Ref = useRef<HTMLDivElement>(null);
   const ceoQuestionRef = useRef<HTMLDivElement>(null);
@@ -226,6 +64,78 @@ export default function LandingPage() {
     "맛이 없는 거 아니야?",
     "서비스가 별로 아닐까?",
     "인테리어가 문제 아니야?",
+  ];
+
+  const stories = [
+    {
+      emoji: "👩‍🍳",
+      gradientFrom: "from-pink-400",
+      gradientTo: "to-pink-500",
+      title: "35세 치킨집 사장님",
+      content:
+        "장사하면서 눈물 쏙 뺀 날도 많았는데, 요즘은 가족들이랑 웃는 날이 더 많아요!",
+    },
+    {
+      emoji: "☕",
+      gradientFrom: "from-blue-400",
+      gradientTo: "to-blue-500",
+      title: "28세 카페 사장님",
+      content:
+        "가게 문 닫을까 고민하던 때가 엊그제 같은데, 지금은 매일매일 정신없어요.",
+    },
+    {
+      emoji: "🍜",
+      gradientFrom: "from-green-400",
+      gradientTo: "to-green-500",
+      title: "42세 분식집 사장님",
+      content: (
+        <>
+          부모님에게 걱정만 끼치던 저였는데 이젠 가끔 용돈도 드리네요..ㅋㅎㅋㅎ
+          <br />
+          정말 작지만 큰 변화라고 생각합니다!
+          <br />
+          부모님도 응원해주시니 더 힘이 나는 거 같아요!
+        </>
+      ),
+      subContent: "(가게 매출이 올라서 부모님 용돈도 가끔 드립니다..)",
+    },
+    {
+      emoji: "🍕",
+      gradientFrom: "from-purple-400",
+      gradientTo: "to-purple-500",
+      title: "31세 피자집 사장님",
+      content: (
+        <>
+          요즘은 매출 오른 걸 핑계 삼아 장난감 하나씩 사주네요ㅎㅎ
+          <br />
+          가족도 분위기가 좋아진거 같아서 너무 행복합니다 ㅎㅎ
+        </>
+      ),
+    },
+    {
+      emoji: "🥘",
+      gradientFrom: "from-orange-400",
+      gradientTo: "to-orange-500",
+      title: "39세 한식당 사장님",
+      content:
+        "힘들 때마다 가족 생각하면서 버텼는데, 이제는 가족들한테 자랑할 수 있는 가게가 됐어요",
+    },
+    {
+      emoji: "🍰",
+      gradientFrom: "from-red-400",
+      gradientTo: "to-red-500",
+      title: "26세 베이커리 사장님",
+      content:
+        "작은 가게지만 가족들의 희망이 되어가고 있어요. 대표님 덕에 하루하루 감사하며 일하고 있습니다.",
+    },
+    {
+      emoji: "🍗",
+      gradientFrom: "from-yellow-400",
+      gradientTo: "to-yellow-500",
+      title: "44세 호프집 사장님",
+      content:
+        "아직 완벽하진 않지만, 그래도 매출 걱정에 밤새던 일은 없어졌어요. 조금씩 좋아지고 있다는 게 느껴집니다.",
+    },
   ];
 
   useEffect(() => {
@@ -649,61 +559,30 @@ export default function LandingPage() {
         },
       });
 
-      section6Timeline
-        .fromTo(
-          storyTitleRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-          0
-        )
-        .fromTo(
-          story1Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          0.5
-        )
-        .fromTo(
-          story2Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          0.7
-        )
-        .fromTo(
-          story3Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          0.9
-        )
-        .fromTo(
-          story4Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.1
-        )
-        .fromTo(
-          story5Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.3
-        )
-        .fromTo(
-          story6Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.5
-        )
-        .fromTo(
-          story7Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.7
-        )
-        .fromTo(
-          successTitleRef.current,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.2)" },
-          2.5
-        );
+      section6Timeline.fromTo(
+        storyTitleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+        0
+      );
+
+      storyRefs.current.forEach((ref, index) => {
+        if (ref) {
+          section6Timeline.fromTo(
+            ref,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+            0.5 + index * 0.2
+          );
+        }
+      });
+
+      section6Timeline.fromTo(
+        successTitleRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.2)" },
+        2.5
+      );
 
       // Section 6 fade out on scroll
       gsap.to(section6Ref.current, {
@@ -1102,9 +981,6 @@ export default function LandingPage() {
       >
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
-          {/* WheelPicker Style Reasons */}
-          <WheelPickerReasons />
-
           {/* Consumer era statement */}
           <div className="text-center py-8">
             <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-white leading-relaxed mb-8">
@@ -1162,254 +1038,52 @@ export default function LandingPage() {
       </div>
 
       {/* Section 6: Success Stories */}
-      <section
-        ref={section6Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
-        {/* Floating animation styles */}
-        <style jsx>{`
-          @keyframes float {
-            0%,
-            100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-20px);
-            }
-          }
-
-          .float-1 {
-            animation: float 6s ease-in-out infinite;
-          }
-
-          .float-2 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 0.5s;
-          }
-
-          .float-3 {
-            animation: float 8s ease-in-out infinite;
-            animation-delay: 1s;
-          }
-
-          .float-4 {
-            animation: float 6.5s ease-in-out infinite;
-            animation-delay: 1.5s;
-          }
-
-          .float-5 {
-            animation: float 7.5s ease-in-out infinite;
-            animation-delay: 2s;
-          }
-
-          .float-6 {
-            animation: float 8.5s ease-in-out infinite;
-            animation-delay: 2.5s;
-          }
-
-          .float-7 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 3s;
-          }
-
-          .scrollbar-hidden::-webkit-scrollbar {
-            display: none;
-          }
-
-          .scrollbar-hidden {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-        `}</style>
-
+      <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Title */}
           <div ref={storyTitleRef} className="opacity-0 text-center">
-            <p className="text-lg md:text-xl text-gray-500 mb-4">
-              (*우리의 이야기 입니다)
+            <p className="text-white/40 text-sm tracking-[0.3em] mb-6">
+              OUR STORY
+            </p>
+            <p className="text-4xl md:text-6xl text-white mb-6">
+              <span className="text-white/60">(</span>
+              <span className="text-white">우리의 이야기입니다</span>
+              <span className="text-white/60">)</span>
             </p>
           </div>
 
           {/* Stories Grid - Unified height with floating effect */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {/* Story 1 */}
-            <div ref={story1Ref} className="opacity-0 float-1">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">👩‍🍳</span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24">
+            {stories.map((story, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  storyRefs.current[index] = el;
+                }}
+                className={`opacity-0 float-${index + 1}`}
+              >
+                <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-8 border border-white/5 hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
+                  <div className="flex flex-col">
+                    <span className="text-6xl mb-6">{story.emoji}</span>
+                    <p className="mb-6 text-white/60">{story.title}</p>
                   </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    35세 치킨집 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    장사하면서 눈물 쏙 뺀 날도 많았는데, 요즘은 가족들이랑 웃는
-                    날이 더 많아요!
-                  </p>
+                  <div className="flex-1 overflow-y-auto scrollbar-hidden">
+                    <blockquote className="text-lg text-white/80 leading-relaxed">
+                      {story.content}
+                    </blockquote>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Story 2 */}
-            <div ref={story2Ref} className="opacity-0 float-2">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">☕</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    28세 카페 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    가게 문 닫을까 고민하던 때가 엊그제 같은데, 지금은 매일매일
-                    정신없어요.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Story 3 */}
-            <div ref={story3Ref} className="opacity-0 float-3">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">🍜</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    42세 분식집 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    부모님에게 걱정만 끼치던 저였는데 이젠 가끔 용돈도
-                    드리네요..ㅋㅎㅋㅎ
-                    <br />
-                    정말 작지만 큰 변화라고 생각합니다!
-                    <br />
-                    부모님도 응원해주시니 더 힘이 나는 거 같아요!
-                  </p>
-                  <p className="text-sm text-gray-400 mt-4 italic">
-                    (가게 매출이 올라서 부모님 용돈도 가끔 드립니다..)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Story 4 */}
-            <div ref={story4Ref} className="opacity-0 float-4">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">🍕</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    31세 피자집 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    요즘은 매출 오른 걸 핑계 삼아 장난감 하나씩 사주네요ㅎㅎ
-                    <br />
-                    가족도 분위기가 좋아진거 같아서 너무 행복합니다 ㅎㅎ
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Story 5 */}
-            <div ref={story5Ref} className="opacity-0 float-5">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">🥘</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    39세 한식당 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    힘들 때마다 가족 생각하면서 버텼는데, 이제는 가족들한테
-                    자랑할 수 있는 가게가 됐어요
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Story 6 */}
-            <div ref={story6Ref} className="opacity-0 float-6">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">🍰</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    26세 베이커리 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    작은 가게지만 가족들의 희망이 되어가고 있어요. 대표님 덕에
-                    하루하루 감사하며 일하고 있습니다.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Story 7 */}
-            <div ref={story7Ref} className="opacity-0 float-7">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-[400px] flex flex-col">
-                {/* Avatar and Info */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center shadow-lg mb-2">
-                    <span className="text-3xl">🍗</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-600">
-                    44세 호프집 사장님
-                  </p>
-                </div>
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                  <div className="text-4xl text-gray-300 mb-3">"</div>
-                  <p className="text-base md:text-lg font-light text-gray-700 leading-relaxed">
-                    아직 완벽하진 않지만, 그래도 매출 걱정에 밤새던 일은
-                    없어졌어요. 조금씩 좋아지고 있다는 게 느껴집니다.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-
           {/* Success statement */}
-          <div ref={successTitleRef} className="opacity-0 text-center py-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-              실제로 많은 사장님들의
-              <br />
-              성공을 도왔습니다
-            </h2>
+          <div className="opacity-100 text-center py-16">
+            <div className="text-4xl md:text-6xl text-white flex flex-col gap-4">
+              <span className="text-white">실제로 많은 사장님들의</span>
+              <span className="text-[#7CB342]">성공을 도왔습니다</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1422,7 +1096,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
           {/* Opening question */}
-          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-8">
+          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-wide">
               그래서 제가 누구냐고요?
             </h2>
@@ -1579,20 +1253,22 @@ export default function LandingPage() {
         </div>
 
         <div className="bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A] backdrop-blur-sm rounded-3xl p-12 md:p-20 border border-[#7CB342]/30 text-center">
-          <p className="text-2xl md:text-4xl text-white leading-relaxed mb-8">
-            이어서 우리의 문제가 나의 삶, 나의 가족에게
-            <br />
+          <div className="text-2xl md:text-4xl text-white leading-relaxed mb-8 flex flex-col gap-4">
+            <span>이어서 우리의 문제가 나의 삶, 나의 가족에게</span>
             <span className="text-[#7CB342]">행복을 가져다주기 위해</span>
-            <br />
-            HD컴퍼니는 존재합니다.
-          </p>
+            <span>HD컴퍼니는 존재합니다.</span>
+          </div>
           <div className="h-px bg-gradient-to-r from-transparent via-[#7CB342]/50 to-transparent my-12" />
           <div className="space-y-6 text-lg md:text-xl text-white leading-relaxed">
-            <p>단순한 광고상품과 혜택을 제공하는 것이 아닌,</p>
+            <p className="text-white/60">
+              단순한 광고상품과 혜택을 제공하는 것이 아닌,
+            </p>
             <p className="text-[#7CB342]">
               힘들 때 한번이라도 이겨낼 수 있는 힘을 부여하고,
             </p>
-            <p>그럼에도 웃을 수 있는 행복을 판매하는 것이며,</p>
+            <p className="text-white/60">
+              그럼에도 웃을 수 있는 행복을 판매하는 것이며,
+            </p>
             <p className="text-white text-2xl md:text-3xl mt-8">
               그동안 여러분의 힘들고 우울했던 날들은
               <br />
@@ -1605,147 +1281,68 @@ export default function LandingPage() {
       {/* Section 8: Final CTA */}
       <section
         ref={section8Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
+        className="relative w-full flex items-center justify-center py-20"
       >
-        {/* Dynamic background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
-            <div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse"
-              style={{ animationDelay: "1s" }}
-            ></div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
+        <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Results Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Result 1 */}
-            <div ref={result1Ref} className="opacity-0">
+            <div
+              ref={result1Ref}
+              className="opacity-0 border border-white/10 rounded-2xl p-4"
+            >
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-2xl">
-                  <span className="text-3xl">🏆</span>
+                <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
+                  <span className="text-5xl">🏆</span>
                 </div>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
                   플레이스 1 페이지
                 </h3>
               </div>
             </div>
 
             {/* Result 2 */}
-            <div ref={result2Ref} className="opacity-0">
+            <div
+              ref={result2Ref}
+              className="opacity-0 border border-white/10 rounded-2xl p-4"
+            >
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-2xl">
-                  <span className="text-3xl">📈</span>
+                <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                  <span className="text-5xl">📈</span>
                 </div>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
                   꾸준한 매출 상승
                 </h3>
               </div>
             </div>
 
             {/* Result 3 */}
-            <div ref={result3Ref} className="opacity-0">
+            <div
+              ref={result3Ref}
+              className="opacity-0 border border-white/10 rounded-2xl p-4"
+            >
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-2xl">
-                  <span className="text-3xl">👥</span>
+                <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                  <span className="text-5xl">👥</span>
                 </div>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
                   끊이지 않는 손님들
                 </h3>
               </div>
             </div>
 
             {/* Result 4 */}
-            <div ref={result4Ref} className="opacity-0">
+            <div
+              ref={result4Ref}
+              className="opacity-0 border border-white/10 rounded-2xl p-4"
+            >
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-2xl">
-                  <span className="text-3xl">⏰</span>
+                <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                  <span className="text-5xl">⏰</span>
                 </div>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
                   끝이 안보이는 웨이팅
                 </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Final strong message */}
-          <div ref={finalMessageRef} className="opacity-0 text-center py-16">
-            <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-1 shadow-2xl">
-              <div className="relative bg-gray-900 rounded-3xl px-12 md:px-16 py-12 md:py-16 overflow-hidden">
-                {/* Background icons - diverse professions */}
-                <div className="absolute inset-0 opacity-30 pointer-events-none">
-                  <div
-                    className="absolute top-[10%] left-[5%] text-6xl animate-pulse"
-                    style={{ animationDelay: "0s" }}
-                  >
-                    👨‍👩‍👧‍👦
-                  </div>
-                  <div
-                    className="absolute top-[20%] right-[8%] text-5xl animate-pulse"
-                    style={{ animationDelay: "0.5s" }}
-                  >
-                    👨‍🍳
-                  </div>
-                  <div
-                    className="absolute top-[60%] left-[10%] text-5xl animate-pulse"
-                    style={{ animationDelay: "1s" }}
-                  >
-                    👨‍⚕️
-                  </div>
-                  <div
-                    className="absolute bottom-[15%] right-[12%] text-6xl animate-pulse"
-                    style={{ animationDelay: "1.5s" }}
-                  >
-                    👨‍⚖️
-                  </div>
-                  <div
-                    className="absolute top-[40%] right-[5%] text-5xl animate-pulse"
-                    style={{ animationDelay: "2s" }}
-                  >
-                    👨‍💼
-                  </div>
-                  <div
-                    className="absolute bottom-[20%] left-[8%] text-5xl animate-pulse"
-                    style={{ animationDelay: "2.5s" }}
-                  >
-                    👨‍🔧
-                  </div>
-                  <div
-                    className="absolute top-[15%] left-[50%] text-5xl animate-pulse"
-                    style={{ animationDelay: "3s" }}
-                  >
-                    👨‍🏫
-                  </div>
-                  <div
-                    className="absolute bottom-[40%] left-[15%] text-6xl animate-pulse"
-                    style={{ animationDelay: "3.5s" }}
-                  >
-                    👨‍🌾
-                  </div>
-                  <div
-                    className="absolute top-[50%] right-[18%] text-5xl animate-pulse"
-                    style={{ animationDelay: "4s" }}
-                  >
-                    👨‍💻
-                  </div>
-                  <div
-                    className="absolute bottom-[10%] left-[40%] text-5xl animate-pulse"
-                    style={{ animationDelay: "4.5s" }}
-                  >
-                    👨‍🎨
-                  </div>
-                </div>
-
-                {/* Text with enhanced visibility */}
-                <div className="relative z-10 bg-transparent backdrop-blur-xs rounded-2xl py-8 px-6">
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 leading-tight drop-shadow-[0_0_40px_rgba(147,51,234,0.8)]">
-                    이제 더 이상
-                    <br />남 이야기가 아닙니다
-                  </h1>
-                </div>
               </div>
             </div>
           </div>
@@ -1753,20 +1350,56 @@ export default function LandingPage() {
       </section>
 
       {/* Section 9: Final Closing */}
-      <section
-        ref={section9Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
-        {/* Content */}
+      <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
-          {/* Second line - strong emphasis */}
-          <div ref={closingLine2Ref} className="opacity-0 py-12">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed mb-4">
+          <div className="text-center mb-16 opacity-100 transform-none">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight">
+              이제 더이상
+              <br />
+              <span className="bg-graident-to-r from-[#7CB342] to-[#9DD65D] bg-clip-text text-[#7CB342]">
+                남 이야기가 아닙니다
+              </span>
+            </h2>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-16 opacity-100">
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍👩‍👧‍👦
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍🍳
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍⚕️
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍⚖️
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍💼
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍🔧
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍🏫
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍🌾
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍💻
+            </div>
+            <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+              👨‍🎨
+            </div>
+          </div>
+          <div className="opacity-100 py-12">
+            <p className="text-3xl md:text-5xl text-white/90 leading-relaxed mb-4">
               우리는 모두가 사랑하는
-            </h1>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#7CB342] leading-relaxed">
-              방식으로 성장합니다.
-            </h1>
+              <br />
+              <span className="text-[#7CB342]">방식으로 성장합니다.</span>
+            </p>
           </div>
           <button className="bg-gradient-to-r from-[#7CB342] to-[#1EC800] text-white text-xl font-medium rounded-full hover:shadow-[0_0_40px_rgba(124,179,66,0.4)] transition-all duration-300 px-8 py-4">
             더 알아보기
