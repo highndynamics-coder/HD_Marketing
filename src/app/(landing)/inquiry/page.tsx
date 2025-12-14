@@ -230,183 +230,133 @@ export default function InquiryPage() {
 
             <div className="bg-gradient-to-br from-[#1A3A5C] to-[#2D5276] rounded-2xl p-8 text-white">
               <h4 className="text-xl mb-4">운영 시간</h4>
+
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-row items-center justify-between">
+                  <h4>평일</h4>
+                  <h4>09:00 - 18:00</h4>
+                </div>
+                <div className="flex flex-row items-center justify-between">
+                  <h4>점심시간</h4>
+                  <h4>12:00 - 13:00</h4>
+                </div>
+                <div className="flex flex-row items-center justify-between">
+                  <h4>주말 및 공휴일</h4>
+                  <h4>휴무</h4>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-2xl p-8">
+          <div className="bg-gray-50 rounded-2xl p-8 w-[600px]">
             <form
               id="inquiryForm"
               onSubmit={(e) => {
                 e.preventDefault();
                 console.log("폼 제출 이벤트 발생");
-                //   handleSubmit(onSubmit)(e);
               }}
-              className="w-full p-10"
+              className="w-full p-10 flex flex-col gap-6"
             >
-              <div className="flex flex-col space-y-4 w-full">
+              <div className="flex flex-col">
                 <label
-                  htmlFor="inquiryType"
-                  className="font-pretendard font-bold"
+                  htmlFor="name"
+                  className="mb-2 font-pretendard font-normal text-xl"
                 >
-                  문의 분류
-                  <span className="text-2xl font-pretendard text-red-500 font-bold">
-                    {" "}
-                    .
+                  이름
+                  <span className="text-2xl font-pretendard text-gray-500 ml-2 font-bold">
+                    *
                   </span>
                 </label>
-                <Controller
-                  control={control}
-                  name="form_type"
-                  render={({ field }) => (
-                    <Select
-                      onValueChange={(value) => {
-                        field.onChange(parseInt(value, 10));
-                      }}
-                      value={field.value ? String(field.value) : "1"}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="문의 유형을 선택해 주세요." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {/* {inquirySelectFormTypeData.map((item, index) => (
-                    <SelectItem key={item.id} value={String(item.id)}>
-                      {item.name}
-                    </SelectItem>
-                  ))} */}
-                      </SelectContent>
-                    </Select>
-                  )}
+                <input
+                  id="name"
+                  {...register("name")}
+                  placeholder="성함을 입력해주세요."
+                  className="p-3 border font-pretendard rounded-md w-full"
                 />
-                {errors.form_type && (
-                  <p className="font-pretendard">{errors.form_type.message}</p>
+                {errors.name && (
+                  <p className="font-pretendard">{errors.name.message}</p>
                 )}
-              </div>
-              <div className="grid grid-cols-2 gap-8 mt-4">
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="name"
-                    className="mb-2 font-pretendard font-bold"
-                  >
-                    성명
-                    <span className="text-2xl font-pretendard text-red-500 font-bold">
-                      {" "}
-                      .
-                    </span>
-                  </label>
-                  <input
-                    id="name"
-                    {...register("name")}
-                    placeholder="성함을 입력해주세요."
-                    className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
-                  />
-                  {errors.name && (
-                    <p className="font-pretendard">{errors.name.message}</p>
-                  )}
-                </div>
               </div>
               <div className="flex flex-col">
                 <label
                   htmlFor="organization"
-                  className="mb-2 font-pretendard font-bold"
+                  className="mb-2 font-pretendard font-normal text-xl"
                 >
-                  소속(조직명)
-                  <span className="text-2xl font-pretendard text-red-500 font-bold">
-                    {" "}
-                    .
+                  회사명
+                  <span className="text-2xl font-pretendard text-gray-500 ml-2 font-bold">
+                    *
                   </span>
                 </label>
                 <input
                   id="organization"
                   {...register("position")}
                   placeholder="소속명을 입력해주세요."
-                  className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
+                  className="p-3 border font-pretendard rounded-md w-full"
                 />
                 {errors.position && (
                   <p className="font-pretendard">{errors.position.message}</p>
                 )}
               </div>
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="phone"
-                    className="mb-2 font-pretendard font-bold"
-                  >
-                    연락처
-                    <span className="text-2xl font-pretendard text-red-500 font-bold">
-                      {" "}
-                      .
-                    </span>
-                  </label>
-                  <input
-                    id="phone"
-                    {...register("phone")}
-                    placeholder="연락처를 입력해주세요."
-                    className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
-                  />
-                  {errors.phone && (
-                    <p className="font-pretendard">{errors.phone.message}</p>
-                  )}
-                </div>
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="email"
-                    className="mb-2 font-pretendard font-bold"
-                  >
-                    이메일
-                    <span className="text-2xl font-pretendard text-red-500 font-bold">
-                      {" "}
-                      .
-                    </span>
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    {...register("email")}
-                    placeholder="이메일을 입력해주세요."
-                    className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
-                  />
-                  {errors.email && (
-                    <p className="font-pretendard">{errors.email.message}</p>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col mt-4">
+
+              <div className="flex flex-col">
                 <label
-                  htmlFor="title"
-                  className="mb-2 font-pretendard font-bold"
+                  htmlFor="email"
+                  className="mb-2 font-pretendard font-normal text-xl"
                 >
-                  문의 제목
-                  <span className="text-2xl font-pretendard text-red-500 font-bold">
-                    {" "}
-                    .
+                  이메일
+                  <span className="text-2xl font-pretendard text-gray-500 ml-2 font-bold">
+                    *
                   </span>
                 </label>
                 <input
-                  id="title"
-                  {...register("title")}
-                  placeholder="제목을 입력해 주세요."
-                  className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  placeholder="이메일을 입력해주세요."
+                  className="p-3 border font-pretendard rounded-md w-full"
                 />
-                {errors.title && (
-                  <p className="font-pretendard">{errors.title.message}</p>
+                {errors.email && (
+                  <p className="font-pretendard">{errors.email.message}</p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
+
+              <div className="flex flex-col">
+                <label
+                  htmlFor="email"
+                  className="mb-2 font-pretendard font-normal text-xl"
+                >
+                  연락처
+                  <span className="text-2xl font-pretendard text-gray-500 ml-2 font-bold">
+                    *
+                  </span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  placeholder="연락처를 입력해주세요."
+                  className="p-3 border font-pretendard rounded-md w-full"
+                />
+                {errors.email && (
+                  <p className="font-pretendard">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col">
                 <label
                   htmlFor="content"
-                  className="mb-2 font-pretendard font-bold"
+                  className="mb-2 font-pretendard font-normal text-xl"
                 >
                   문의 내용
-                  <span className="text-2xl font-pretendard text-red-500 font-bold">
-                    {" "}
-                    .
+                  <span className="text-2xl font-pretendard text-gray-500 ml-2 font-bold">
+                    *
                   </span>
                 </label>
                 <textarea
                   id="content"
                   {...register("content")}
                   placeholder="문의 내용을 입력해 주세요."
-                  className="p-3 border font-pretendard rounded-md shadow-md focus:ring-1 focus:outline-none"
+                  className="p-3 border font-pretendard rounded-md w-full"
                 />
                 {errors.content && (
                   <p className="font-pretendard">{errors.content.message}</p>
@@ -419,17 +369,6 @@ export default function InquiryPage() {
         <div className="border rounded-md p-4 w-[900px]">
           <div className="flex justify-between">
             <div className="flex items-center space-x-4">
-              <label className="flex items-center">
-                {/* {isCheckboxClicked ? (
-                <div onClick={toggleCheckbox}>
-                  <CheckboxClickedIcon />
-                </div>
-              ) : (
-                <div onClick={toggleCheckbox}>
-                  <CheckboxClickIcon />
-                </div>
-              )} */}
-              </label>
               <span className="font-pretendard font-bold">
                 개인정보 수집 / 이용에 동의합니다.
               </span>
