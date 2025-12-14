@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { forwardRef, RefObject, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ContactBanner } from "@/components/ContactBanner";
@@ -8,37 +8,172 @@ import { ContactBanner } from "@/components/ContactBanner";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
-  const line1Ref = useRef<HTMLDivElement>(null);
-  const line2Ref = useRef<HTMLDivElement>(null);
-  const line3Ref = useRef<HTMLDivElement>(null);
-  const line4Ref = useRef<HTMLDivElement>(null);
-  const questionRef = useRef<HTMLDivElement>(null);
-  const answer1Ref = useRef<HTMLDivElement>(null);
-  const finalQuestionRef = useRef<HTMLDivElement>(null);
-  const marketingTitleRef = useRef<HTMLDivElement>(null);
-  const marketingSubRef = useRef<HTMLDivElement>(null);
-  const section6Ref = useRef<HTMLDivElement>(null);
-  const storyTitleRef = useRef<HTMLDivElement>(null);
-  const storyRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const successTitleRef = useRef<HTMLDivElement>(null);
-  const section7Ref = useRef<HTMLDivElement>(null);
-  const ceoQuestionRef = useRef<HTMLDivElement>(null);
-  const ceoGreetingRef = useRef<HTMLDivElement>(null);
-  const ceoNameRef = useRef<HTMLDivElement>(null);
-  const ceoPhotoRef = useRef<HTMLDivElement>(null);
-  const cert1Ref = useRef<HTMLDivElement>(null);
-  const cert2Ref = useRef<HTMLDivElement>(null);
-  const cert3Ref = useRef<HTMLDivElement>(null);
-  const section8Ref = useRef<HTMLDivElement>(null);
-  const result1Ref = useRef<HTMLDivElement>(null);
-  const result2Ref = useRef<HTMLDivElement>(null);
-  const result3Ref = useRef<HTMLDivElement>(null);
-  const result4Ref = useRef<HTMLDivElement>(null);
-  const finalMessageRef = useRef<HTMLDivElement>(null);
-  const section9Ref = useRef<HTMLDivElement>(null);
-  const closingLine1Ref = useRef<HTMLDivElement>(null);
-  const closingLine2Ref = useRef<HTMLDivElement>(null);
-  const [typedText, setTypedText] = useState("");
+  const firstSectionRef = useRef<HTMLDivElement>(null);
+  const firstSectionTitleRefs = useRef<HTMLHeadingElement[]>([]);
+  const firstSectionCurveRef = useRef<SVGPathElement>(null);
+
+  useEffect(() => {
+    const section = firstSectionRef.current;
+    const titles = firstSectionTitleRefs.current;
+    const curve = firstSectionCurveRef.current;
+
+    if (!section || titles.length < 2 || !curve) return;
+
+    const curveLength = curve.getTotalLength();
+
+    gsap.set(curve, {
+      strokeDasharray: curveLength,
+      strokeDashoffset: curveLength,
+      opacity: 0,
+    });
+
+    gsap.set(titles, {
+      opacity: 0,
+      y: 24,
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 70%",
+        once: true,
+      },
+    });
+
+    tl.fromTo(
+      section,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      }
+    );
+
+    tl.to(titles, {
+      opacity: 1,
+      y: 0,
+      duration: 0.45,
+      ease: "power3.out",
+      stagger: 0.12,
+    });
+
+    tl.to(
+      curve,
+      {
+        strokeDashoffset: 0,
+        opacity: 1,
+        duration: 0.45,
+        ease: "cubic-bezier(.43,1.14,.53,-0.51)",
+      },
+      "-=0.15"
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
+  useEffect(() => {
+    const section = firstSectionRef.current;
+    const curve = firstSectionCurveRef.current;
+
+    if (!section || !curve) return;
+
+    gsap.to(curve, {
+      y: -260,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "bottom center",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
+
+  const secondSectionRef = useRef<HTMLDivElement>(null);
+  const secondSectionTextGroupRef = useRef<HTMLDivElement>(null);
+  const secondSectionQuestionRef = useRef<HTMLParagraphElement>(null);
+  const secondSectionCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const textGroup = secondSectionTextGroupRef.current;
+    const question = secondSectionQuestionRef.current;
+    const cards = secondSectionCardsRef.current;
+
+    if (!textGroup || !question || !cards) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: textGroup,
+        start: "top 75%",
+        once: true,
+      },
+    });
+
+    tl.fromTo(
+      textGroup,
+      {
+        y: 60,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      }
+    );
+
+    tl.fromTo(
+      question,
+      {
+        scale: 0.96,
+        opacity: 0,
+      },
+      {
+        scale: 1.3,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+      },
+      "-=0.15"
+    );
+
+    const cardElements = cards.children;
+
+    tl.fromTo(
+      cardElements,
+      {
+        y: 24,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+      "-=0.1"
+    );
+    gsap.to(cardElements, {
+      y: -6,
+      duration: 1.8,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        each: 0.2,
+      },
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   const isReason = [
     "맛이 없는 거 아니야?",
@@ -124,439 +259,111 @@ export default function LandingPage() {
     },
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
+  const BasicCurve = forwardRef<
+    SVGPathElement,
+    { ref: RefObject<SVGPathElement> }
+  >((props, ref) => {
+    return (
+      <div className="flex flex-row items-center justify-center mt-48">
+        <svg
+          className="absolute w-full h-full"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Background wave */}
+          <path
+            ref={ref}
+            d="M0 600 Q300 550 600 580 T1200 600"
+            stroke="rgba(124, 179, 66, 0.15)"
+            strokeWidth="2"
+            fill="none"
+          />
 
-      tl.fromTo(
-        line1Ref.current,
-        {
-          opacity: 0,
-          y: 20,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power2.out",
-        },
-        0
-      );
+          {/* Animated curve */}
+          <path
+            d="M100 650 C450 -450 700 1400 1100 -300"
+            stroke="url(#curveGradient)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            style={{
+              strokeDasharray: 2000,
+              strokeDashoffset: 2000,
+              animation: "draw-curve 0.25s ease-out forwards",
+            }}
+          />
+          <defs>
+            <linearGradient
+              id="curveGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#7CB342" />
+              <stop offset="100%" stopColor="#9DD65D" />
+            </linearGradient>
+          </defs>
 
-      // Fade in the line 2 container with slide from right to left
-      tl.fromTo(
-        line2Ref.current,
-        {
-          opacity: 0,
-          x: 100,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1.0,
-          ease: "power2.out",
-        },
-        1.2
-      );
-
-      // line3Ref - 타이핑 애니메이션은 별도로 처리
-      tl.fromTo(
-        line3Ref.current,
-        {
-          opacity: 0,
-        },
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        1.8
-      );
-    });
-
-    return () => {
-      ctx.revert();
-    };
-  }, []);
-
-  useEffect(() => {
-    const fullText = "내일은 우리가 함께합니다";
-    let currentIndex = 0;
-
-    const startDelay = setTimeout(() => {
-      const typingInterval = setInterval(() => {
-        if (currentIndex <= fullText.length) {
-          setTypedText(fullText.slice(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(typingInterval);
-        }
-      }, 200);
-
-      return () => clearInterval(typingInterval);
-    }, 2300);
-
-    return () => {
-      clearTimeout(startDelay);
-    };
-  }, []);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Section 6 fade in on scroll
-      gsap.fromTo(
-        section6Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section6Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 6 animations
-      const section6Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section6Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section6Timeline.fromTo(
-        storyTitleRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-        0
-      );
-
-      storyRefs.current.forEach((ref, index) => {
-        if (ref) {
-          section6Timeline.fromTo(
-            ref,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            0.5 + index * 0.2
-          );
-        }
-      });
-
-      section6Timeline.fromTo(
-        successTitleRef.current,
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.2)" },
-        2.5
-      );
-
-      // Section 6 fade out on scroll
-      gsap.to(section6Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section6Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 7 fade in on scroll
-      gsap.fromTo(
-        section7Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section7Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 7 animations
-      const section7Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section7Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section7Timeline
-        .fromTo(
-          ceoQuestionRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-          0
-        )
-        .fromTo(
-          ceoPhotoRef.current,
-          { opacity: 0, scale: 0.9 },
-          { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
-          0.5
-        )
-        .fromTo(
-          ceoGreetingRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.0
-        )
-        .fromTo(
-          ceoNameRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.3
-        )
-        .fromTo(
-          cert1Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          1.8
-        )
-        .fromTo(
-          cert2Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          2.0
-        )
-        .fromTo(
-          cert3Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          2.2
-        );
-
-      // Section 7 fade out on scroll
-      gsap.to(section7Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section7Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 8 fade in on scroll
-      gsap.fromTo(
-        section8Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section8Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 8 animations
-      const section8Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section8Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section8Timeline
-        .fromTo(
-          result1Ref.current,
-          { opacity: 0, scale: 0.8, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
-          0
-        )
-        .fromTo(
-          result2Ref.current,
-          { opacity: 0, scale: 0.8, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
-          0.3
-        )
-        .fromTo(
-          result3Ref.current,
-          { opacity: 0, scale: 0.8, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
-          0.6
-        )
-        .fromTo(
-          result4Ref.current,
-          { opacity: 0, scale: 0.8, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
-          0.9
-        )
-        .fromTo(
-          finalMessageRef.current,
-          { opacity: 0, scale: 0.9, y: 50 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" },
-          1.8
-        );
-
-      // Section 8 fade out on scroll
-      gsap.to(section8Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section8Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 9 fade in on scroll
-      gsap.fromTo(
-        section9Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section9Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 9 animations
-      const section9Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section9Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section9Timeline
-        .fromTo(
-          closingLine1Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-          0
-        )
-        .fromTo(
-          closingLine2Ref.current,
-          { opacity: 0, scale: 0.95, y: 40 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" },
-          0.8
-        );
-    });
-
-    return () => ctx.revert();
-  }, []);
+          <style>
+            {`@keyframes draw-curve {
+              to {
+                stroke-dashoffset: 0;
+              }
+            }`}
+          </style>
+        </svg>
+      </div>
+    );
+  });
 
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
-      <section className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]">
+      <section
+        ref={firstSectionRef}
+        className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]"
+      >
         <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
           <div className="max-w-6xl mx-auto">
             <div className="mb-32 opacity-100 transform-none">
               <div className="relative">
                 <div className="h-1 bg-gradient-to-r from-[#7CB342] to-transparent mb-12 w-28" />
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white/90 mb-6 min-h-[1.2em]">
+                <h2
+                  ref={(el) => {
+                    if (el) firstSectionTitleRefs.current[0] = el;
+                  }}
+                  className="text-4xl md:text-6xl lg:text-7xl font-medium text-white/90 mb-6 min-h-[1.2em]"
+                >
                   오늘도 버티셨다면,
                 </h2>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 min-h-[1.2em]">
+                <h2
+                  ref={(el) => {
+                    if (el) firstSectionTitleRefs.current[1] = el;
+                  }}
+                  className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 min-h-[1.2em]"
+                >
                   <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
                     내일은 우리가 함께 합니다.
                   </span>
                 </h2>
               </div>
-              {/* Cubic Bezier Curve */}
-              <div className="flex flex-row items-center justify-center mt-48">
-                <svg
-                  className="absolute w-full h-full"
-                  viewBox="0 0 1200 800"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Background wave */}
-                  <path
-                    d="M0 600 Q300 550 600 580 T1200 600"
-                    stroke="rgba(124, 179, 66, 0.15)"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-
-                  {/* Animated curve */}
-                  <path
-                    d="M100 650 C450 -450 700 1400 1100 -300"
-                    stroke="url(#curveGradient)"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeLinecap="round"
-                    style={{
-                      strokeDasharray: 2000,
-                      strokeDashoffset: 2000,
-                      animation: "draw-curve 0.25s ease-out forwards",
-                    }}
-                  />
-                  <defs>
-                    <linearGradient
-                      id="curveGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" stopColor="#7CB342" />
-                      <stop offset="100%" stopColor="#9DD65D" />
-                    </linearGradient>
-                  </defs>
-
-                  <style>
-                    {`@keyframes draw-curve {
-              to {
-                stroke-dashoffset: 0;
-              }
-            }`}
-                  </style>
-                </svg>
-              </div>
             </div>
+            <BasicCurve ref={firstSectionCurveRef} />
           </div>
         </div>
       </section>
 
       {/* Section 2: 과거부터 현재까지... */}
-      <section className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]">
+      <section
+        ref={secondSectionRef}
+        className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]"
+      >
         <div className="container mx-auto px-6 lg:px-12 py-24">
           <div className="max-w-5xl mx-auto">
             <div
-              ref={line4Ref}
+              ref={secondSectionTextGroupRef}
               className="opacity-100 mb-24 flex flex-col gap-4"
             >
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
@@ -571,11 +378,17 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <p className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed">
+            <p
+              ref={secondSectionQuestionRef}
+              className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed"
+            >
               이유가 뭘까요?
             </p>
 
-            <div className="flex flex-row items-center justify-center gap-6 my-12">
+            <div
+              className="flex flex-row items-center justify-center gap-6 my-16"
+              ref={secondSectionCardsRef}
+            >
               {isReason.map((reason, index) => (
                 <div
                   className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
@@ -595,7 +408,7 @@ export default function LandingPage() {
       {/* Section 3: Q&A - Chat Style */}
       <section className="flex flex-col space-y-16 opacity-100 container mx-auto">
         {/* Question - 사장님들 (Left) */}
-        <div ref={questionRef} className="flex items-start gap-4 text-black">
+        <div className="flex items-start gap-4 text-black">
           <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg ">
             <span className="text-2xl">👨‍👩‍👦</span>
           </div>
@@ -609,7 +422,7 @@ export default function LandingPage() {
         </div>
 
         {/* Final Answer - HD (Right) */}
-        <div ref={answer1Ref}>
+        <div>
           <div className="flex items-start gap-4 justify-end">
             <div className="flex-1 max-w-3xl flex flex-col gap-4">
               <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
@@ -673,7 +486,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
           {/* Final provocative question */}
-          <div ref={finalQuestionRef} className="opacity-0 text-center py-16">
+          <div className="opacity-0 text-center py-16">
             <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-loose">
                 정말 사장님 가게가
@@ -710,12 +523,12 @@ export default function LandingPage() {
 
       {/* Marketing definition - emphasized */}
       <div className="text-center space-y-6 py-12 bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A]/40 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-[#7CB342]/30 mt-16 container mx-auto px-6 lg:px-12">
-        <div ref={marketingTitleRef}>
+        <div>
           <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight text-white">
             마케팅,
           </h2>
         </div>
-        <div ref={marketingSubRef}>
+        <div>
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white">
             <span className="text-[#7CB342]">매출 성장의 원동력</span>이 되어야
             합니다.
@@ -728,7 +541,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Title */}
-          <div ref={storyTitleRef} className="opacity-0 text-center">
+          <div className="opacity-0 text-center">
             <p className="text-white/40 text-sm tracking-[0.3em] mb-6">
               OUR STORY
             </p>
@@ -742,13 +555,7 @@ export default function LandingPage() {
           {/* Stories Grid - Unified height with floating effect */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24">
             {stories.map((story, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  storyRefs.current[index] = el;
-                }}
-                className={`opacity-0 float-${index + 1}`}
-              >
+              <div key={index} className={`opacity-0 float-${index + 1}`}>
                 <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-8 border border-white/5 hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
                   <div className="flex flex-col">
@@ -778,10 +585,7 @@ export default function LandingPage() {
       <section className="relative min-h-screen w-full flex items-center justify-center py-32">
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
-          <div
-            ref={ceoGreetingRef}
-            className="grid lg:grid-cols-2 gap-12 items-center"
-          >
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-3xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -805,10 +609,7 @@ export default function LandingPage() {
               </h3>
               <div className="space-y-3 hidden">
                 {/* Cert 1 */}
-                <div
-                  ref={cert1Ref}
-                  className="flex items-center gap-4 group opacity-100 transform-none"
-                >
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -833,10 +634,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Cert 2 */}
-                <div
-                  ref={cert2Ref}
-                  className="flex items-center gap-4 group opacity-100 transform-none"
-                >
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -861,10 +659,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Cert 3 */}
-                <div
-                  ref={cert3Ref}
-                  className="flex items-center gap-4 group opacity-100 transform-none"
-                >
+                <div className="flex items-center gap-4 group opacity-100 transform-none">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -960,10 +755,7 @@ export default function LandingPage() {
           {/* Results Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Result 1 */}
-            <div
-              ref={result1Ref}
-              className="opacity-0 border border-white/10 rounded-2xl p-4"
-            >
+            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
                   <span className="text-5xl">🏆</span>
@@ -975,10 +767,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 2 */}
-            <div
-              ref={result2Ref}
-              className="opacity-0 border border-white/10 rounded-2xl p-4"
-            >
+            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">📈</span>
@@ -990,10 +779,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 3 */}
-            <div
-              ref={result3Ref}
-              className="opacity-0 border border-white/10 rounded-2xl p-4"
-            >
+            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">👥</span>
@@ -1005,10 +791,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 4 */}
-            <div
-              ref={result4Ref}
-              className="opacity-0 border border-white/10 rounded-2xl p-4"
-            >
+            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">⏰</span>
