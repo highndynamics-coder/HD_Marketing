@@ -8,35 +8,15 @@ import { ContactBanner } from "@/components/ContactBanner";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
-  const section1Ref = useRef<HTMLDivElement>(null);
-  const section2Ref = useRef<HTMLDivElement>(null);
-  const section3Ref = useRef<HTMLDivElement>(null);
-  const section4Ref = useRef<HTMLDivElement>(null);
-  const section5Ref = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLDivElement>(null);
   const line2Ref = useRef<HTMLDivElement>(null);
   const line3Ref = useRef<HTMLDivElement>(null);
   const line4Ref = useRef<HTMLDivElement>(null);
-  const line5Ref = useRef<HTMLDivElement>(null);
-  const line6Ref = useRef<HTMLDivElement>(null);
-  const line7Ref = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
   const answer1Ref = useRef<HTMLDivElement>(null);
-  const answer2Ref = useRef<HTMLDivElement>(null);
-  const answer3Ref = useRef<HTMLDivElement>(null);
-  const emphasisRef = useRef<HTMLDivElement>(null);
   const finalQuestionRef = useRef<HTMLDivElement>(null);
-  const doubt1Ref = useRef<HTMLDivElement>(null);
-  const doubt2Ref = useRef<HTMLDivElement>(null);
-  const doubt3Ref = useRef<HTMLDivElement>(null);
   const marketingTitleRef = useRef<HTMLDivElement>(null);
   const marketingSubRef = useRef<HTMLDivElement>(null);
-  const valueRef = useRef<HTMLDivElement>(null);
-  const timeline1Ref = useRef<HTMLDivElement>(null);
-  const timeline2Ref = useRef<HTMLDivElement>(null);
-  const timeline3Ref = useRef<HTMLDivElement>(null);
-  const timeline4Ref = useRef<HTMLDivElement>(null);
-  const timeline5Ref = useRef<HTMLDivElement>(null);
   const section6Ref = useRef<HTMLDivElement>(null);
   const storyTitleRef = useRef<HTMLDivElement>(null);
   const storyRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -64,6 +44,12 @@ export default function LandingPage() {
     "맛이 없는 거 아니야?",
     "서비스가 별로 아닐까?",
     "인테리어가 문제 아니야?",
+  ];
+
+  const isMarketingComponent = [
+    "정말 효과가 있을까?",
+    "평생 광고비 써야하는거 아니야..?",
+    "한다고 정말 달라질까..?",
   ];
 
   const stories = [
@@ -217,319 +203,6 @@ export default function LandingPage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(section1Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section1Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      gsap.fromTo(
-        section2Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section2Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 2 fade out on scroll
-      gsap.to(section2Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section2Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 2 text animations
-      const section2Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section2Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section2Timeline
-        .fromTo(
-          line4Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          0
-        )
-        .fromTo(
-          line5Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          0.5
-        )
-        .fromTo(
-          line6Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.0
-        )
-        .fromTo(
-          line7Ref.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.5
-        );
-
-      // Section 3 fade in on scroll
-      gsap.fromTo(
-        section3Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section3Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 3 Q&A animations
-      const section3Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section3Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section3Timeline
-        .fromTo(
-          questionRef.current,
-          { opacity: 0, scale: 0.95, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.0, ease: "back.out(1.2)" },
-          0
-        )
-        .fromTo(
-          answer1Ref.current,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 1.0, ease: "power2.out" },
-          0.8
-        )
-        .fromTo(
-          answer2Ref.current,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 2.0, ease: "power2.out" },
-          0.8
-        )
-        .fromTo(
-          answer3Ref.current,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 3.0, ease: "power2.out" },
-          0.8
-        );
-
-      // Section 3 fade out on scroll
-      gsap.to(section3Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section3Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 4 fade in on scroll
-      gsap.fromTo(
-        section4Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section4Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 4 animations
-      const section4Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section4Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section4Timeline
-        .fromTo(
-          emphasisRef.current,
-          { opacity: 0, scale: 0.9 },
-          { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
-          0
-        )
-        .fromTo(
-          finalQuestionRef.current,
-          { opacity: 0, scale: 0.95, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" },
-          1.0
-        );
-
-      // Section 4 fade out on scroll
-      gsap.to(section4Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section4Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
-      // Section 5 fade in on scroll
-      gsap.fromTo(
-        section5Ref.current,
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: section5Ref.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Section 5 animations
-      const section5Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section5Ref.current,
-          start: "top center",
-          end: "bottom bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      section5Timeline
-        .fromTo(
-          doubt1Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0
-        )
-        .fromTo(
-          doubt2Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.3
-        )
-        .fromTo(
-          doubt3Ref.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.6
-        )
-        .fromTo(
-          marketingTitleRef.current,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.2)" },
-          1.2
-        )
-        .fromTo(
-          marketingSubRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          1.8
-        )
-        .fromTo(
-          valueRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          2.4
-        )
-        .fromTo(
-          timeline1Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          3.0
-        )
-        .fromTo(
-          timeline2Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          3.3
-        )
-        .fromTo(
-          timeline3Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          3.6
-        )
-        .fromTo(
-          timeline4Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          3.9
-        )
-        .fromTo(
-          timeline5Ref.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          4.2
-        );
-
-      // Section 5 fade out on scroll
-      gsap.to(section5Ref.current, {
-        opacity: 0,
-        scale: 0.95,
-        scrollTrigger: {
-          trigger: section5Ref.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: false,
-        },
-      });
-
       // Section 6 fade in on scroll
       gsap.fromTo(
         section6Ref.current,
@@ -821,68 +494,97 @@ export default function LandingPage() {
                   </span>
                 </h2>
               </div>
+              {/* Cubic Bezier Curve */}
+              <div className="flex flex-row items-center justify-center mt-48">
+                <svg
+                  className="absolute w-full h-full"
+                  viewBox="0 0 1200 800"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Background wave */}
+                  <path
+                    d="M0 600 Q300 550 600 580 T1200 600"
+                    stroke="rgba(124, 179, 66, 0.15)"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+
+                  {/* Animated curve */}
+                  <path
+                    d="M100 650 C450 -450 700 1400 1100 -300"
+                    stroke="url(#curveGradient)"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                    style={{
+                      strokeDasharray: 2000,
+                      strokeDashoffset: 2000,
+                      animation: "draw-curve 0.25s ease-out forwards",
+                    }}
+                  />
+                  <defs>
+                    <linearGradient
+                      id="curveGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stopColor="#7CB342" />
+                      <stop offset="100%" stopColor="#9DD65D" />
+                    </linearGradient>
+                  </defs>
+
+                  <style>
+                    {`@keyframes draw-curve {
+              to {
+                stroke-dashoffset: 0;
+              }
+            }`}
+                  </style>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 2: 과거부터 현재까지... */}
-      <section
-        ref={section2Ref}
-        className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]"
-      >
+      <section className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]">
         <div className="container mx-auto px-6 lg:px-12 py-24">
           <div className="max-w-5xl mx-auto">
-            <div ref={line4Ref} className="opacity-100 mb-32">
-              <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-16">
-                과거부터 현재까지 수많은{" "}
-                <span className="relative inline-block opacity-100">
-                  <span className="relative z-10 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] bg-clip-text text-transparent">
-                    자영업자와 소상공인
-                  </span>
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7CB342] to-[#9DD65D] rounded-full origin-left transform-none" />
-                </span>
-                들이 생겨났지만,
-                <br />
-                <br />
+            <div
+              ref={line4Ref}
+              className="opacity-100 mb-24 flex flex-col gap-4"
+            >
+              <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
+                과거부터 현재까지
+              </p>
+              <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
+                수 많은 자영업자와 소상공인들이 <span>생겨났지만</span>
+              </p>
+              <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
                 반대로 그만큼 많이{" "}
-                <span className="relative inline-block opacity-100">
-                  <span className="relative z-10 text-red-400">
-                    망했습니다.
-                  </span>
-                  <span className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r bg-red-500" />
-                </span>
+                <span className="realtive z-10 text-red-400">망했습니다.</span>
               </p>
             </div>
 
-            <div className="flex flex-col space-y-8 mb-16">
+            <p className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed">
+              이유가 뭘까요?
+            </p>
+
+            <div className="flex flex-row items-center justify-center gap-6 my-12">
               {isReason.map((reason, index) => (
                 <div
-                  className="relative group opacity-100 transform-none"
+                  className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
                   key={index}
                 >
-                  <div className="flex items-center gap-4 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-red-400/30 transition-all">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-circle-alert w-8 h-8 text-red-400/60 group-hover:text-red-400 transition-colors"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" x2="12" y1="8" y2="12"></line>
-                      <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                    </svg>
-                    <p className="text-2xl md:text-4xl text-white/60 group-hover:text-white/80 transition-colors">
-                      {reason}
-                    </p>
-                  </div>
+                  <h4 className="text-base md:text-lg font-light text-gray-700 text-center">
+                    {reason}
+                  </h4>
+                  <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
                 </div>
               ))}
             </div>
@@ -891,103 +593,78 @@ export default function LandingPage() {
       </section>
 
       {/* Section 3: Q&A - Chat Style */}
-      <section
-        ref={section3Ref}
-        className="flex flex-col space-y-16 mb-32 opacity-100 container mx-auto"
-      >
-        {/* Chat content section */}
-        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 border border-white/5 opacity-100 transform-none">
-          {/* Question - 사장님들 (Left) */}
-          <div ref={questionRef} className="flex items-start gap-6 mb-6">
-            <div className="text-4xl">👨‍👩‍👦</div>
-            <div>
-              <div className="text-white/40 text-sm mb-3">대표님</div>
-              <p className="text-2xl md:text-3xl text-white">
-                저희 가게는 왜 사람이 안올까요?
+      <section className="flex flex-col space-y-16 mb-32 opacity-100 container mx-auto py-20">
+        {/* Question - 사장님들 (Left) */}
+        <div ref={questionRef} className="flex items-start gap-4 text-black">
+          <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg ">
+            <span className="text-2xl">👨‍👩‍👦</span>
+          </div>
+          <div className="flex-1 max-w-xl">
+            <div className="bg-white rounded-3xl rounded-tl-none px-6 py-4 shadow-md border border-gray-200">
+              <p className="text-2xl md:text-3xl font-normal text-gray-800 leading-relaxed">
+                대표님! 저희 가게는 왜 사람이 안 올까요?
               </p>
             </div>
-          </div>
-          <div className="pl-20">
-            <p className="text-xl text-white/60">잘 모르겠습니다..</p>
           </div>
         </div>
 
         {/* Final Answer - HD (Right) */}
-        <div
-          ref={answer1Ref}
-          className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none"
-        >
-          <div className="flex items-start gap-6 mb-8">
-            <div className="text-4xl">👨‍💼</div>
-            <div>
-              <h2 className="text-[#7CB342] text-sm mb-3">우리의 답변</h2>
-              <p className="text-3xl md:text-4xl text-white mb-6">
-                정말 몰라서 못옵니다.
-              </p>
+        <div ref={answer1Ref}>
+          <div className="flex items-start gap-4 justify-end">
+            <div className="flex-1 max-w-3xl">
+              <div className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4">
+                <h2 className="text-2xl font-semibold text-white">
+                  정말 몰라서 못 옵니다.
+                </h2>
+                <p className="text-lg md:text-xl font-normal text-white/60 leading-relaxed">
+                  현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
+                  종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
+                  잘될 수 밖에 없습니다.
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="pl-20">
-            <p className="text-xl text-white/60">
-              현 시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
-              종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더 잘될 수
-              밖에 없습니다.
-            </p>
+            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
+              <span className="text-2xl">👨‍💼</span>
+            </div>
           </div>
         </div>
 
-        <div
-          ref={answer2Ref}
-          className="opacity-100 transform-none text-center"
-        >
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="opacity-100 transform-none text-center">
+          <div className="flex flex-col gap-8 my-16">
             <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <div className="text-5xl mb-4">🔍</div>
               <p className="text-lg text-white">
                 내 가게를 찾고, 기억하게 하기 위해서
               </p>
             </div>
             <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <div className="text-5xl mb-4">⭐</div>
               <p className="text-lg text-white">
                 우리 가게만의 특별한 점을 어필하기 위해서
               </p>
             </div>
             <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <div className="text-5xl mb-4">📊</div>
               <p className="text-lg text-white">
                 손님이 뜸한 시기에도 안정적인 매출을 유지하고,
               </p>
             </div>
             <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <div className="text-5xl mb-4">🛡️</div>
               <p className="text-lg text-white">위기에 대비하기 위해서</p>
             </div>
           </div>
+        </div>
 
-          <div className="opacity-100 transform-none">
-            <h2 className="text-5xl md:text-7xl mb-6">
-              <span className="text-white">마케팅은</span>
-              <span className="text-[#7CB342] ml-2 mr-2">필수</span>
-              <span className="text-white">입니다.</span>
-            </h2>
-          </div>
+        <div className="opacity-100 transform-none mt-8 flex flex-col items-center justify-center">
+          <h2 className="text-5xl md:text-7xl mb-6">
+            <span className="text-white">마케팅은</span>
+            <span className="text-[#7CB342] ml-2 mr-2">필수</span>
+            <span className="text-white">입니다.</span>
+          </h2>
         </div>
       </section>
 
       {/* Section 4: Marketing Message */}
-      <section
-        ref={section4Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-20"
-      >
+      <section className="relative w-full flex items-center justify-center">
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
-          {/* Consumer era statement */}
-          <div className="text-center py-8">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-white leading-relaxed mb-8">
-              이제는 소비자가 선택하는 시대입니다.
-            </p>
-          </div>
-
           {/* Final provocative question */}
           <div ref={finalQuestionRef} className="opacity-0 text-center py-16">
             <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
@@ -1004,21 +681,23 @@ export default function LandingPage() {
       </section>
 
       {/* Section 5: 5T Timeline */}
-      <section ref={section5Ref} className="container mx-auto px-6 lg:px-12">
-        {/* Content */}
-        <div className="space-y-8 mb-24">
-          <div className="text-2xl md:text-3xl text-white text-left opacity-100 transform-none">
-            그럼 마케팅이란 무엇일까요?
-          </div>
-          <div className="text-2xl md:text-3xl text-white text-right opacity-100 transform-none">
-            정말 효과 있을까..?
-          </div>
-          <div className="text-2xl md:text-3xl text-white text-left opacity-100 transform-none">
-            평생 광고비 써야하는거 아니야..?
-          </div>
-          <div className="text-2xl md:text-3xl text-white text-right opacity-100 transform-none">
-            한다고 정말 달라질까..?
-          </div>
+      <section className="container mx-auto px-6 lg:px-12">
+        <p className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed">
+          그럼 마케팅이란 무엇일까요?
+        </p>
+
+        <div className="flex flex-row items-center justify-center gap-6 my-12">
+          {isMarketingComponent.map((reason, index) => (
+            <div
+              className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
+              key={index}
+            >
+              <h4 className="text-base md:text-lg font-light text-gray-700 text-center">
+                {reason}
+              </h4>
+              <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -1089,19 +768,9 @@ export default function LandingPage() {
       </section>
 
       {/* Section 7: CEO Introduction */}
-      <section
-        ref={section7Ref}
-        className="relative min-h-screen w-full flex items-center justify-center py-32"
-      >
+      <section className="relative min-h-screen w-full flex items-center justify-center py-32">
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
-          {/* Opening question */}
-          <div ref={ceoQuestionRef} className="opacity-0 text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-wide">
-              그래서 제가 누구냐고요?
-            </h2>
-          </div>
-
           <div
             ref={ceoGreetingRef}
             className="grid lg:grid-cols-2 gap-12 items-center"
@@ -1127,7 +796,7 @@ export default function LandingPage() {
               <h3 className="text-3xl md:text-5xl text-white mb-8 leading-tight">
                 반갑습니다.
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 hidden">
                 {/* Cert 1 */}
                 <div
                   ref={cert1Ref}
@@ -1279,10 +948,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 8: Final CTA */}
-      <section
-        ref={section8Ref}
-        className="relative w-full flex items-center justify-center py-20"
-      >
+      <section className="relative w-full flex items-center justify-center py-20">
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Results Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
