@@ -178,12 +178,14 @@ export default function LandingPage() {
   const thirdSectionRef = useRef<HTMLDivElement>(null);
   const thirdSectionQuestionRef = useRef<HTMLDivElement>(null);
   const thirdSectionAnswerRefs = useRef<HTMLDivElement[]>([]);
+  const thirdSectionScrollListRef = useRef<HTMLDivElement>(null);
+  const thirdSectionScrollItemRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     if (!thirdSectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      const qaTl = gsap.timeline({
         scrollTrigger: {
           trigger: thirdSectionRef.current,
           start: "top 70%",
@@ -191,44 +193,175 @@ export default function LandingPage() {
         },
       });
 
-      /* 1️⃣ 질문 (왼 → 오) */
-      tl.fromTo(
+      qaTl.fromTo(
         thirdSectionQuestionRef.current,
         {
           opacity: 0,
-          x: -50,
-          scale: 0.98,
+          x: -60,
+          scale: 0.97,
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
-          duration: 0.7,
-          ease: "power2.out",
+          duration: 0.75,
+          ease: "power3.out",
         }
       );
 
-      /* 2️⃣ 답변들 (오 → 왼, 카톡처럼 순차) */
-      tl.fromTo(
+      qaTl.fromTo(
         thirdSectionAnswerRefs.current,
         {
           opacity: 0,
-          x: 60,
-          scale: 0.98,
+          x: 80,
+          scale: 0.97,
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
           duration: 0.65,
-          ease: "power2.out",
-          stagger: 0.22,
+          ease: "power3.out",
+          stagger: 0.25,
         },
-        "+=0.15"
+        "+=0.2"
       );
-    });
+
+      gsap.fromTo(
+        thirdSectionScrollItemRefs.current,
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          stagger: 0.25,
+          scrollTrigger: {
+            trigger: thirdSectionScrollListRef.current,
+            start: "top 75%",
+            end: "bottom 40%",
+            scrub: true,
+          },
+        }
+      );
+    }, thirdSectionRef);
 
     return () => ctx.revert();
+  }, []);
+
+  const fourthSectionQuestionRef = useRef<HTMLParagraphElement>(null);
+  const fourthSectionCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const question = fourthSectionQuestionRef.current;
+    const cards = fourthSectionCardsRef.current;
+
+    if (!question || !cards) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: question,
+        start: "top 75%",
+        once: true,
+      },
+    });
+
+    tl.fromTo(
+      question,
+      {
+        scale: 0.96,
+        opacity: 0,
+      },
+      {
+        scale: 1.3,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+      },
+      "-=0.15"
+    );
+
+    const cardElements = cards.children;
+
+    tl.fromTo(
+      cardElements,
+      {
+        y: 24,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+      "-=0.1"
+    );
+    gsap.to(cardElements, {
+      y: -6,
+      duration: 1.8,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        each: 0.2,
+      },
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
+  const fifthSectionCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const cards = fifthSectionCardsRef.current;
+
+    if (!cards) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: cards,
+        start: "top 75%",
+        once: true,
+      },
+    });
+
+    const cardElements = cards.children;
+
+    tl.fromTo(
+      cardElements,
+      {
+        y: 24,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+      "-=0.1"
+    );
+    gsap.to(cardElements, {
+      y: -6,
+      duration: 1.8,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        each: 0.2,
+      },
+    });
+
+    return () => {
+      tl.kill();
+    };
   }, []);
 
   const isReason = [
@@ -526,26 +659,27 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="opacity-100 transform-none text-center">
+        <div
+          ref={thirdSectionScrollListRef}
+          className="opacity-100 transform-none text-center"
+        >
           <div className="flex flex-col gap-8 my-16">
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                내 가게를 찾고, 기억하게 하기 위해서
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                우리 가게만의 특별한 점을 어필하기 위해서
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">
-                손님이 뜸한 시기에도 안정적인 매출을 유지하고,
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5 opacity-100 transform-none">
-              <p className="text-lg text-white">위기에 대비하기 위해서</p>
-            </div>
+            {[
+              "내 가게를 찾고, 기억하게 하기 위해서",
+              "우리 가게만의 특별한 점을 어필하기 위해서",
+              "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
+              "위기에 대비하기 위해서",
+            ].map((text, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) thirdSectionScrollItemRefs.current[index] = el;
+                }}
+                className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5"
+              >
+                <p className="text-lg text-white">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -579,11 +713,17 @@ export default function LandingPage() {
 
       {/* Section 5: 5T Timeline */}
       <section className="container mx-auto px-6 lg:px-12">
-        <p className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed">
+        <p
+          ref={fourthSectionQuestionRef}
+          className="text-3xl md:text-4xl lg:text-5xl font-normal text-white text-center leading-relaxed"
+        >
           그럼 마케팅이란 무엇일까요?
         </p>
 
-        <div className="flex flex-row items-center justify-center gap-6 my-12">
+        <div
+          className="flex flex-row items-center justify-center gap-6 my-12"
+          ref={fourthSectionCardsRef}
+        >
           {isMarketingComponent.map((reason, index) => (
             <div
               className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
@@ -599,7 +739,7 @@ export default function LandingPage() {
       </section>
 
       {/* Marketing definition - emphasized */}
-      <div className="text-center space-y-6 py-12 bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A]/40 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-[#7CB342]/30 mt-16 container mx-auto px-6 lg:px-12">
+      <section className="text-center space-y-6 py-12 bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A]/40 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-[#7CB342]/30 mt-16 container mx-auto px-6 lg:px-12">
         <div>
           <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight text-white">
             마케팅,
@@ -611,14 +751,14 @@ export default function LandingPage() {
             합니다.
           </h3>
         </div>
-      </div>
+      </section>
 
       {/* Section 6: Success Stories */}
       <section className="relative min-h-screen w-full flex items-center justify-center py-20">
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Title */}
-          <div className="opacity-0 text-center">
+          <div className="text-center">
             <p className="text-white/40 text-sm tracking-[0.3em] mb-6">
               OUR STORY
             </p>
@@ -629,10 +769,12 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Stories Grid - Unified height with floating effect */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24">
+          <div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24"
+            ref={fifthSectionCardsRef}
+          >
             {stories.map((story, index) => (
-              <div key={index} className={`opacity-0 float-${index + 1}`}>
+              <div key={index} className={`float-${index + 1}`}>
                 <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-8 border border-white/5 hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
                   <div className="flex flex-col">
