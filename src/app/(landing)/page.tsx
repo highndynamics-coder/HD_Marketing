@@ -92,6 +92,62 @@ export default function LandingPage() {
     },
   ];
 
+  const BasicCurve = () => {
+    return (
+      <div className="flex flex-row items-center justify-center mt-48">
+        <svg
+          className="absolute w-full h-full"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Background wave */}
+          <path
+            d="M0 600 Q300 550 600 580 T1200 600"
+            stroke="rgba(124, 179, 66, 0.15)"
+            strokeWidth="2"
+            fill="none"
+          />
+
+          {/* Animated curve */}
+          <path
+            d="M100 650 C450 -450 700 1400 1100 -300"
+            stroke="url(#curveGradient)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            style={{
+              strokeDasharray: 2000,
+              strokeDashoffset: 2000,
+              animation: "draw-curve 0.25s ease-out forwards",
+            }}
+          />
+          <defs>
+            <linearGradient
+              id="curveGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#7CB342" />
+              <stop offset="100%" stopColor="#9DD65D" />
+            </linearGradient>
+          </defs>
+
+          <style>
+            {`@keyframes draw-curve {
+              to {
+                stroke-dashoffset: 0;
+              }
+            }`}
+          </style>
+        </svg>
+      </div>
+    );
+  };
+
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
       <section className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]">
@@ -109,59 +165,8 @@ export default function LandingPage() {
                   </span>
                 </h2>
               </div>
-              {/* Cubic Bezier Curve */}
-              <div className="flex flex-row items-center justify-center mt-48">
-                <svg
-                  className="absolute w-full h-full"
-                  viewBox="0 0 1200 800"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Background wave */}
-                  <path
-                    d="M0 600 Q300 550 600 580 T1200 600"
-                    stroke="rgba(124, 179, 66, 0.15)"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-
-                  {/* Animated curve */}
-                  <path
-                    d="M100 650 C450 -450 700 1400 1100 -300"
-                    stroke="url(#curveGradient)"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeLinecap="round"
-                    style={{
-                      strokeDasharray: 2000,
-                      strokeDashoffset: 2000,
-                      animation: "draw-curve 0.25s ease-out forwards",
-                    }}
-                  />
-                  <defs>
-                    <linearGradient
-                      id="curveGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" stopColor="#7CB342" />
-                      <stop offset="100%" stopColor="#9DD65D" />
-                    </linearGradient>
-                  </defs>
-
-                  <style>
-                    {`@keyframes draw-curve {
-              to {
-                stroke-dashoffset: 0;
-              }
-            }`}
-                  </style>
-                </svg>
-              </div>
             </div>
+            <BasicCurve />
           </div>
         </div>
       </section>
