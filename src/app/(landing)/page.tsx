@@ -785,6 +785,7 @@ export default function LandingPage() {
                     <blockquote className="text-lg text-white/80 leading-relaxed">
                       {story.content}
                     </blockquote>
+                    <div className="absolute -bottom-2 left-8 w-4 h-4 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-b border-r border-black transform rotate-45"></div>
                   </div>
                 </div>
               </div>
