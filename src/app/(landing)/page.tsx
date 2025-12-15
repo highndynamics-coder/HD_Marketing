@@ -534,6 +534,10 @@ export default function LandingPage() {
                   className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 min-h-[1.2em]"
                 >
                   <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
+                    <span
+                      aria-hidden
+                      className="absolute left-1/3 top-1/2 w-[70%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                    />
                     내일은 우리가 함께 합니다.
                   </span>
                 </h2>
@@ -560,11 +564,20 @@ export default function LandingPage() {
               </p>
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
                 수 많은 자영업자와 소상공인들이{" "}
-                <span className="text-[#7CB342]">생겨났지만</span>
+                <span className="relative inline-block text-[#7CB342] z-10">
+                  {/* glow layer */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                  />
+                  생겨났지만
+                </span>
               </p>
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
                 반대로 그만큼 많이{" "}
-                <span className="realtive z-10 text-red-400">망했습니다.</span>
+                <span className="realtive z-10 text-red-400/80 line-through">
+                  망했습니다.
+                </span>
               </p>
             </div>
 
