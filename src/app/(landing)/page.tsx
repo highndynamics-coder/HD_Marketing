@@ -1,6 +1,12 @@
 "use client";
 
-import React, { forwardRef, RefObject, useEffect, useRef } from "react";
+import React, {
+  Fragment,
+  forwardRef,
+  RefObject,
+  useEffect,
+  useRef,
+} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ContactBanner } from "@/components/ContactBanner";
@@ -575,7 +581,7 @@ export default function LandingPage() {
               </p>
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
                 반대로 그만큼 많이{" "}
-                <span className="realtive z-10 text-red-400/80 line-through">
+                <span className="realtive z-10 text-red-400/80 underline">
                   망했습니다.
                 </span>
               </p>
@@ -589,15 +595,15 @@ export default function LandingPage() {
             </p>
 
             <div
-              className="flex flex-row items-center justify-center gap-6 my-16"
+              className="flex flex-row items-center justify-center gap-6 my-36"
               ref={secondSectionCardsRef}
             >
               {isReason.map((reason, index) => (
                 <div
-                  className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
+                  className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 w-96 h-20 mb-8 flex flex-col items-center justify-center"
                   key={index}
                 >
-                  <h4 className="text-base md:text-lg font-light text-gray-700 text-center">
+                  <h4 className="text-xl md:text-2xl font-semibold text-gray-700 text-center">
                     {reason}
                   </h4>
                   <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
@@ -618,7 +624,7 @@ export default function LandingPage() {
           className="flex items-start gap-4 text-black"
           ref={thirdSectionQuestionRef}
         >
-          <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg ">
+          <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg">
             <span className="text-2xl">👨‍👩‍👦</span>
           </div>
           <div className="flex-1 max-w-xl">
@@ -634,14 +640,14 @@ export default function LandingPage() {
         {/* Final Answer - HD (Right) */}
         <div>
           <div className="flex items-start gap-4 justify-end">
-            <div className="flex-1 max-w-3xl flex flex-col gap-4">
+            <div className="flex-1 flex max-w-4xl flex-col items-end justify-end gap-4">
               <div
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[0] = el;
                 }}
-                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
               >
-                <h2 className="text-2xl font-semibold text-gray-800">
+                <h2 className="text-2xl md:text-3xl font-normal text-gray-800">
                   잘 모르겠습니다..
                 </h2>
                 <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
@@ -650,9 +656,9 @@ export default function LandingPage() {
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[1] = el;
                 }}
-                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
               >
-                <h2 className="text-2xl font-semibold text-gray-800">
+                <h2 className="text-2xl md:text-3xl font-normal text-gray-800">
                   정말 몰라서 못 옵니다.
                 </h2>
                 <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
@@ -661,12 +667,17 @@ export default function LandingPage() {
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[2] = el;
                 }}
-                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
               >
-                <p className="text-xl md:text-2xl font-normal text-gray-800 leading-relaxed">
-                  현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
-                  종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
-                  잘될 수 밖에 없습니다.
+                <p className="text-2xl md:text-3xl font-normal text-gray-800 leading-relaxed text-right">
+                  {"현시점 모든 가게와 스토어의 제품은\n상향 평준화 됐지만 그만큼 종사자가 너무 많아졌고\n인터넷의 발달로 잘 되는 업체들이 더 잘될 수 밖에 없습니다."
+                    .split("\n")
+                    .map((line, index, array) => (
+                      <Fragment key={index}>
+                        {line}
+                        {index < array.length - 1 && <br />}
+                      </Fragment>
+                    ))}
                 </p>
                 <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
               </div>
@@ -693,9 +704,9 @@ export default function LandingPage() {
                 ref={(el) => {
                   if (el) thirdSectionScrollItemRefs.current[index] = el;
                 }}
-                className="rounded-2xl p-8 border border-white"
+                className="rounded-2xl p-8"
               >
-                <p className="text-lg text-white">{text}</p>
+                <p className="text-4xl text-white font-semibold">{text}</p>
               </div>
             ))}
           </div>
@@ -787,27 +798,35 @@ export default function LandingPage() {
             </p>
           </div>
 
+          {/* Infinite Carousel */}
           <div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24"
+            className="w-full overflow-hidden mb-24"
             ref={fifthSectionCardsRef}
           >
-            {stories.map((story, index) => (
-              <div key={index} className={`float-${index + 1}`}>
-                <div className="rounded-3xl p-8 border border-white hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
-                  <div className="flex flex-col">
-                    <span className="text-6xl mb-6">{story.emoji}</span>
-                    <p className="mb-6 text-white/60">{story.title}</p>
-                  </div>
-                  <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                    <blockquote className="text-lg text-white/80 leading-relaxed">
-                      {story.content}
-                    </blockquote>
-                    <div className="absolute -bottom-4 left-8 w-4 h-4 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white" />
+            <div className="flex animate-stories-scroll hover:pause-animation">
+              {/* Original stories */}
+              {[...stories, ...stories].map((story, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-[350px] md:w-[400px] mx-4"
+                >
+                  <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
+                    <div className="flex flex-col">
+                      <span className="text-5xl mb-4">{story.emoji}</span>
+                      <p className="mb-4 text-white/60 text-sm font-medium">
+                        {story.title}
+                      </p>
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                      <blockquote className="text-base text-white/80 leading-relaxed">
+                        {story.content}
+                      </blockquote>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           {/* Success statement */}
           <div className="opacity-100 text-center py-16">
