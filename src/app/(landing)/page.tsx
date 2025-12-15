@@ -798,27 +798,35 @@ export default function LandingPage() {
             </p>
           </div>
 
+          {/* Infinite Carousel */}
           <div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24"
+            className="w-full overflow-hidden mb-24"
             ref={fifthSectionCardsRef}
           >
-            {stories.map((story, index) => (
-              <div key={index} className={`float-${index + 1}`}>
-                <div className="rounded-3xl p-8 border border-white hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
-                  <div className="flex flex-col">
-                    <span className="text-6xl mb-6">{story.emoji}</span>
-                    <p className="mb-6 text-white/60">{story.title}</p>
-                  </div>
-                  <div className="flex-1 overflow-y-auto scrollbar-hidden">
-                    <blockquote className="text-lg text-white/80 leading-relaxed">
-                      {story.content}
-                    </blockquote>
-                    <div className="absolute -bottom-4 left-8 w-4 h-4 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white" />
+            <div className="flex animate-stories-scroll hover:pause-animation">
+              {/* Original stories */}
+              {[...stories, ...stories].map((story, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-[350px] md:w-[400px] mx-4"
+                >
+                  <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
+                    <div className="flex flex-col">
+                      <span className="text-5xl mb-4">{story.emoji}</span>
+                      <p className="mb-4 text-white/60 text-sm font-medium">
+                        {story.title}
+                      </p>
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                      <blockquote className="text-base text-white/80 leading-relaxed">
+                        {story.content}
+                      </blockquote>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           {/* Success statement */}
           <div className="opacity-100 text-center py-16">
