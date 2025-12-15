@@ -22,7 +22,7 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">회사명:</span>
-                <span className="ml-2 text-gray-300">홍도현</span>
+                <span className="ml-2 text-gray-300">-</span>
               </div>
             </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">대표자명:</span>
-                <span className="ml-2 text-gray-300">HD company</span>
+                <span className="ml-2 text-gray-300">-</span>
               </div>
             </div>
 
@@ -50,7 +50,7 @@ export default function Footer() {
                   href="mailto:ceo@highdynamics.kr"
                   className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  ceo@highdynamics.kr
+                  -
                 </a>
               </div>
             </div>
@@ -71,7 +71,7 @@ export default function Footer() {
                   href="tel:044-000-000"
                   className="ml-2 text-gray-300 hover:text-white transition-colors"
                 >
-                  044-000-000
+                  -
                 </a>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">개인정보관리책임자:</span>
-                <span className="ml-2 text-gray-300">홍도현</span>
+                <span className="ml-2 text-gray-300">-</span>
               </div>
             </div>
 
@@ -92,7 +92,7 @@ export default function Footer() {
                   href="mailto:hsmenok@naver.com"
                   className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  hsmenok@naver.com
+                  -
                 </a>
               </div>
             </div>
