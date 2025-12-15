@@ -512,7 +512,7 @@ export default function LandingPage() {
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
       <section
         ref={firstSectionRef}
-        className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]"
+        className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24"
       >
         <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
           <div className="max-w-6xl mx-auto">
@@ -547,7 +547,7 @@ export default function LandingPage() {
       {/* Section 2: 과거부터 현재까지... */}
       <section
         ref={secondSectionRef}
-        className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]"
+        className="relative min-h-screen w-full flex items-center justify-center"
       >
         <div className="container mx-auto px-6 lg:px-12 py-24">
           <div className="max-w-5xl mx-auto">
@@ -697,7 +697,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
           {/* Final provocative question */}
-          <div className="opacity-0 text-center py-16">
+          <div className="text-center py-16">
             <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-loose">
                 정말 사장님 가게가
