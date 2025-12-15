@@ -512,7 +512,7 @@ export default function LandingPage() {
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
       <section
         ref={firstSectionRef}
-        className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24 bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]"
+        className="relative min-h-screen w-full flex flex-col items-center justify-center mt-24"
       >
         <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
           <div className="max-w-6xl mx-auto">
@@ -547,7 +547,7 @@ export default function LandingPage() {
       {/* Section 2: 과거부터 현재까지... */}
       <section
         ref={secondSectionRef}
-        className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#001A4D] via-[#000000] to-[#001529]"
+        className="relative min-h-screen w-full flex items-center justify-center"
       >
         <div className="container mx-auto px-6 lg:px-12 py-24">
           <div className="max-w-5xl mx-auto">
@@ -697,7 +697,7 @@ export default function LandingPage() {
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
           {/* Final provocative question */}
-          <div className="opacity-0 text-center py-16">
+          <div className="text-center py-16">
             <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16 shadow-lg border border-gray-200">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-loose">
                 정말 사장님 가게가
@@ -785,6 +785,7 @@ export default function LandingPage() {
                     <blockquote className="text-lg text-white/80 leading-relaxed">
                       {story.content}
                     </blockquote>
+                    <div className="absolute -bottom-2 left-8 w-4 h-4 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-b border-r border-black transform rotate-45"></div>
                   </div>
                 </div>
               </div>
@@ -801,114 +802,40 @@ export default function LandingPage() {
       </section>
 
       {/* Section 7: CEO Introduction */}
-      <section className="relative min-h-screen w-full flex items-center justify-center py-32">
+      <section className="relative min-h-screen w-full flex flex-col gap-8 items-center justify-center py-32">
+        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-16">
+          이 이야기의 시작점, 누군지 궁금하신가요?
+        </h4>
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col items-center gap-6">
             <div className="relative rounded-3xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Founder"
-                className="w-full h-[600px] object-cover"
+                className="w-full h-[500px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8 bg-black/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                <div className="text-5xl mb-4">👤</div>
-                <div className="text-white text-sm mb-2">
-                  종합광고대행사 HD 컴퍼니
-                </div>
-                <div className="text-2xl text-white font-medium mb-4">
-                  대표 홍도현
-                </div>
-              </div>
             </div>
-            <div className="flex flex-col space-y-8 opacity-100 transform-none">
-              <h3 className="text-3xl md:text-5xl text-white mb-8 leading-tight">
-                반갑습니다.
-              </h3>
-              <div className="space-y-3 hidden">
-                {/* Cert 1 */}
-                <div className="flex items-center gap-4 group opacity-100 transform-none">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-circle-check text-white"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                  </div>
-                  <span className="text-xl text-white group-hover:text-white transition-colors">
-                    검색광고 마케터 1급
-                  </span>
-                </div>
-
-                {/* Cert 2 */}
-                <div className="flex items-center gap-4 group opacity-100 transform-none">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-circle-check text-white"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                  </div>
-                  <span className="text-xl text-white group-hover:text-white transition-colors">
-                    SNS광고마케터 1급
-                  </span>
-                </div>
-
-                {/* Cert 3 */}
-                <div className="flex items-center gap-4 group opacity-100 transform-none">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-circle-check text-white"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                  </div>
-                  <span className="text-xl text-white group-hover:text-white transition-colors">
-                    마케팅 대행 250+
-                  </span>
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-[#1A3A5C]/50 to-[#7CB342]/10 rounded-2xl p-8 border border-[#&CB342]/20 opacity-100 transform-none">
-                <p className="text-lg text-white leading-relaxed italic">
-                  수많은 소상공인과 자영업자분들의 성공을 돕는 것이 저의
-                  사명입니다. 단순한 광고가 아닌, 진정한 성장을 함께
-                  만들어갑니다.
+            <div className="flex flex-col space-y-16 opacity-100 transform-none max-w-6xl">
+              <hr />
+              <div className="flex flex-row items-center justify-center gap-2">
+                <h4 className="text-4xl font-medium text-white">홍도현</h4>
+                <p className="text-2xl text-white/60">
+                  종합광고대행사 HD 컴퍼니 대표
                 </p>
               </div>
+              <p className="text-2xl md:text-3xl text-white leading-loose">
+                HD컴퍼니의 시작은, 성장하는 과정에 있어 서로의 이야기를 듣고,
+                진심으로 공감하며, 정확한 해결 방안을 찾고, 신속히 적용시키는
+                것에서부터 출발했습니다.
+              </p>
+              <p className="text-2xl md:text-3xl text-white/80 leading-loose">
+                이어서 소비자의 대한 존중과 가치를 바라며 함께 감에 있어 공존된
+                성장을 추구하고...
+              </p>
+              <p className="text-2xl md:text-3xl text-white/40 leading-loose text-center">
+                그 마음의 뒷이야기→
+              </p>
             </div>
           </div>
         </div>
