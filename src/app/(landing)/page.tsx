@@ -559,7 +559,8 @@ export default function LandingPage() {
                 과거부터 현재까지
               </p>
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
-                수 많은 자영업자와 소상공인들이 <span>생겨났지만</span>
+                수 많은 자영업자와 소상공인들이{" "}
+                <span className="text-[#7CB342]">생겨났지만</span>
               </p>
               <p className="text-3xl md:text-5xl font-medium text-white/80 leading-relaxed mb-8">
                 반대로 그만큼 많이{" "}
@@ -612,6 +613,7 @@ export default function LandingPage() {
               <p className="text-2xl md:text-3xl font-normal text-gray-800 leading-relaxed">
                 대표님! 저희 가게는 왜 사람이 안 올까요?
               </p>
+              <div className="absolute -bottom-1 left-24 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
             </div>
           </div>
         </div>
@@ -624,33 +626,36 @@ export default function LandingPage() {
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[0] = el;
                 }}
-                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
               >
-                <h2 className="text-2xl font-semibold text-white">
+                <h2 className="text-2xl font-semibold text-gray-800">
                   잘 모르겠습니다..
                 </h2>
+                <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
               </div>
               <div
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[1] = el;
                 }}
-                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
               >
-                <h2 className="text-2xl font-semibold text-white">
+                <h2 className="text-2xl font-semibold text-gray-800">
                   정말 몰라서 못 옵니다.
                 </h2>
+                <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
               </div>
               <div
                 ref={(el) => {
                   if (el) thirdSectionAnswerRefs.current[2] = el;
                 }}
-                className="bg-gradient-to-br from-[#1A3A5C]/20 to-[#7CB342]/10 rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                className="bg-white  rounded-3xl p-12 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
               >
-                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
+                <p className="text-xl md:text-2xl font-normal text-gray-800 leading-relaxed">
                   현시점 모든 가게와 스토어의 제품은 상향 평준화 됐지만 그만큼
                   종사자가 너무 많아졌고 인터넷의 발달로 잘 되는 업체들이 더
                   잘될 수 밖에 없습니다.
                 </p>
+                <div className="absolute -bottom-1 right-4 w-5 h-5 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
               </div>
             </div>
             <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
@@ -675,7 +680,7 @@ export default function LandingPage() {
                 ref={(el) => {
                   if (el) thirdSectionScrollItemRefs.current[index] = el;
                 }}
-                className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-2xl p-8 border border-white/5"
+                className="rounded-2xl p-8 border border-white"
               >
                 <p className="text-lg text-white">{text}</p>
               </div>
@@ -739,7 +744,7 @@ export default function LandingPage() {
       </section>
 
       {/* Marketing definition - emphasized */}
-      <section className="text-center space-y-6 py-12 bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A]/40 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-[#7CB342]/30 mt-16 container mx-auto px-6 lg:px-12">
+      <section className="text-center space-y-6 py-12 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-white mt-16 container mx-auto px-6 lg:px-12">
         <div>
           <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight text-white">
             마케팅,
@@ -775,7 +780,7 @@ export default function LandingPage() {
           >
             {stories.map((story, index) => (
               <div key={index} className={`float-${index + 1}`}>
-                <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-8 border border-white/5 hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
+                <div className="rounded-3xl p-8 border border-white hover:border-[#7CB342]/30 transition-all duration-500 h-full flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
                   <div className="flex flex-col">
                     <span className="text-6xl mb-6">{story.emoji}</span>
@@ -785,7 +790,7 @@ export default function LandingPage() {
                     <blockquote className="text-lg text-white/80 leading-relaxed">
                       {story.content}
                     </blockquote>
-                    <div className="absolute -bottom-2 left-8 w-4 h-4 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-b border-r border-black transform rotate-45"></div>
+                    <div className="absolute -bottom-4 left-8 w-4 h-4 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white" />
                   </div>
                 </div>
               </div>
@@ -803,21 +808,23 @@ export default function LandingPage() {
 
       {/* Section 7: CEO Introduction */}
       <section className="relative min-h-screen w-full flex flex-col gap-8 items-center justify-center py-32">
-        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-16">
+        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-8">
           이 이야기의 시작점, 누군지 궁금하신가요?
+        </h4>
+        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-16">
+          잘되는 가게보다 중요한건, 사람의 이야기를 이해하는 일이었습니다
         </h4>
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-row items-center justify-between gap-10">
             <div className="relative rounded-3xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Founder"
-                className="w-full h-[500px] object-cover"
+                className="w-[1500px] h-[500px] object-cover"
               />
             </div>
             <div className="flex flex-col space-y-16 opacity-100 transform-none max-w-6xl">
-              <hr />
               <div className="flex flex-row items-center justify-center gap-2">
                 <h4 className="text-4xl font-medium text-white">홍도현</h4>
                 <p className="text-2xl text-white/60">
@@ -841,67 +848,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/*Section : High and Dynamics*/}
-      <section className="container mx-auto px-6 lg:px-12 flex flex-col gap-8">
-        <div className="text-center mb-20 opacity-100 transform-none">
-          <h2 className="text-5xl md:text-7xl mb-6">
-            <span className="text-white">High </span>
-            <span className="text-white/40">그리고, </span>
-            <span className="text-[#7CB342]">Dynamics</span>
-            <span className="text-white">의 시작</span>
-          </h2>
-        </div>
-
-        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 md:p-16 border border-white/10">
-          <p className="text-2xl md:text-3xl text-white leading-relaxed mb-8">
-            단순히 빠르고 크게 성장하는 것만이 목표가 아닙니다.
-          </p>
-          <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
-            성장하는 과정에 있어 서로의 이야기를 듣고, 진심으로 공감하며, 정확한
-            해결방안을 찾고, 신속히 적용시키는 것에 대해 진짜 의미가 있습니다.
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] rounded-3xl p-12 md:p-16 border border-white/10">
-          <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
-            이렇듯 소비자의 대한 존중과 가치를 바라며 함께 감에 있어 공존된
-            성장을 추구하고 지금 이 순간도 여전히 우리는 성장하고 있습니다.
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-[#1A3A5C]/40 to-[#0A0A0A] backdrop-blur-sm rounded-3xl p-12 md:p-20 border border-[#7CB342]/30 text-center">
-          <div className="text-2xl md:text-4xl text-white leading-relaxed mb-8 flex flex-col gap-4">
-            <span>이어서 우리의 문제가 나의 삶, 나의 가족에게</span>
-            <span className="text-[#7CB342]">행복을 가져다주기 위해</span>
-            <span>HD컴퍼니는 존재합니다.</span>
-          </div>
-          <div className="h-px bg-gradient-to-r from-transparent via-[#7CB342]/50 to-transparent my-12" />
-          <div className="space-y-6 text-lg md:text-xl text-white leading-relaxed">
-            <p className="text-white/60">
-              단순한 광고상품과 혜택을 제공하는 것이 아닌,
-            </p>
-            <p className="text-[#7CB342]">
-              힘들 때 한번이라도 이겨낼 수 있는 힘을 부여하고,
-            </p>
-            <p className="text-white/60">
-              그럼에도 웃을 수 있는 행복을 판매하는 것이며,
-            </p>
-            <p className="text-white text-2xl md:text-3xl mt-8">
-              그동안 여러분의 힘들고 우울했던 날들은
-              <br />
-              <span className="text-[#7CB342]">HD컴퍼니가 구매합니다.</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Section 8: Final CTA */}
       <section className="relative w-full flex items-center justify-center py-20">
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
           {/* Results Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Result 1 */}
-            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
+            <div className="border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
                   <span className="text-5xl">🏆</span>
@@ -913,7 +866,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 2 */}
-            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
+            <div className="border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">📈</span>
@@ -925,7 +878,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 3 */}
-            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
+            <div className="border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">👥</span>
@@ -937,7 +890,7 @@ export default function LandingPage() {
             </div>
 
             {/* Result 4 */}
-            <div className="opacity-0 border border-white/10 rounded-2xl p-4">
+            <div className="border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
                   <span className="text-5xl">⏰</span>
