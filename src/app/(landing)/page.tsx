@@ -851,21 +851,32 @@ export default function LandingPage() {
 
       {/* Section 7: CEO Introduction */}
       <section className="relative min-h-screen w-full flex flex-col gap-8 items-center justify-center py-32">
-        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-8">
+        <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed">
           이 이야기의 시작점, 누군지 궁금하신가요?
         </h4>
+        {[...Array(3)].map((_, index) => (
+          <div
+            key={index}
+            className="text-white rounded-full w-2 h-2 bg-white mb-8"
+          />
+        ))}
+
         <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-16">
           잘되는 가게보다 중요한건, 사람의 이야기를 이해하는 일이었습니다
         </h4>
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
           <div className="flex flex-row items-center justify-between gap-10">
-            <div className="relative rounded-3xl overflow-hidden">
+            <div className="relative rounded-3xl overflow-hidden bg-opacity-40">
               <img
                 src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Founder"
-                className="w-[1500px] h-[500px] object-cover"
+                className="w-[1500px] h-[500px] object-cover bg-opacity-40"
               />
+              <div className="absolute bg-black/50 inset-0" />
+              <div className="absolute top-1/2 left-1/3 -translate-x-5 text-white/60 text-3xl z-10">
+                사진 준비중 입니다.
+              </div>
             </div>
             <div className="flex flex-col space-y-16 opacity-100 transform-none max-w-6xl">
               <div className="flex flex-row items-center justify-center gap-2">
