@@ -113,7 +113,7 @@ export default function ProductPage() {
                     >
                       <div
                         className={clsx(
-                          "flex flex-col w-[450px] h-28 rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)]",
+                          "flex flex-col w-[450px] h-28 rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)] hover:scale-110",
                           {
                             "border-white border-2 shadow-[0_8px_32px_rgba(0,0,0,0.3)]":
                               isSelected,
