@@ -11,11 +11,13 @@ import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ContactBanner } from "@/components/ContactBanner";
+import { useResponsive } from "@/lib/useResponsive";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const router = useRouter();
+  const { isMobile } = useResponsive();
   const firstSectionRef = useRef<HTMLDivElement>(null);
   const firstSectionTitleRefs = useRef<HTMLHeadingElement[]>([]);
   const firstSectionCurveRef = useRef<SVGPathElement>(null);
@@ -515,6 +517,548 @@ export default function LandingPage() {
       </div>
     );
   });
+
+  if (isMobile) {
+    return (
+      <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
+        <section
+          ref={firstSectionRef}
+          className="relative min-h-screen w-full flex flex-col items-center justify-center mt-12"
+        >
+          <div className="relative z-10 container px-6 mx-auto lg:px-12 opacity-100 transform-none">
+            <div className="max-w-6xl mx-auto">
+              <div className="mb-32 opacity-100 transform-none">
+                <div className="relative">
+                  <div className="h-1 bg-gradient-to-r from-[#7CB342] to-transparent mb-12 w-28" />
+                  <h2
+                    ref={(el) => {
+                      if (el) firstSectionTitleRefs.current[0] = el;
+                    }}
+                    className="text-2xl font-medium text-white/90 mb-6 min-h-[1.2em]"
+                  >
+                    오늘도 버티셨다면,
+                  </h2>
+                  <h2
+                    ref={(el) => {
+                      if (el) firstSectionTitleRefs.current[1] = el;
+                    }}
+                    className="text-2xl font-medium mb-4 min-h-[1.2em]"
+                  >
+                    <span className="bg-gradient-to-r from-[#7CB342] via-[#9DD65D] to-[#7CB342] bg-clip-text text-transparent">
+                      <span
+                        aria-hidden
+                        className="absolute left-1/3 top-1/2 w-[70%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                      />
+                      내일은 우리가 함께 합니다.
+                    </span>
+                  </h2>
+                </div>
+              </div>
+              <BasicCurve ref={firstSectionCurveRef} />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: 과거부터 현재까지... */}
+        <section
+          ref={secondSectionRef}
+          className="relative min-h-screen w-full flex items-center justify-center"
+        >
+          <div className="container mx-auto px-6 lg:px-12 py-24">
+            <div className="max-w-5xl mx-auto">
+              <div
+                ref={secondSectionTextGroupRef}
+                className="opacity-100 mb-24 flex flex-col gap-4"
+              >
+                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                  과거부터 현재까지
+                </p>
+                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                  수 많은 자영업자와 소상공인들이{" "}
+                  <span className="relative inline-block text-[#7CB342] z-10">
+                    {/* glow layer */}
+                    <span
+                      aria-hidden
+                      className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                    />
+                    생겨났지만
+                  </span>
+                </p>
+                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                  반대로 그만큼 많이{" "}
+                  <span className="realtive z-10 text-red-400/80 underline">
+                    망했습니다.
+                  </span>
+                </p>
+              </div>
+
+              <p
+                ref={secondSectionQuestionRef}
+                className="text-2xl font-normal text-white text-center leading-relaxed"
+              >
+                이유가 뭘까요?
+              </p>
+
+              <div
+                className="flex flex-col items-center justify-center gap-6 my-20 p-2"
+                ref={secondSectionCardsRef}
+              >
+                {isReason.map((reason, index) => (
+                  <div
+                    className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 h-24 mb-8 flex flex-col items-center justify-center"
+                    key={index}
+                  >
+                    <h4 className="text-md font-semibold text-gray-700 text-center">
+                      {reason}
+                    </h4>
+                    <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Q&A - Chat Style */}
+        <section
+          ref={thirdSectionRef}
+          className="flex flex-col space-y-16 opacity-100 container mx-auto p-6"
+        >
+          {/* Question - 사장님들 (Left) */}
+          <div
+            className="flex items-start gap-4 text-black"
+            ref={thirdSectionQuestionRef}
+          >
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg">
+              <span className="text-xl">👨‍👩‍👦</span>
+            </div>
+            <div className="flex-1 w-52">
+              <div className="bg-white rounded-3xl rounded-tl-none px-6 py-4 shadow-md border border-gray-200">
+                <p className="text-lg font-normal text-gray-800 leading-relaxed">
+                  대표님! 저희 가게는 왜 사람이 안 올까요?
+                </p>
+                <div className="absolute -bottom-1.5 left-20 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Final Answer - HD (Right) */}
+          <div>
+            <div className="flex items-start gap-4 justify-end">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
+                <span className="text-xl">👨‍💼</span>
+              </div>
+              <div className="flex-1 flex max-w-4xl flex-col items-start justify-start gap-4">
+                <div
+                  ref={(el) => {
+                    if (el) thirdSectionAnswerRefs.current[0] = el;
+                  }}
+                  className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
+                >
+                  <h2 className="text-lg font-normal text-gray-800">
+                    잘 모르겠습니다..
+                  </h2>
+                  <div className="absolute -bottom-2 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                </div>
+                <div
+                  ref={(el) => {
+                    if (el) thirdSectionAnswerRefs.current[1] = el;
+                  }}
+                  className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
+                >
+                  <h2 className="text-lg font-normal text-gray-800">
+                    정말 몰라서 못 옵니다.
+                  </h2>
+                  <div className="absolute -bottom-2 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                </div>
+                <div
+                  ref={(el) => {
+                    if (el) thirdSectionAnswerRefs.current[2] = el;
+                  }}
+                  className="bg-white rounded-3xl p-4 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                >
+                  <p className="text-lg font-normal text-gray-800 leading-relaxed text-left">
+                    {"현시점 모든 가게와 스토어의 제품은\n상향 평준화 됐지만 그만큼 종사자가 너무 많아졌고\n인터넷의 발달로 잘 되는 업체들이 더 잘될 수 밖에 없습니다."
+                      .split("\n")
+                      .map((line, index, array) => (
+                        <Fragment key={index}>
+                          {line}
+                          {index < array.length - 1 && <br />}
+                        </Fragment>
+                      ))}
+                  </p>
+                  <div className="absolute -bottom-1.5 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            ref={thirdSectionScrollListRef}
+            className="opacity-100 transform-none text-center"
+          >
+            <div className="flex flex-col gap-8 my-16">
+              {[
+                "내 가게를 찾고, 기억하게 하기 위해서",
+                "우리 가게만의 특별한 점을 어필하기 위해서",
+                "손님이 뜸한 시기에도 안정적인 매출을 유지하고,",
+                "위기에 대비하기 위해서",
+              ].map((text, index) => (
+                <div
+                  key={index}
+                  ref={(el) => {
+                    if (el) thirdSectionScrollItemRefs.current[index] = el;
+                  }}
+                  className="rounded-2xl p-7"
+                >
+                  <p className="text-xl text-white font-semibold">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="opacity-100 transform-none mt-8 flex flex-col items-center justify-center">
+            <h2 className="text-4xl mb-6">
+              <span className="text-white">마케팅은</span>
+              <span className="text-[#7CB342] ml-2 mr-2">필수</span>
+              <span className="text-white">입니다.</span>
+            </h2>
+          </div>
+        </section>
+
+        {/* Section 4: Marketing Message */}
+        <section className="relative w-full flex items-center justify-center">
+          {/* Content */}
+          <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
+            {/* Final provocative question */}
+            <div className="text-center py-16">
+              <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16">
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-2xl font-normal text-white leading-loose">
+                    정말 사장님 가게가
+                  </h1>
+                  <h1 className="text-2xl font-normal text-white leading-loose">
+                    맛이 없어서
+                  </h1>
+                  <h1 className="text-2xl font-normal text-white leading-loose">
+                    손님이 없는 걸까요?
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 5: 5T Timeline */}
+        <section className="container mx-auto px-6 lg:px-12">
+          <p
+            ref={fourthSectionQuestionRef}
+            className="text-xl font-normal text-white text-center leading-relaxed"
+          >
+            그럼 마케팅이란 무엇일까요?
+          </p>
+
+          <div
+            className="flex flex-col items-center justify-center gap-6 my-12"
+            ref={fourthSectionCardsRef}
+          >
+            {isMarketingComponent.map((reason, index) => (
+              <div
+                className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 max-w-xs mb-8"
+                key={index}
+              >
+                <h4 className="text-base md:text-lg font-normal text-gray-700 text-center">
+                  {reason}
+                </h4>
+                <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Marketing definition - emphasized */}
+        <section className="text-center space-y-6 py-12 backdrop-blur-sm rounded-3xl p-12 md:p-16 mt-16 container mx-auto px-6 lg:px-12">
+          <div>
+            <h2 className="text-3xl mb-6 leading-tight text-white">마케팅,</h2>
+          </div>
+          <div>
+            <h3 className="text-xl font-medium text-white">
+              <span className="relative inline-block text-[#7CB342] z-10">
+                {/* glow layer */}
+                <span
+                  aria-hidden
+                  className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                />
+                매출 성장의 원동력
+              </span>
+              이 되어야 합니다.
+            </h3>
+          </div>
+        </section>
+
+        {/* Section 6: Success Stories */}
+        <section className="relative min-h-screen w-full flex items-center justify-center py-20">
+          {/* Content */}
+          <div className="relative z-10 w-full max-w-7xl px-8 space-y-16">
+            {/* Title */}
+            <div className="text-center">
+              <p className="text-white/40 text-sm tracking-[0.3em] mb-6">
+                OUR STORY
+              </p>
+              <p className="text-2xl text-white mb-6">
+                <span className="text-white/60">(</span>
+                <span className="text-white">우리의 이야기입니다</span>
+                <span className="text-white/60">)</span>
+              </p>
+            </div>
+
+            {/* Infinite Carousel */}
+            <div
+              className="w-full overflow-hidden mb-24"
+              ref={fifthSectionCardsRef}
+            >
+              <div className="flex animate-stories-scroll hover:pause-animation">
+                {/* Original stories */}
+                {[...stories, ...stories].map((story, index) => (
+                  <div key={index} className="flex-shrink-0 w-[200px] mx-4">
+                    <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
+                      <div className="flex flex-col">
+                        <span className="text-5xl mb-4">{story.emoji}</span>
+                        <p className="mb-4 text-white/60 text-sm font-medium">
+                          {story.title}
+                        </p>
+                      </div>
+                      <div className="flex-1 overflow-hidden">
+                        <blockquote className="text-base text-white/80 leading-relaxed">
+                          {story.content}
+                        </blockquote>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Success statement */}
+            <div className="opacity-100 text-center py-16">
+              <div className="text-2xl text-white flex flex-col gap-4">
+                <span className="text-white">실제로 많은 사장님들의</span>
+                <span className="text-[#7CB342]">성공을 도왔습니다</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 7: CEO Introduction */}
+        <section className="relative min-h-screen w-full flex flex-col gap-8 items-center justify-center py-32">
+          <h4 className="text-white text-xl font-medium text-center leading-relaxed">
+            이 이야기의 시작점, 누군지 궁금하신가요?
+          </h4>
+          {[...Array(3)].map((_, index) => (
+            <div
+              key={index}
+              className="text-white rounded-full w-2 h-2 bg-white mb-2"
+            />
+          ))}
+
+          <h4 className="text-white text-xl font-medium text-center leading-relaxed mb-16">
+            "잘되는 가게보다 중요한건, 사람의 이야기를 이해하는 일이었습니다"
+          </h4>
+          {/* Content */}
+          <div className="relative z-10 w-full px-6 md:px-8">
+            <div className="flex flex-col items-center justify-between gap-24">
+              <div className="relative rounded-3xl overflow-hidden bg-opacity-40">
+                <img
+                  src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Founder"
+                  className="w-[1500px] h-[300px] object-cover bg-opacity-40"
+                />
+                <div className="absolute bg-black/50 inset-0" />
+                <div className="absolute top-1/2 left-1/4 -translate-x-8 text-white/60 text-3xl z-10">
+                  사진 준비중 입니다.
+                </div>
+              </div>
+              <div className="relative bg-black rounded-2xl p-8 shadow-lg border border-gray-200 w-full h-full group hover:shadow-xl transition-all duration-300">
+                {/* Title */}
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <h4 className="text-lg font-medium text-white">홍도현</h4>
+                  <p className="text-lg text-white/60">
+                    종합광고대행사 HD 컴퍼니 대표
+                  </p>
+                </div>
+
+                <hr className="my-4 border-white" />
+
+                {/* Scrollable Message Content */}
+                <div className="min-h-[400px] max-w-6xl overflow-hidden scrollbar-hidden pr-4 text-gray-700 leading-relaxed flex flex-col gap-[22px]">
+                  <p className="text-base font-normal text-white/80 leading-relaxed">
+                    HD컴퍼니의 시작은
+                  </p>
+                  <p className="text-base font-normal text-white/80  leading-relaxed">
+                    성장하는 과정에 있어 서로의 이야기를 듣고,
+                  </p>
+                  <p className="text-base font-normal text-white/80  leading-relaxed">
+                    진심으로 공감하며, 정확한 해결 방안을 찾고,
+                  </p>
+                  <p className="text-base font-normal text-white/80  leading-relaxed">
+                    그 답을 행동으로 옮기는 것에서부터 출발했습니다.
+                  </p>
+
+                  <p className="text-base font-normal text-white/80 leading-relaxed flex flex-col gap-4">
+                    <span>이어서 소비자의 대한 존중과 가치를 바라며</span>
+                    <span className="bg-opacity-40 text-white/40">
+                      함께 감에 있어 공존된 성장을 추구하고,
+                    </span>
+                    <span className="bg-opacity-40 text-white/20">
+                      지금 이 순간도 여전히 우리는 성장하고 있습니다.
+                    </span>
+                  </p>
+
+                  <hr className="border-white absolute bottom-[110px] border-b-2 left-0 right-0" />
+                  <div className="flex flex-col items-center justify-center z-20">
+                    <button
+                      className="text-2xl md:text-3xl text-white leading-loose text-center cursor-pointer hover:scale-110 ease-in transition-all duration-300"
+                      onClick={() => router.push("/company")}
+                    >
+                      그 마음의 뒷이야기→
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 8: Final CTA */}
+        <section className="relative w-full flex items-center justify-center py-20">
+          <div className="relative z-10 w-full max-w-7xl px-8 space-y-48">
+            {/* Results Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+              {/* Result 1 */}
+              <div className="border border-white/10 rounded-2xl p-4">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
+                    <span className="text-5xl">🏆</span>
+                  </div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
+                    플레이스 1 페이지
+                  </h3>
+                </div>
+              </div>
+
+              {/* Result 2 */}
+              <div className="border border-white/10 rounded-2xl p-4">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                    <span className="text-5xl">📈</span>
+                  </div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
+                    꾸준한 매출 상승
+                  </h3>
+                </div>
+              </div>
+
+              {/* Result 3 */}
+              <div className="border border-white/10 rounded-2xl p-4">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                    <span className="text-5xl">👥</span>
+                  </div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
+                    끊이지 않는 손님들
+                  </h3>
+                </div>
+              </div>
+
+              {/* Result 4 */}
+              <div className="border border-white/10 rounded-2xl p-4">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-2xl">
+                    <span className="text-5xl">⏰</span>
+                  </div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
+                    끝이 안보이는 웨이팅
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mb-16 opacity-100 transform-none">
+              <h2 className="text-3xl text-white mb-8 leading-tight">
+                이제 더이상
+                <br />
+                <span className="relative inline-block text-[#7CB342] z-10">
+                  {/* glow layer */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                  />
+                  남 이야기가 아닙니다
+                </span>
+              </h2>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 9: Final Closing */}
+        <section className="relative min-h-screen w-full flex items-center justify-center py-20">
+          <div className="relative z-10 w-full max-w-6xl px-8 space-y-16 text-center">
+            <div className="flex-wrap items-center justify-center gap-4 mb-16 opacity-100 hidden">
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍👩‍👧‍👦
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍🍳
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍⚕️
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍⚖️
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍💼
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍🔧
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍🏫
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍🌾
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍💻
+              </div>
+              <div className="text-5xl md:text-6xl cursor-pointer opacity-100 transform-none">
+                👨‍🎨
+              </div>
+            </div>
+            <div className="opacity-100 py-2">
+              <p className="text-2xl text-white/90 leading-relaxed mb-4">
+                우리는 모두가 사랑하는
+                <br />
+                <span className="relative inline-block text-[#7CB342] z-10">
+                  {/* glow layer */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
+                  />
+                  방식으로 성장합니다.
+                </span>
+              </p>
+            </div>
+            <button className="bg-gradient-to-r from-[#7CB342] to-[#1EC800] text-white text-xl font-medium rounded-full hover:shadow-[0_0_40px_rgba(124,179,66,0.4)] transition-all duration-300 px-8 py-4">
+              더 알아보기
+            </button>
+          </div>
+        </section>
+
+        {/* Contact Banner - Fixed at bottom */}
+        <ContactBanner />
+      </main>
+    );
+  }
 
   return (
     <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
