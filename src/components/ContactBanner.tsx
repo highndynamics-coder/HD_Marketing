@@ -3,12 +3,28 @@
 import { useState } from "react";
 import { FileTextIcon, TrashIcon } from "@radix-ui/react-icons";
 
+const CONTACT_EMAIL = "highndynamics@gmail.com";
+
 export const ContactBanner = () => {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
 
   const handleSubmit = () => {
-    console.log("Form submitted:", { name, contact });
+    if (!name.trim()) {
+      alert("성함을 입력해주세요.");
+      return;
+    }
+    if (!contact.trim()) {
+      alert("연락처를 입력해주세요.");
+      return;
+    }
+
+    const subject = encodeURIComponent("[빠른 상담 신청]");
+    const body = encodeURIComponent(
+      `성함: ${name}\n연락처: ${contact}\n\n빠른 상담을 신청합니다.`
+    );
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   const handleClear = () => {

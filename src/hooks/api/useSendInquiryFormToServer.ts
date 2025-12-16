@@ -2,14 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import AxiosInstance from "@/shared/lib/utils/api/axiosInstance";
 
 interface InquiryFormDataTypeToServer {
-  title: string;
   content: string;
-  form_type: number;
   name: string;
-  position: string;
   phone: string;
-  email: string;
-  is_agree: boolean;
 }
 
 interface InquiryFormDataSuccessFromServer extends InquiryFormDataTypeToServer {

@@ -1,42 +1,15 @@
 "use client";
 
-import React, { useState, useCallback, useMemo } from "react";
-import { useForm, type SubmitHandler, Controller } from "react-hook-form";
+import React, { useState, useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/shared/ui/Select";
-import { useInquiryFormType } from "@/hooks/api/useInquiryFormType";
-import { useSendInquiryFormToServer } from "@/hooks/api/useSendInquiryFormToServer";
 
-interface FormType {
-  id: number;
-  name: string;
-}
-
-type InquiryFormType = FormType[];
-
-interface InquiryFormDataTypeToServer {
-  title: string;
-  content: string;
-  form_type: number;
-  name: string;
-  position: string;
-  phone: string;
-  email: string;
-  is_agree: boolean;
-}
+const CONTACT_EMAIL = "highndynamics@gmail.com";
 
 const inquiryServiceFormSchema = z.object({
-  form_type: z.number().min(1, { message: "문의 유형을 선택해 주세요." }),
   name: z.string().min(1, { message: "성함을 입력해주세요." }),
-  position: z.string().min(1, { message: "소속(조직명)을 입력해 주세요." }),
+  company: z.string().min(1, { message: "소속명을 입력해주세요." }),
   phone: z
     .string()
     .regex(/^\d{3}-\d{3,4}-\d{4}$/, {
@@ -44,44 +17,25 @@ const inquiryServiceFormSchema = z.object({
     })
     .min(1, { message: "연락처를 입력해주세요." }),
   email: z.string().email({ message: "유효한 이메일 형식을 입력해주세요." }),
-  title: z.string().min(1, { message: "제목을 입력해주세요." }),
   content: z.string().min(1, { message: "문의 내용을 입력해주세요." }),
-  is_agree: z.boolean(),
 });
 
 type InquiryServiceFormValues = z.infer<typeof inquiryServiceFormSchema>;
 
 export default function InquiryPage() {
-  const { data: inquiryData, isPending, isError } = useInquiryFormType();
-
-  const { mutateAsync } = useSendInquiryFormToServer();
-
-  const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
   const [isAccordionOpened, setIsAccordionOpened] = useState(false);
 
-  const inquirySelectFormTypeData = useMemo(
-    () => inquiryData as InquiryFormType,
-    [inquiryData]
-  );
-
   const defaultValues = {
-    form_type: 1,
     name: "",
-    position: "",
-    phone: "",
+    company: "",
     email: "",
-    title: "",
+    phone: "",
     content: "",
-    is_agree: false,
   };
 
   const toggleAccordionState = useCallback(() => {
     setIsAccordionOpened((prev) => !prev);
   }, []);
-  const toggleCheckbox = useCallback(
-    () => setIsCheckboxClicked((prev) => !prev),
-    []
-  );
 
   const {
     control,
@@ -95,35 +49,15 @@ export default function InquiryPage() {
     mode: "onChange",
   });
 
-  const showToast = useCallback(
-    (type: "success" | "error", message: string) => {
-      if (type === "success") toast.success(message);
-      if (type === "error") toast.error(message);
-    },
-    []
-  );
+  const onSubmit = (data: InquiryServiceFormValues) => {
+    console.log(data);
 
-  const onSubmit: SubmitHandler<InquiryServiceFormValues> = async (
-    data: Omit<InquiryFormDataTypeToServer, "is_agree">
-  ) => {
-    if (!isCheckboxClicked) {
-      showToast("error", "개인정보 수집/이용에 동의해주세요.");
-      return;
-    }
+    const subject = encodeURIComponent("[상담 신청]");
+    const body = encodeURIComponent(
+      `성함: ${data.name}\n소속명: ${data.company}\n연락처: ${data.phone}\n이메일: ${data.email}\n문의 내용: ${data.content}`
+    );
 
-    const dataToSend: InquiryFormDataTypeToServer = {
-      ...data,
-      is_agree: isCheckboxClicked,
-    };
-
-    try {
-      await mutateAsync(dataToSend);
-      showToast("success", "문의가 성공적으로 접수되었습니다.");
-      reset();
-    } catch (error) {
-      console.error("폼 제출 실패:", error);
-      showToast("error", "문의 접수에 실패했습니다. 다시 시도해주세요.");
-    }
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -194,11 +128,8 @@ export default function InquiryPage() {
                 </div>
                 <div>
                   <div className="text-[#1A3A5C] mb-1">전화</div>
-                  <a
-                    href="tel:02-1234-5678"
-                    className="text-gray-600 hover:text-[#7CB342]"
-                  >
-                    02-1234-5678
+                  <a href="tel:" className="text-gray-600 hover:text-[#7CB342]">
+                    -
                   </a>
                 </div>
               </div>
@@ -223,7 +154,9 @@ export default function InquiryPage() {
                 </div>
                 <div>
                   <div className="text-[#1A3A5C] mb-1">주소</div>
-                  <p className="text-gray-600">세종특별자치시 (가안)</p>
+                  <p className="text-gray-600">
+                    세종특별자치시 나성북로 21, 701~703호
+                  </p>
                 </div>
               </div>
             </div>
@@ -251,10 +184,7 @@ export default function InquiryPage() {
           <div className="bg-gray-50 rounded-2xl p-8 w-[600px]">
             <form
               id="inquiryForm"
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log("폼 제출 이벤트 발생");
-              }}
+              onSubmit={handleSubmit(onSubmit)}
               className="w-full p-10 flex flex-col gap-6"
             >
               <div className="flex flex-col">
@@ -289,12 +219,12 @@ export default function InquiryPage() {
                 </label>
                 <input
                   id="organization"
-                  {...register("position")}
+                  {...register("company")}
                   placeholder="소속명을 입력해주세요."
                   className="p-3 border font-pretendard rounded-md w-full"
                 />
-                {errors.position && (
-                  <p className="font-pretendard">{errors.position.message}</p>
+                {errors.company && (
+                  <p className="font-pretendard">{errors.company.message}</p>
                 )}
               </div>
 
@@ -331,14 +261,13 @@ export default function InquiryPage() {
                   </span>
                 </label>
                 <input
-                  id="email"
-                  type="email"
-                  {...register("email")}
+                  id="phone"
+                  {...register("phone")}
                   placeholder="연락처를 입력해주세요."
                   className="p-3 border font-pretendard rounded-md w-full"
                 />
-                {errors.email && (
-                  <p className="font-pretendard">{errors.email.message}</p>
+                {errors.phone && (
+                  <p className="font-pretendard">{errors.phone.message}</p>
                 )}
               </div>
 

@@ -22,7 +22,9 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">회사명:</span>
-                <span className="ml-2 text-gray-300">-</span>
+                <span className="ml-2 text-gray-300">
+                  에이치디 컴퍼니(HD COMPANY)
+                </span>
               </div>
             </div>
 
@@ -30,15 +32,15 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">대표자명:</span>
-                <span className="ml-2 text-gray-300">-</span>
+                <span className="ml-2 text-gray-300">홍도현</span>
               </div>
             </div>
 
             <div className="flex items-start space-x-2">
               <span className="text-gray-500">ㅣ</span>
               <div>
-                <span className="text-gray-400">사업자번호:</span>
-                <span className="ml-2 text-gray-300">-</span>
+                <span className="text-gray-400">사업자등록번호:</span>
+                <span className="ml-2 text-gray-300">557-30-01818</span>
               </div>
             </div>
 
@@ -47,10 +49,10 @@ export default function Footer() {
               <div>
                 <span className="text-gray-400">이메일:</span>
                 <a
-                  href="mailto:ceo@highdynamics.kr"
+                  href="mailto:highndynamics@gmail.com"
                   className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  -
+                  highndynamics@gmail.com
                 </a>
               </div>
             </div>
@@ -59,7 +61,9 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">주소:</span>
-                <span className="ml-2 text-gray-300">-</span>
+                <span className="ml-2 text-gray-300 text-sm">
+                  세종특별자치시 나성북로 21, 701~703호
+                </span>
               </div>
             </div>
 
@@ -80,7 +84,7 @@ export default function Footer() {
               <span className="text-gray-500">ㅣ</span>
               <div>
                 <span className="text-gray-400">개인정보관리책임자:</span>
-                <span className="ml-2 text-gray-300">-</span>
+                <span className="ml-2 text-gray-300">홍도현</span>
               </div>
             </div>
 
@@ -89,10 +93,10 @@ export default function Footer() {
               <div>
                 <span className="text-gray-400">개인정보관리책임자 메일:</span>
                 <a
-                  href="mailto:hsmenok@naver.com"
+                  href="mailto:hsmenoch@gmail.com"
                   className="ml-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  -
+                  hsmenoch@gmail.com
                 </a>
               </div>
             </div>

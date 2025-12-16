@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { SiteNavCloseIcon, SiteNavHamburgerIcon } from "@/icons";
 import { useResponsive } from "../lib/useResponsive";
 import { NAV } from "../constants/nav";
-import { NEXT_PUBLIC_CDN_BASE } from "../lib/env";
 
 export default function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -45,10 +44,12 @@ export default function SiteNav() {
           <div className="container mx-auto">
             <div className="flex flex-row items-center justify-between">
               <Link href="/" className="flex items-center">
-                <img
+                <Image
                   src="/images/HDLogo.png"
                   alt="HD Logo"
-                  className="h-28 w-auto"
+                  width={144}
+                  height={144}
+                  className="w-1/3"
                 />
               </Link>
               <button
@@ -119,10 +120,12 @@ export default function SiteNav() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-24">
             <Link href="/" className="flex items-center">
-              <img
+              <Image
                 src="/images/HDLogo.png"
                 alt="HD Logo"
-                className="h-20 w-auto bg-white aspect-auto"
+                width={80}
+                height={80}
+                className="w-1/6"
               />
             </Link>
             <div className="flex-shrink-0 cursor-pointer transform-none">
