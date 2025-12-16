@@ -283,16 +283,45 @@ export default function WorkPage() {
                               <div className="space-y-3">
                                 {Array.isArray(content) &&
                                   content.map(
-                                    (item: string, itemIdx: number) => (
-                                      <div
-                                        key={itemIdx}
-                                        className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
-                                      >
-                                        <p className="text-base lg:text-lg text-white/80 leading-relaxed">
-                                          {item}
-                                        </p>
-                                      </div>
-                                    )
+                                    (
+                                      item: string | string[],
+                                      itemIdx: number
+                                    ) => {
+                                      if (typeof item === "string") {
+                                        return (
+                                          <div
+                                            key={itemIdx}
+                                            className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
+                                          >
+                                            <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+                                              {item}
+                                            </p>
+                                          </div>
+                                        );
+                                      } else if (typeof item !== "string") {
+                                        return (
+                                          <div
+                                            key={itemIdx}
+                                            className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
+                                          >
+                                            {item.map(
+                                              (
+                                                item: string,
+                                                itemIdx: number
+                                              ) => {
+                                                return (
+                                                  <div key={itemIdx}>
+                                                    <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+                                                      {item}
+                                                    </p>
+                                                  </div>
+                                                );
+                                              }
+                                            )}
+                                          </div>
+                                        );
+                                      }
+                                    }
                                   )}
                               </div>
                             </div>
