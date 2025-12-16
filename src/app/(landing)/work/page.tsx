@@ -125,28 +125,6 @@ export default function WorkPage() {
                         : "border-white border"
                     )}
                   >
-                    {isSelected && (
-                      <div className="absolute top-4 right-4 w-24 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-100 transform-none">
-                        <div className="flex flex-row items-center gap-1.5">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-zap w-3 h-3 text-[#7cb342]"
-                            aria-hidden="true"
-                          >
-                            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-                          </svg>
-                          <span className="text-sm text-white/80">Active</span>
-                        </div>
-                      </div>
-                    )}
                     <div
                       className={clsx(
                         "relative w-24 h-24 mx-auto mb-6 rounded-2xl flex items-center justify-center transform-none",

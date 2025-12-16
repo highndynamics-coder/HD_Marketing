@@ -864,7 +864,7 @@ export default function LandingPage() {
         ))}
 
         <h4 className="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-relaxed mb-16">
-          잘되는 가게보다 중요한건, 사람의 이야기를 이해하는 일이었습니다
+          "잘되는 가게보다 중요한건, 사람의 이야기를 이해하는 일이었습니다"
         </h4>
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-6 md:px-8">
@@ -880,34 +880,51 @@ export default function LandingPage() {
                 사진 준비중 입니다.
               </div>
             </div>
-            <div className="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg border border-gray-200 h-full group hover:shadow-xl transition-all duration-300">
+            <div className="relative bg-black rounded-2xl p-8 md:p-10 shadow-lg border border-gray-200 h-full group hover:shadow-xl transition-all duration-300">
               {/* Title */}
               <div className="flex flex-row items-center justify-center gap-2">
-                <h4 className="text-4xl font-medium text-black">홍도현</h4>
-                <p className="text-2xl text-black/60">
+                <h4 className="text-4xl font-medium text-white">홍도현</h4>
+                <p className="text-2xl text-white/60">
                   종합광고대행사 HD 컴퍼니 대표
                 </p>
               </div>
 
-              <hr className="my-4 border-black/10" />
+              <hr className="my-4 border-white" />
 
               {/* Scrollable Message Content */}
-              <div className="h-[400px] max-w-6xl overflow-hidden scrollbar-hidden pr-4 text-gray-700 leading-relaxed space-y-5">
-                <p className="text-2xl md:text-3xl text-black leading-loose">
-                  HD컴퍼니의 시작은, 성장하는 과정에 있어 서로의 이야기를 듣고,
-                  진심으로 공감하며, 정확한 해결 방안을 찾고, 신속히 적용시키는
-                  것에서부터 출발했습니다.
+              <div className="h-[400px] min-w-[500px] max-w-6xl overflow-hidden scrollbar-hidden pr-4 text-gray-700 leading-relaxed flex flex-col gap-[22px]">
+                <p className="text-lg md:text-xl lg:text-2xl font-normal text-white/80 leading-relaxed">
+                  HD컴퍼니의 시작은
                 </p>
-                <p className="text-2xl md:text-3xl text-black leading-loose">
-                  이어서 소비자의 대한 존중과 가치를 바라며 함께 감에 있어
-                  공존된 성장을 추구하고...
+                <p className="text-lg md:text-xl lg:text-2xl font-normal text-white/80  leading-relaxed">
+                  성장하는 과정에 있어 서로의 이야기를 듣고,
                 </p>
-                <p
-                  className="text-2xl md:text-3xl text-black leading-loose text-center cursor-pointer"
-                  onClick={() => router.push("/company")}
-                >
-                  그 마음의 뒷이야기→
+                <p className="text-lg md:text-xl lg:text-2xl font-normal text-white/80  leading-relaxed">
+                  진심으로 공감하며, 정확한 해결 방안을 찾고,
                 </p>
+                <p className="text-lg md:text-xl lg:text-2xl font-normal text-white/80  leading-relaxed">
+                  그 답을 행동으로 옮기는 것에서부터 출발했습니다.
+                </p>
+
+                <p className="text-lg md:text-xl lg:text-2xl font-normal text-white/80 leading-relaxed flex flex-col gap-4">
+                  <span>이어서 소비자의 대한 존중과 가치를 바라며</span>
+                  <span className="bg-opacity-40 text-white/40">
+                    함께 감에 있어 공존된 성장을 추구하고,
+                  </span>
+                  <span className="bg-opacity-40 text-white/20">
+                    지금 이 순간도 여전히 우리는 성장하고 있습니다.
+                  </span>
+                </p>
+
+                <hr className="border-white absolute bottom-[105px] border-b-2 left-0 right-0" />
+                <div className="flex flex-col items-center justify-center z-20">
+                  <button
+                    className="text-2xl md:text-3xl text-white leading-loose text-center cursor-pointer hover:scale-110 ease-in transition-all duration-300"
+                    onClick={() => router.push("/company")}
+                  >
+                    그 마음의 뒷이야기→
+                  </button>
+                </div>
               </div>
             </div>
           </div>

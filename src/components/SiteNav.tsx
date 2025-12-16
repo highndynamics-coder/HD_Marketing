@@ -125,7 +125,7 @@ export default function SiteNav() {
                 alt="HD Logo"
                 width={80}
                 height={80}
-                className="w-1/6"
+                className="w-1/4"
               />
             </Link>
             <div className="flex-shrink-0 cursor-pointer transform-none">
