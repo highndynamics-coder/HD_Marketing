@@ -40,7 +40,7 @@ export default function SiteNav() {
   if (isMobile || isTablet) {
     return (
       <>
-        <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none h-28">
+        <header className="fixed flex flex-col items-center justify-center top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5 transform-none h-32 p-4">
           <div className="container mx-auto">
             <div className="flex flex-row items-center justify-between">
               <Link href="/" className="flex items-center">
@@ -49,7 +49,7 @@ export default function SiteNav() {
                   alt="HD Logo"
                   width={144}
                   height={144}
-                  className="w-1/3"
+                  className="w-1/2"
                 />
               </Link>
               <button
@@ -72,7 +72,7 @@ export default function SiteNav() {
                 <div
                   role="dialog"
                   aria-modal="true"
-                  className="fixed inset-0 z-50 overflow-y-auto bg-black/90"
+                  className="fixed inset-0 z-[100] overflow-y-auto bg-black/90 min-h-screen"
                 >
                   {/* content */}
                   <div className="relative mx-auto flex min-h-full w-full max-w-[1440px] flex-col px-6 pt-6 md:px-10">

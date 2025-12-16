@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
+import { useResponsive } from "@/lib/useResponsive";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
@@ -26,6 +27,8 @@ export default function ProductPage() {
     "/images/MCNLogo.png",
   ];
 
+  const { isMobile } = useResponsive();
+
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const { data: ProductData, isLoading } = useQuery<ProductInfo[]>({
     queryKey: ["product"],
@@ -44,6 +47,193 @@ export default function ProductPage() {
   console.log("Rendering with ProductData:", ProductData);
 
   console.log("selectedProduct", selectedProduct);
+
+  if (isMobile) {
+    return (
+      <main className="relative w-full min-h-screen overflow-x-hidden py-36">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#001A4D] via-[#001529] to-[#000000]" />
+        <section className="relative z-10 container mx-auto px-6 lg:px-16">
+          <div className="w-full flex flex-col items-center justify-center p-8 lg:p-16 border-r border-white/5">
+            <div className="text-center mb-16 opacity-100 transform-none">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 mb-6 opacity-100 transform-none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-sparkles w-4 h-4 text-[#7cb342]"
+                  aria-hidden="true"
+                >
+                  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
+                  <path d="M20 2v4"></path>
+                  <path d="M22 4h-4"></path>
+                  <circle cx="4" cy="20" r="2"></circle>
+                </svg>
+                <h4 className="text-[#7CB342] text-sm tracking-wider uppercase">
+                  OUR SOLUTION
+                </h4>
+              </div>
+
+              <h1 className="text-3xl text-white mb-6">
+                우리의{" "}
+                <span className="bg-gradient-to-r from-[#7CB342] to-[#1EC800] bg-clip-text text-transparent">
+                  솔루션
+                </span>
+              </h1>
+
+              <p className="text-lg text-white/60 mx-auto">
+                성장을 위한 최선의 마케팅 솔루션으로 당신의 브랜드를 다음 레벨로
+              </p>
+            </div>
+
+            <div className="w-full flex flex-col items-center justify-center gap-10">
+              <div className="flex flex-col gap-6 mx-auto mb-16">
+                {ProductData?.sort((a, b) => a.id - b.id).map(
+                  (product, index) => {
+                    const isSelected = selectedProduct?.title === product.title;
+                    const imageList = [
+                      "/images/NaverLogo.png",
+                      "/images/InstaLogo.png",
+                      "/images/CarrotLogo.png",
+                      "/images/Influencer.png",
+                      "/images/MCNLogo.png",
+                    ];
+
+                    return (
+                      <div
+                        className="flex flex-col w-full opacity-100 transform-none"
+                        key={index}
+                        onClick={() => {
+                          setSelectedProduct({
+                            ...product,
+                            image: imageList[index],
+                          });
+                        }}
+                      >
+                        <div
+                          className={clsx(
+                            "flex flex-col w-full rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)] hover:scale-110",
+                            {
+                              "border-white border-2 shadow-[0_8px_32px_rgba(0,0,0,0.3)]":
+                                isSelected,
+                            },
+                            {
+                              "border-white/20 border": !isSelected,
+                            }
+                          )}
+                        >
+                          <div className="h-full flex flex-row items-center justify-center p-4">
+                            <div className="flex flex-col items-center w-full gap-2">
+                              <div className="w-16 h-16 flex items-center justify-center">
+                                <Image
+                                  src={imageList[index]}
+                                  alt="Product Logo"
+                                  width={100}
+                                  height={100}
+                                  priority
+                                  className="object-cover aspect-square"
+                                />
+                              </div>
+                              <div className="flex flex-col items-center gap-2">
+                                <h3 className="text-lg text-white">
+                                  {product.title}
+                                </h3>
+                                <p className="text-sm text-center text-white/70 leading-relaxed">
+                                  {product.content}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
+              </div>
+              {selectedProduct && (
+                <div className="w-full h-full overflow-y-auto flex flex-col border border-white/20 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/5 to-transparent">
+                  {/* Header Section */}
+                  <div className="flex flex-col items-center gap-4 p-5 border-b border-white/10">
+                    <div className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden shrink-0">
+                      <Image
+                        src={selectedProduct.image}
+                        alt="Product Logo"
+                        width={100}
+                        height={100}
+                        priority
+                        className="object-contain mix-blend-luminosity brightness-[1.5] aspect-square"
+                      />
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <h4 className="text-2xl font-bold text-white">
+                        {selectedProduct.title}
+                      </h4>
+                      <p className="text-lg text-white/60 leading-snug line-clamp-2">
+                        {selectedProduct.content}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="flex-1 p-5 overflow-y-auto">
+                    <div className="flex flex-col gap-3">
+                      {selectedProduct.product?.map(
+                        (product: any, index: number) => (
+                          <div
+                            key={index}
+                            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
+                          >
+                            <div className="flex flex-col items-start gap-6">
+                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#1EC800] flex items-center justify-center shrink-0 mt-0.5">
+                                <span className="text-lg font-bold text-white">
+                                  {index + 1}
+                                </span>
+                              </div>
+                              <div className="flex flex-col gap-1.5 mt-2">
+                                <h5 className="text-xl font-semibold text-white mb-4">
+                                  {product.title}
+                                </h5>
+                                {Array.isArray(product.content) ? (
+                                  <ul className="space-y-4">
+                                    {product.content.map(
+                                      (item: string, i: number) => (
+                                        <li
+                                          key={i}
+                                          className="text-sm text-white/60 leading-relaxed flex items-center gap-2"
+                                        >
+                                          <span className="text-[#7CB342]">
+                                            •
+                                          </span>
+                                          <span>{item}</span>
+                                        </li>
+                                      )
+                                    )}
+                                  </ul>
+                                ) : (
+                                  <p className="text-sm text-white/60 leading-relaxed">
+                                    {product.content}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden py-20 lg:py-32">
