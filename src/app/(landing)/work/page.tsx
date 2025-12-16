@@ -12,12 +12,12 @@ import { SquareChevronDown, SquareChevronUp } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
-    const imageList = [
-                "/images/SelfWork.png",
-                "/images/OnlineCommerce.png",
-                "/images/Influencer.png",
-    ];
-  
+  const imageList = [
+    "/images/SelfWork.png",
+    "/images/OnlineCommerce.png",
+    "/images/Influencer.png",
+  ];
+
   const [selectedWork, setSelectedWork] = useState<any | null>(null);
   const { data: WorkData, isLoading } = useQuery<any[]>({
     queryKey: ["work"],
@@ -30,7 +30,7 @@ export default function WorkPage() {
       return data;
     },
   });
-  
+
   const [expandedProcessIndex, setExpandedProcessIndex] = useState<
     number | null
   >(null);
@@ -94,70 +94,21 @@ export default function WorkPage() {
               const workIndex = index;
               const isSelected = selectedWork?.title === work.title;
 
-              const svgList = [
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-store w-8 h-8 text-white"
-                  aria-hidden="true"
-                >
-                  <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"></path>
-                  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"></path>
-                  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"></path>
-                </svg>,
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-shopping-cart w-8 h-8 text-white"
-                  aria-hidden="true"
-                >
-                  <circle cx="8" cy="21" r="1"></circle>
-                  <circle cx="19" cy="21" r="1"></circle>
-                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                </svg>,
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-briefcase w-8 h-8 text-white"
-                  aria-hidden="true"
-                >
-                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                  <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                </svg>,
-              ];
+              const colorList = ["[#FF6F0F]", "[#7CB342]", "[#0066CC]"];
 
-                const colorList = [
-                    "from-[#FF6F0F] via-[#FF8C3A] to-[#FFA05C]",
-                    "from-[#7CB342] via-[#9DD158] to-[#B8E986]",
-                    "from-[#001A4D] via-[#003D7A] to-[#0066CC]"
-                ];
+              const borderColorList = [
+                "border-[#FF6F0F]",
+                "border-[#7CB342]",
+                "border-[#0066CC]",
+              ];
 
               const imageList = [
                 "/images/SelfWork.png",
                 "/images/OnlineCommerce.png",
-                "/images/Influencer.png",
+                "/images/Professional.png",
               ];
+
+              console.log("colorList", colorList[workIndex]);
 
               return (
                 <div
@@ -166,7 +117,14 @@ export default function WorkPage() {
                     setSelectedWork({ ...work, image: imageList[workIndex] });
                   }}
                 >
-                  <button className={clsx("relative w-full h-full p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 oveflow-hidden bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20", isSelected && `bg-gradient-to-br ${colorList[workIndex]} border border-white/20  hover:border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]`)}>
+                  <button
+                    className={clsx(
+                      "relative w-full h-full p-8 rounded-3xl backdrop-blur-xl transition-all overflow-hidden hover:scale-110",
+                      isSelected
+                        ? `border-${colorList[workIndex]} border-2 shadow-[0_8px_32px_rgba(0,0,0,0.3)]`
+                        : "border-white border"
+                    )}
+                  >
                     {isSelected && (
                       <div className="absolute top-4 right-4 w-24 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-100 transform-none">
                         <div className="flex flex-row items-center gap-1.5">
@@ -189,8 +147,23 @@ export default function WorkPage() {
                         </div>
                       </div>
                     )}
-                    <div className="relative w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-white/10 group-hover:bg-white/15 transform-none">
-                      {svgList[workIndex]}
+                    <div
+                      className={clsx(
+                        "relative w-24 h-24 mx-auto mb-6 rounded-2xl flex items-center justify-center transform-none",
+                        {
+                          "w-32 h-32": workIndex === 0 || workIndex === 2,
+                          "w-24 h-24": workIndex === 1,
+                        }
+                      )}
+                    >
+                      <Image
+                        src={imageList[workIndex]}
+                        alt="Work Image"
+                        width={700}
+                        height={700}
+                        priority
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                      />
                     </div>
                     <div className="relative">
                       <h2 className="text-xl lg:text-2xl mb-2 transition-colors duration-300 text-white/80 group-hover:text-white">
@@ -199,16 +172,6 @@ export default function WorkPage() {
                       <p className="text-sm text-white/50 mb-4">
                         {work.sub_title}
                       </p>
-                      {isSelected && (
-                        <div className="flex flex-row gap-3 items-center justify-center">
-                          {work.metrics.map((metric: any, idx: number) => (
-                            <div key={idx} className="bg-white/10 backdrop-blur-md flex flex-col items-center gap-2 opacity-100 transform-none p-2">
-                              <span className="text-lg text-white">{metric.number}</span>
-                              <span className="text-sm text-white/80">{metric.name}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </button>
                 </div>
@@ -216,21 +179,19 @@ export default function WorkPage() {
             })}
           </div>
           {selectedWork && (
-            <div className="max-w-6xl mx-auto opacity-100 transform-none">
-              <div className="relative rounded-3xl overflow-hidden mb-12 group opacity-100 transform-none">
+            <div className="max-w-6xl mx-auto opacity-100 transform-none -mt-20 mb-24">
+              <div className="relative rounded-3xl group opacity-100 transform-none">
                 <div className="aspect-[21/9] relative">
                   <Image
                     src={selectedWork?.image}
                     alt="Work Image"
-                    width={800}
-                    height={800}
+                    width={700}
+                    height={700}
                     priority
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                  <div className="absolute inset-0 bg-graident-to-r from-transparent via-white/20 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
-                    <div className="flex items-start gap-6 opacity-100 transform-none mt-36">
+                  <div className="absolute inset-0 top-2/3 transform-y-1/2 items-center justify-center p-8 lg:p-12 text-center">
+                    <div className="flex gap-6 opacity-100 transform-none text-center">
                       <div className="w-20 h-20 rounded-2xl bg-graident-to-br from-[#7CB342] to-[#6A9C37] flex items-center justify-center group-hover:scale-110 transition-transform"></div>
                     </div>
                     <div className="flex-1">
@@ -240,14 +201,6 @@ export default function WorkPage() {
                       <p className="text-xl lg:text-2xl text-white/80 mb-6">
                         {selectedWork?.description}
                       </p>
-                      <div className="flex flex-wrap gap-3">
-                        {selectedWork?.metrics.map((metric: any, idx: number) => (
-                          <div key={idx} className="px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-2 opacity-100 transform-none">
-                            <span className="text-lg text-white">{metric.number}</span>
-                            <span className="text-sm text-white/80">{metric.name}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -330,16 +283,45 @@ export default function WorkPage() {
                               <div className="space-y-3">
                                 {Array.isArray(content) &&
                                   content.map(
-                                    (item: string, itemIdx: number) => (
-                                      <div
-                                        key={itemIdx}
-                                        className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
-                                      >
-                                        <p className="text-base lg:text-lg text-white/80 leading-relaxed">
-                                          {item}
-                                        </p>
-                                      </div>
-                                    )
+                                    (
+                                      item: string | string[],
+                                      itemIdx: number
+                                    ) => {
+                                      if (typeof item === "string") {
+                                        return (
+                                          <div
+                                            key={itemIdx}
+                                            className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
+                                          >
+                                            <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+                                              {item}
+                                            </p>
+                                          </div>
+                                        );
+                                      } else if (typeof item !== "string") {
+                                        return (
+                                          <div
+                                            key={itemIdx}
+                                            className="relative pl-6 before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gradient-to-r before:from-[#7CB342] before:to-[#6A9C37]"
+                                          >
+                                            {item.map(
+                                              (
+                                                item: string,
+                                                itemIdx: number
+                                              ) => {
+                                                return (
+                                                  <div key={itemIdx}>
+                                                    <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+                                                      {item}
+                                                    </p>
+                                                  </div>
+                                                );
+                                              }
+                                            )}
+                                          </div>
+                                        );
+                                      }
+                                    }
                                   )}
                               </div>
                             </div>

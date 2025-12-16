@@ -142,7 +142,7 @@ export default function ProductPage() {
               <div className="w-full max-w-[800px] h-[650px] overflow-y-auto flex flex-col border border-white/20 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/5 to-transparent">
                 {/* Header Section */}
                 <div className="flex items-center gap-4 p-5 border-b border-white/10">
-                  <div className="w-28 h-28 rounded-2xl bg-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                  <div className="w-28 h-28 rounded-2xl flex items-center justify-center overflow-hidden shrink-0">
                     <Image
                       src={selectedProduct.image}
                       alt="Product Logo"

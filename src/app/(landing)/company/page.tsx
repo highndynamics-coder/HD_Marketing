@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image"
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -178,13 +178,21 @@ export default function CompanyPage() {
               <span>힘들 때 한번이라도 이겨낼 수 있는 힘을 부여하고,</span>
               <span>그럼에도 웃을 수 있는 행복을 제공하는 것이며,</span>
               <span>그동안 여러분의 힘들고 우울했던 날들은</span>
-              <span className="font-bold text-white/80 mt-12">
+              <span className="font-bold text-white/80">
                 HD컴퍼니가 구매합니다.
               </span>
             </p>
-            <div className="mt-6">
-              <Image src="/images/Sign.png" alt="Sign" width={300} height={300} priority className="opacity-50" />
-            </div>
+            {/*TODO: Search How to Image set */}
+            {/* <div className="mt-6">
+              <Image
+                src="/images/Sign.png"
+                alt="Sign"
+                width={300}
+                height={300}
+                priority
+                className="block mx-auto my-auto cursor-zoom-in transition-all duration-300 brightness-0 invert bg-black"
+              />
+            </div> */}
           </div>
         </div>
       </section>
