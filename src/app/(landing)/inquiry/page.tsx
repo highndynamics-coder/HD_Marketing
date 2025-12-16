@@ -291,65 +291,59 @@ export default function InquiryPage() {
                   <p className="font-pretendard">{errors.content.message}</p>
                 )}
               </div>
+              <div className="border rounded-md p-4 w-full mt-8 hidden">
+                <div className="flex justify-between">
+                  <div className="flex items-center space-x-4">
+                    <span className="font-pretendard font-bold">
+                      개인정보 수집 / 이용에 동의합니다.
+                    </span>
+                  </div>
+                  <button
+                    onClick={toggleAccordionState}
+                    className="text-blue-600 font-pretendard text-sm focus:outline-none"
+                  >
+                    {isAccordionOpened ? "▲" : "▼"}
+                  </button>
+                </div>
+                {isAccordionOpened && (
+                  <div className="mt-4 bg-gray-100 p-4 rounded-md">
+                    <p className="text-xs font-pretendard mb-2">
+                      <span className="font-bold">수집항목: </span>
+                      <span>(필수) 성명, 소속, 연락처, 이메일</span>
+                    </p>
+                    <p className="text-xs font-pretendard mb-2">
+                      <span className="font-bold">이용목적: </span>
+                      <span>
+                        제휴 관련 문의 응대, 기타서비스 문의 응대, 사후관리
+                      </span>
+                    </p>
+                    <p className="text-xs font-pretendard mb-2">
+                      <span className="font-bold">보유기간: </span>
+                      <span>
+                        10년 (기간 내 목적 달성하거나, 별도 요청 시 즉시 파기)
+                      </span>
+                    </p>
+                    <p className="text-xs font-pretendard">
+                      <span className="font-bold">거부할 권리: </span>
+                      <span>
+                        개인정보 수집 및 이용을 거부하실 수 있으며, 거부 시에는
+                        접수가 어렵습니다.
+                      </span>
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-row items-center justify-center gap-10 mt-16">
+                <button
+                  type="submit"
+                  form="inquiryForm"
+                  className="bg-[#7CB342] w-36 h-14 rounded-full text-white font-pretendard font-bold focus:ring-2"
+                >
+                  문의접수
+                </button>
+              </div>
             </form>
           </div>
-        </div>
-
-        <div className="border rounded-md p-4 w-[900px]">
-          <div className="flex justify-between">
-            <div className="flex items-center space-x-4">
-              <span className="font-pretendard font-bold">
-                개인정보 수집 / 이용에 동의합니다.
-              </span>
-            </div>
-            <button
-              onClick={toggleAccordionState}
-              className="text-blue-600 font-pretendard text-sm focus:outline-none"
-            >
-              {isAccordionOpened ? "▲" : "▼"}
-            </button>
-          </div>
-          {isAccordionOpened && (
-            <div className="mt-4 bg-gray-100 p-4 rounded-md">
-              <p className="text-xs font-pretendard mb-2">
-                <span className="font-bold">수집항목: </span>
-                <span>(필수) 성명, 소속, 연락처, 이메일</span>
-              </p>
-              <p className="text-xs font-pretendard mb-2">
-                <span className="font-bold">이용목적: </span>
-                <span>제휴 관련 문의 응대, 기타서비스 문의 응대, 사후관리</span>
-              </p>
-              <p className="text-xs font-pretendard mb-2">
-                <span className="font-bold">보유기간: </span>
-                <span>
-                  10년 (기간 내 목적 달성하거나, 별도 요청 시 즉시 파기)
-                </span>
-              </p>
-              <p className="text-xs font-pretendard">
-                <span className="font-bold">거부할 권리: </span>
-                <span>
-                  개인정보 수집 및 이용을 거부하실 수 있으며, 거부 시에는 접수가
-                  어렵습니다.
-                </span>
-              </p>
-            </div>
-          )}
-        </div>
-        <div className="flex flex-row gap-10 mt-16">
-          <button
-            type="submit"
-            className="bg-[#AAAAAA] w-36 h-14 rounded-full text-white font-pretendard font-bold"
-            onClick={() => reset()}
-          >
-            취소하기
-          </button>
-          <button
-            type="submit"
-            form="inquiryForm"
-            className="bg-[#7CB342] w-36 h-14 rounded-full text-white font-pretendard font-bold focus:ring-2"
-          >
-            문의접수
-          </button>
         </div>
       </div>
     </div>

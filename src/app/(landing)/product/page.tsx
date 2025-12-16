@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import clsx from "clsx";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
@@ -90,11 +91,12 @@ export default function ProductPage() {
             <div className="flex flex-col gap-6 mx-auto mb-16">
               {ProductData?.sort((a, b) => a.id - b.id).map(
                 (product, index) => {
+                  const isSelected = selectedProduct?.title === product.title;
                   const imageList = [
                     "/images/NaverLogo.png",
                     "/images/InstaLogo.png",
-                    "/images/Influencer.png",
                     "/images/CarrotLogo.png",
+                    "/images/Influencer.png",
                     "/images/MCNLogo.png",
                   ];
 
@@ -109,7 +111,18 @@ export default function ProductPage() {
                         });
                       }}
                     >
-                      <div className="flex flex-col w-[450px] h-28 rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20  hover:border-white/40 transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)]">
+                      <div
+                        className={clsx(
+                          "flex flex-col w-[450px] h-28 rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl transition-all duration-500 group-hover:shadow-[0_0_80px_rgba(124,179,66,0.3)] hover:scale-110",
+                          {
+                            "border-white border-2 shadow-[0_8px_32px_rgba(0,0,0,0.3)]":
+                              isSelected,
+                          },
+                          {
+                            "border-white/20 border": !isSelected,
+                          }
+                        )}
+                      >
                         <div className="h-full flex flex-col items-center justify-center">
                           <div className="flex flex-row items-center w-full p-4 gap-4">
                             <div>
