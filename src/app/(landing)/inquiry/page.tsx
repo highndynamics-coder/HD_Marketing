@@ -24,7 +24,7 @@ const inquiryServiceFormSchema = z.object({
 type InquiryServiceFormValues = z.infer<typeof inquiryServiceFormSchema>;
 
 export default function InquiryPage() {
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const [isAccordionOpened, setIsAccordionOpened] = useState(false);
 
   const defaultValues = {
@@ -62,7 +62,7 @@ export default function InquiryPage() {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-white mx-auto">
         <div className="container mx-auto px-6 lg:px-12 flex-1 flex flex-col items-center justify-center my-36">
@@ -103,10 +103,10 @@ export default function InquiryPage() {
                   <div>
                     <div className="text-[#1A3A5C] mb-1">이메일</div>
                     <a
-                      href="mailto:contact@highdynamics.kr"
+                      href={`mailto:${CONTACT_EMAIL}`}
                       className="text-gray-600 hover:text-[#7CB342]"
                     >
-                      contact@highdynamics.kr
+                      {CONTACT_EMAIL}
                     </a>
                   </div>
                 </div>
@@ -152,10 +152,11 @@ export default function InquiryPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-phone text-[#7cb342]"
+                      className="lucide lucide-map-pin text-[#7cb342]"
                       aria-hidden="true"
                     >
-                      <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
+                      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                   </div>
                   <div>
@@ -171,15 +172,15 @@ export default function InquiryPage() {
                 <h4 className="text-xl mb-4">운영 시간</h4>
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-row items-center justify-between gap-6">
                     <h4>평일</h4>
-                    <h4>09:00 - 18:00</h4>
+                    <h4>09:00 - 21:00</h4>
                   </div>
-                  <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-row items-center justify-between gap-6">
                     <h4>점심시간</h4>
                     <h4>12:00 - 13:00</h4>
                   </div>
-                  <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-row items-center justify-between gap-6">
                     <h4>주말 및 공휴일</h4>
                     <h4>휴무</h4>
                   </div>
@@ -191,7 +192,7 @@ export default function InquiryPage() {
               <form
                 id="inquiryForm"
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-full p-10 flex flex-col gap-6"
+                className="w-full p-4 flex flex-col gap-6"
               >
                 <div className="flex flex-col">
                   <label
@@ -339,7 +340,7 @@ export default function InquiryPage() {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-row items-center justify-center gap-10 mt-16">
+                <div className="flex flex-row items-center justify-center gap-10 mt-8">
                   <button
                     type="submit"
                     form="inquiryForm"
@@ -396,10 +397,10 @@ export default function InquiryPage() {
                 <div>
                   <div className="text-[#1A3A5C] mb-1">이메일</div>
                   <a
-                    href="mailto:contact@highdynamics.kr"
+                    href={`mailto:${CONTACT_EMAIL}`}
                     className="text-gray-600 hover:text-[#7CB342]"
                   >
-                    contact@highdynamics.kr
+                    {CONTACT_EMAIL}
                   </a>
                 </div>
               </div>
@@ -442,10 +443,11 @@ export default function InquiryPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-phone text-[#7cb342]"
+                    className="lucide lucide-map-pin text-[#7cb342]"
                     aria-hidden="true"
                   >
-                    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
                   </svg>
                 </div>
                 <div>
@@ -463,7 +465,7 @@ export default function InquiryPage() {
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row items-center justify-between">
                   <h4>평일</h4>
-                  <h4>09:00 - 18:00</h4>
+                  <h4>09:00 - 21:00</h4>
                 </div>
                 <div className="flex flex-row items-center justify-between">
                   <h4>점심시간</h4>

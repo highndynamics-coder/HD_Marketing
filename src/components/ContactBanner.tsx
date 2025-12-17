@@ -31,8 +31,8 @@ export const ContactBanner = () => {
 
   if (isMobile) {
     return (
-      <div className="fixed bottom-0 left-0 right-0 z-[90] bg-blue-600 px-6 py-4 shadow-lg w-full">
-        <div className="mx-auto flex flex-col w-full items-center gap-6">
+      <div className="fixed bottom-0 left-0 right-0 z-[90] bg-blue-600 px-6 py-4 shadow-lg w-full h-24">
+        <div className="mx-auto flex flex-col w-full items-center gap-2">
           {/* Left: Icon and Text */}
           <div className="flex row items-center gap-3 text-white">
             <FileTextIcon className="h-6 w-6 flex-shrink-0" />
@@ -42,30 +42,29 @@ export const ContactBanner = () => {
           </div>
 
           {/* Middle: Input Fields */}
-          <div className="flex flex-col flex-1 items-center gap-4">
+          <div className="flex flex-row items-center gap-2">
             <input
               type="text"
-              placeholder="성함을 입력하세요."
+              placeholder="성함"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="flex-1 rounded-md border border-blue-500 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="flex-1 rounded-md border border-blue-500 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 w-20"
             />
             <input
               type="tel"
-              placeholder="연락처를 입력하세요."
+              placeholder="연락처"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
-              className="flex-1 rounded-md border border-blue-500 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="flex-1 rounded-md border border-blue-500 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 w-20"
             />
+            {/* Right: Submit Button */}
+            <button
+              onClick={handleSubmit}
+              className="rounded-md bg-blue-700 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              신청하기
+            </button>
           </div>
-
-          {/* Right: Submit Button */}
-          <button
-            onClick={handleSubmit}
-            className="rounded-md bg-blue-700 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          >
-            신청하기
-          </button>
         </div>
       </div>
     );

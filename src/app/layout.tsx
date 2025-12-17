@@ -33,32 +33,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isMobile, isTablet } = useResponsive();
   const pathname = usePathname();
   const isMainPage = pathname === "/";
-
-  if (isMobile || isTablet) {
-    return (
-      <html lang="ko" className="light" suppressHydrationWarning>
-        <head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1"
-          />
-          <meta name="format-detection" content="telephone=no" />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="default"
-          />
-        </head>
-        <body>
-          <MaintenancePage />
-        </body>
-      </html>
-    );
-  }
 
   return (
     <html lang="ko" className="light" suppressHydrationWarning>

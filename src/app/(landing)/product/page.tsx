@@ -27,7 +27,7 @@ export default function ProductPage() {
     "/images/MCNLogo.png",
   ];
 
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
 
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const { data: ProductData, isLoading } = useQuery<ProductInfo[]>({
@@ -48,7 +48,7 @@ export default function ProductPage() {
 
   console.log("selectedProduct", selectedProduct);
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <main className="relative w-full min-h-screen overflow-x-hidden py-36">
         <div className="absolute inset-0 bg-gradient-to-br from-[#001A4D] via-[#001529] to-[#000000]" />
@@ -91,7 +91,7 @@ export default function ProductPage() {
               </p>
             </div>
 
-            <div className="w-full flex flex-col items-center justify-center gap-10">
+            <div className="w-full flex flex-col items-center justify-center gap-10 min-h-screen">
               <div className="flex flex-col gap-6 mx-auto mb-16">
                 {ProductData?.sort((a, b) => a.id - b.id).map(
                   (product, index) => {
@@ -109,10 +109,14 @@ export default function ProductPage() {
                         className="flex flex-col w-full opacity-100 transform-none"
                         key={index}
                         onClick={() => {
-                          setSelectedProduct({
-                            ...product,
-                            image: imageList[index],
-                          });
+                          if (isSelected) {
+                            setSelectedProduct(null);
+                          } else {
+                            setSelectedProduct({
+                              ...product,
+                              image: imageList[index],
+                            });
+                          }
                         }}
                       >
                         <div
@@ -150,84 +154,92 @@ export default function ProductPage() {
                             </div>
                           </div>
                         </div>
+                        {isSelected && (
+                          <div className="w-full mt-4 overflow-hidden flex flex-col border border-white/20 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/5 to-transparent transition-all duration-300">
+                            {/* Header Section */}
+                            <div className="flex flex-col items-center gap-4 p-5 border-b border-white/10">
+                              <div className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden shrink-0">
+                                <Image
+                                  src={selectedProduct.image}
+                                  alt="Product Logo"
+                                  width={100}
+                                  height={100}
+                                  priority
+                                  className="object-contain mix-blend-luminosity brightness-[1.5] aspect-square"
+                                />
+                              </div>
+                              <div className="flex flex-col items-center gap-1">
+                                <h4 className="text-xl font-bold text-white">
+                                  {selectedProduct.title}
+                                </h4>
+                                <p className="text-base text-white/60 leading-snug line-clamp-2 text-center">
+                                  {selectedProduct.content}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Content Section */}
+                            <div className="flex-1 p-5">
+                              <div className="flex flex-col gap-3">
+                                {selectedProduct.product?.map(
+                                  (productItem: any, idx: number) => (
+                                    <div
+                                      key={idx}
+                                      className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
+                                    >
+                                      <div className="flex flex-col items-start gap-6">
+                                        <div className="flex flex-row items-center gap-6">
+                                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#1EC800] flex items-center justify-center shrink-0">
+                                            <span className="text-md font-semibold text-white">
+                                              {idx + 1}
+                                            </span>
+                                          </div>
+                                          <div>
+                                            <h5 className="text-base font-semibold text-white">
+                                              {productItem.title}
+                                            </h5>
+                                          </div>
+                                        </div>
+                                        {productItem.content && (
+                                          <div className="flex flex-col gap-1.5 mt-2">
+                                            {Array.isArray(
+                                              productItem.content
+                                            ) ? (
+                                              <ul className="space-y-4">
+                                                {productItem.content.map(
+                                                  (item: string, i: number) => (
+                                                    <li
+                                                      key={i}
+                                                      className="text-sm text-white/60 leading-relaxed flex gap-2"
+                                                    >
+                                                      <span className="text-[#7CB342]">
+                                                        •
+                                                      </span>
+                                                      <span>{item}</span>
+                                                    </li>
+                                                  )
+                                                )}
+                                              </ul>
+                                            ) : (
+                                              <p className="text-sm text-white/60 leading-relaxed">
+                                                {productItem.content}
+                                              </p>
+                                            )}
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     );
                   }
                 )}
               </div>
-              {selectedProduct && (
-                <div className="w-full h-full overflow-y-auto flex flex-col border border-white/20 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/5 to-transparent">
-                  {/* Header Section */}
-                  <div className="flex flex-col items-center gap-4 p-5 border-b border-white/10">
-                    <div className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden shrink-0">
-                      <Image
-                        src={selectedProduct.image}
-                        alt="Product Logo"
-                        width={100}
-                        height={100}
-                        priority
-                        className="object-contain mix-blend-luminosity brightness-[1.5] aspect-square"
-                      />
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <h4 className="text-2xl font-bold text-white">
-                        {selectedProduct.title}
-                      </h4>
-                      <p className="text-lg text-white/60 leading-snug line-clamp-2">
-                        {selectedProduct.content}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="flex-1 p-5 overflow-y-auto">
-                    <div className="flex flex-col gap-3">
-                      {selectedProduct.product?.map(
-                        (product: any, index: number) => (
-                          <div
-                            key={index}
-                            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
-                          >
-                            <div className="flex flex-col items-start gap-6">
-                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#1EC800] flex items-center justify-center shrink-0 mt-0.5">
-                                <span className="text-lg font-bold text-white">
-                                  {index + 1}
-                                </span>
-                              </div>
-                              <div className="flex flex-col gap-1.5 mt-2">
-                                <h5 className="text-xl font-semibold text-white mb-4">
-                                  {product.title}
-                                </h5>
-                                {Array.isArray(product.content) ? (
-                                  <ul className="space-y-4">
-                                    {product.content.map(
-                                      (item: string, i: number) => (
-                                        <li
-                                          key={i}
-                                          className="text-sm text-white/60 leading-relaxed flex items-center gap-2"
-                                        >
-                                          <span className="text-[#7CB342]">
-                                            •
-                                          </span>
-                                          <span>{item}</span>
-                                        </li>
-                                      )
-                                    )}
-                                  </ul>
-                                ) : (
-                                  <p className="text-sm text-white/60 leading-relaxed">
-                                    {product.content}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </section>
