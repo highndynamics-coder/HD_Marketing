@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const router = useRouter();
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const firstSectionRef = useRef<HTMLDivElement>(null);
   const firstSectionTitleRefs = useRef<HTMLHeadingElement[]>([]);
   const firstSectionCurveRef = useRef<SVGPathElement>(null);
@@ -518,7 +518,7 @@ export default function LandingPage() {
     );
   });
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <main className="relative w-full overflow-x-hidden bg-graident-to-b from-black/70 via-black/60 to-black">
         <section
@@ -570,10 +570,10 @@ export default function LandingPage() {
                 ref={secondSectionTextGroupRef}
                 className="opacity-100 mb-24 flex flex-col gap-4"
               >
-                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                <p className="text-md font-medium text-white/80 leading-relaxed mb-8">
                   과거부터 현재까지
                 </p>
-                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                <p className="text-md font-medium text-white/80 leading-relaxed mb-8">
                   수 많은 자영업자와 소상공인들이{" "}
                   <span className="relative inline-block text-[#7CB342] z-10">
                     {/* glow layer */}
@@ -584,7 +584,7 @@ export default function LandingPage() {
                     생겨났지만
                   </span>
                 </p>
-                <p className="text-2xl font-medium text-white/80 leading-relaxed mb-8">
+                <p className="text-md font-medium text-white/80 leading-relaxed mb-8">
                   반대로 그만큼 많이{" "}
                   <span className="realtive z-10 text-red-400/80 underline">
                     망했습니다.
@@ -605,7 +605,7 @@ export default function LandingPage() {
               >
                 {isReason.map((reason, index) => (
                   <div
-                    className="relative bg-white rounded-3xl px-6 py-4 shadow-lg border border-gray-200 h-24 mb-8 flex flex-col items-center justify-center"
+                    className="relative bg-white rounded-3xl px-6 py-2 shadow-lg border border-gray-200 h-12 mb-8 flex flex-col items-center justify-center"
                     key={index}
                   >
                     <h4 className="text-md font-semibold text-gray-700 text-center">
@@ -622,7 +622,7 @@ export default function LandingPage() {
         {/* Section 3: Q&A - Chat Style */}
         <section
           ref={thirdSectionRef}
-          className="flex flex-col space-y-16 opacity-100 container mx-auto p-6"
+          className="flex flex-col space-y-32 opacity-100 container mx-auto p-6"
         >
           {/* Question - 사장님들 (Left) */}
           <div
@@ -632,12 +632,18 @@ export default function LandingPage() {
             <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-lg">
               <span className="text-xl">👨‍👩‍👦</span>
             </div>
-            <div className="flex-1 w-52">
+            <div className="w-52 h-6">
               <div className="bg-white rounded-3xl rounded-tl-none px-6 py-4 shadow-md border border-gray-200">
-                <p className="text-lg font-normal text-gray-800 leading-relaxed">
-                  대표님! 저희 가게는 왜 사람이 안 올까요?
+                <p className="text-base font-normal text-gray-800 leading-relaxed">
+                  대표님!
                 </p>
-                <div className="absolute -bottom-1.5 left-20 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                <p className="text-base font-normal text-gray-800 leading-relaxed">
+                  저희 가게는
+                </p>
+                <p className="text-base font-normal text-gray-800 leading-relaxed">
+                  왜 사람이 안올까요?
+                </p>
+                <div className="absolute top-[260%] left-20 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
               </div>
             </div>
           </div>
@@ -645,20 +651,17 @@ export default function LandingPage() {
           {/* Final Answer - HD (Right) */}
           <div>
             <div className="flex items-start gap-4 justify-end">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
-                <span className="text-xl">👨‍💼</span>
-              </div>
-              <div className="flex-1 flex max-w-4xl flex-col items-start justify-start gap-4">
+              <div className="flex-1 flex max-w-4xl flex-col items-end justify-end gap-4">
                 <div
                   ref={(el) => {
                     if (el) thirdSectionAnswerRefs.current[0] = el;
                   }}
                   className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
                 >
-                  <h2 className="text-lg font-normal text-gray-800">
+                  <h2 className="text-xl font-normal text-gray-800">
                     잘 모르겠습니다..
                   </h2>
-                  <div className="absolute -bottom-2 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                  <div className="absolute -bottom-2 right-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
                 </div>
                 <div
                   ref={(el) => {
@@ -666,29 +669,43 @@ export default function LandingPage() {
                   }}
                   className="bg-white rounded-xl max-w-sm px-4 py-3 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4 items-center justify-center"
                 >
-                  <h2 className="text-lg font-normal text-gray-800">
+                  <h2 className="text-xl font-normal text-gray-800">
                     정말 몰라서 못 옵니다.
                   </h2>
-                  <div className="absolute -bottom-2 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                  <div className="absolute -bottom-2 right-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
                 </div>
                 <div
                   ref={(el) => {
                     if (el) thirdSectionAnswerRefs.current[2] = el;
                   }}
-                  className="bg-white rounded-3xl p-4 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col gap-4"
+                  className="bg-white rounded-3xl p-8 border border-[#7CB342]/20 opacity-100 transform-none flex flex-col"
                 >
-                  <p className="text-lg font-normal text-gray-800 leading-relaxed text-left">
-                    {"현시점 모든 가게와 스토어의 제품은\n상향 평준화 됐지만 그만큼 종사자가 너무 많아졌고\n인터넷의 발달로 잘 되는 업체들이 더 잘될 수 밖에 없습니다."
-                      .split("\n")
-                      .map((line, index, array) => (
-                        <Fragment key={index}>
-                          {line}
-                          {index < array.length - 1 && <br />}
-                        </Fragment>
-                      ))}
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    현시점
                   </p>
-                  <div className="absolute -bottom-1.5 left-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    모든 가게와 스토어의 제품은
+                  </p>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    상향 평준화 됐지만 그만큼
+                  </p>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    종사자가 너무 너무 많아졌고
+                  </p>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    인터넷의 발달로
+                  </p>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    잘 되는 업체들이
+                  </p>
+                  <p className="text-base font-normal text-gray-800 leading-relaxed text-left">
+                    더 잘될 수 밖에 없습니다.
+                  </p>
+                  <div className="absolute -bottom-1.5 right-4 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
                 </div>
+              </div>
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-lg">
+                <span className="text-xl">👨‍💼</span>
               </div>
             </div>
           </div>
@@ -709,16 +726,16 @@ export default function LandingPage() {
                   ref={(el) => {
                     if (el) thirdSectionScrollItemRefs.current[index] = el;
                   }}
-                  className="rounded-2xl p-7"
+                  className="rounded-2xl"
                 >
-                  <p className="text-xl text-white font-semibold">{text}</p>
+                  <p className="text-base text-white font-semibold">{text}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="opacity-100 transform-none mt-8 flex flex-col items-center justify-center">
-            <h2 className="text-4xl mb-6">
+          <div className="opacity-100 transform-none flex flex-col items-center justify-center">
+            <h2 className="text-4xl">
               <span className="text-white">마케팅은</span>
               <span className="text-[#7CB342] ml-2 mr-2">필수</span>
               <span className="text-white">입니다.</span>
@@ -731,16 +748,16 @@ export default function LandingPage() {
           {/* Content */}
           <div className="relative z-10 w-full max-w-6xl px-8 space-y-16">
             {/* Final provocative question */}
-            <div className="text-center py-16">
+            <div className="text-center">
               <div className="rounded-3xl px-12 md:px-16 py-12 md:py-16">
                 <div className="flex flex-col gap-4">
-                  <h1 className="text-2xl font-normal text-white leading-loose">
+                  <h1 className="text-xl font-normal text-white leading-loose">
                     정말 사장님 가게가
                   </h1>
-                  <h1 className="text-2xl font-normal text-white leading-loose">
+                  <h1 className="text-xl font-normal text-white leading-loose">
                     맛이 없어서
                   </h1>
-                  <h1 className="text-2xl font-normal text-white leading-loose">
+                  <h1 className="text-xl font-normal text-white leading-loose">
                     손님이 없는 걸까요?
                   </h1>
                 </div>
@@ -820,7 +837,10 @@ export default function LandingPage() {
               <div className="flex animate-stories-scroll hover:pause-animation">
                 {/* Original stories */}
                 {[...stories, ...stories].map((story, index) => (
-                  <div key={index} className="flex-shrink-0 w-[200px] mx-4">
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-[200px] min-h-[300px] mx-4"
+                  >
                     <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
                       <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
                       <div className="flex flex-col">
@@ -1357,32 +1377,34 @@ export default function LandingPage() {
 
           {/* Infinite Carousel */}
           <div
-            className="w-full overflow-hidden mb-24"
+            className="w-full overflow-y-hidden overflow-x-auto mb-24"
             ref={fifthSectionCardsRef}
           >
-            <div className="flex animate-stories-scroll hover:pause-animation">
+            <div className="flex min-w-full cursor-grab active:cursor-grabbing overflow-x-auto">
               {/* Original stories */}
-              {[...stories, ...stories].map((story, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-[350px] md:w-[400px] mx-4"
-                >
-                  <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
-                    <div className="flex flex-col">
-                      <span className="text-5xl mb-4">{story.emoji}</span>
-                      <p className="mb-4 text-white/60 text-sm font-medium">
-                        {story.title}
-                      </p>
-                    </div>
-                    <div className="flex-1 overflow-hidden">
-                      <blockquote className="text-base text-white/80 leading-relaxed">
-                        {story.content}
-                      </blockquote>
+              <div className="flex snap-x snap-mandatory">
+                {stories.map((story, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-[350px] md:w-[400px] mx-4"
+                  >
+                    <div className="rounded-3xl p-8 border border-white/20 hover:border-[#7CB342]/50 bg-white/5 backdrop-blur-sm transition-all duration-500 h-[280px] flex flex-col group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#7CB342]/0 to-[#7CB342]/0 group-hover:from-[#7CB342]/5 group-hover:to-[#7CB342]/10 rounded-3xl transition-all duration-500" />
+                      <div className="flex flex-col">
+                        <span className="text-5xl mb-4">{story.emoji}</span>
+                        <p className="mb-4 text-white/60 text-sm font-medium">
+                          {story.title}
+                        </p>
+                      </div>
+                      <div className="flex-1 overflow-hidden">
+                        <blockquote className="text-base text-white/80 leading-relaxed">
+                          {story.content}
+                        </blockquote>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           {/* Success statement */}
