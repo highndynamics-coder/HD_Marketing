@@ -27,7 +27,7 @@ export default function ProductPage() {
     "/images/MCNLogo.png",
   ];
 
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
 
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const { data: ProductData, isLoading } = useQuery<ProductInfo[]>({
@@ -48,7 +48,7 @@ export default function ProductPage() {
 
   console.log("selectedProduct", selectedProduct);
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <main className="relative w-full min-h-screen overflow-x-hidden py-36">
         <div className="absolute inset-0 bg-gradient-to-br from-[#001A4D] via-[#001529] to-[#000000]" />
