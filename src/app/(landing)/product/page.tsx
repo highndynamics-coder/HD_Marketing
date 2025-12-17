@@ -169,10 +169,10 @@ export default function ProductPage() {
                                 />
                               </div>
                               <div className="flex flex-col items-center gap-1">
-                                <h4 className="text-2xl font-bold text-white">
+                                <h4 className="text-xl font-bold text-white">
                                   {selectedProduct.title}
                                 </h4>
-                                <p className="text-lg text-white/60 leading-snug line-clamp-2">
+                                <p className="text-base text-white/60 leading-snug line-clamp-2 text-center">
                                   {selectedProduct.content}
                                 </p>
                               </div>
@@ -188,39 +188,45 @@ export default function ProductPage() {
                                       className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
                                     >
                                       <div className="flex flex-col items-start gap-6">
-                                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#1EC800] flex items-center justify-center shrink-0 mt-0.5">
-                                          <span className="text-lg font-bold text-white">
-                                            {idx + 1}
-                                          </span>
+                                        <div className="flex flex-row items-center gap-6">
+                                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#1EC800] flex items-center justify-center shrink-0">
+                                            <span className="text-md font-semibold text-white">
+                                              {idx + 1}
+                                            </span>
+                                          </div>
+                                          <div>
+                                            <h5 className="text-base font-semibold text-white">
+                                              {productItem.title}
+                                            </h5>
+                                          </div>
                                         </div>
-                                        <div className="flex flex-col gap-1.5 mt-2">
-                                          <h5 className="text-xl font-semibold text-white mb-4">
-                                            {productItem.title}
-                                          </h5>
-                                          {Array.isArray(
-                                            productItem.content
-                                          ) ? (
-                                            <ul className="space-y-4">
-                                              {productItem.content.map(
-                                                (item: string, i: number) => (
-                                                  <li
-                                                    key={i}
-                                                    className="text-sm text-white/60 leading-relaxed flex items-center gap-2"
-                                                  >
-                                                    <span className="text-[#7CB342]">
-                                                      •
-                                                    </span>
-                                                    <span>{item}</span>
-                                                  </li>
-                                                )
-                                              )}
-                                            </ul>
-                                          ) : (
-                                            <p className="text-sm text-white/60 leading-relaxed">
-                                              {productItem.content}
-                                            </p>
-                                          )}
-                                        </div>
+                                        {productItem.content && (
+                                          <div className="flex flex-col gap-1.5 mt-2">
+                                            {Array.isArray(
+                                              productItem.content
+                                            ) ? (
+                                              <ul className="space-y-4">
+                                                {productItem.content.map(
+                                                  (item: string, i: number) => (
+                                                    <li
+                                                      key={i}
+                                                      className="text-sm text-white/60 leading-relaxed flex gap-2"
+                                                    >
+                                                      <span className="text-[#7CB342]">
+                                                        •
+                                                      </span>
+                                                      <span>{item}</span>
+                                                    </li>
+                                                  )
+                                                )}
+                                              </ul>
+                                            ) : (
+                                              <p className="text-sm text-white/60 leading-relaxed">
+                                                {productItem.content}
+                                              </p>
+                                            )}
+                                          </div>
+                                        )}
                                       </div>
                                     </div>
                                   )
