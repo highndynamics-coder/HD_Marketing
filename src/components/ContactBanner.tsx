@@ -7,7 +7,7 @@ import { useResponsive } from "@/lib/useResponsive";
 const CONTACT_EMAIL = "highndynamics@gmail.com";
 
 export const ContactBanner = () => {
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
 
@@ -29,7 +29,7 @@ export const ContactBanner = () => {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <div className="fixed bottom-0 left-0 right-0 z-[90] bg-blue-600 px-6 py-4 shadow-lg w-full h-24">
         <div className="mx-auto flex flex-col w-full items-center gap-2">
