@@ -83,10 +83,10 @@ export default function Footer() {
                 <div>
                   <span className="text-gray-400">전화번호:</span>
                   <a
-                    href="tel:044-000-000"
+                    href="tel:070-4647-1493"
                     className="ml-2 text-gray-300 hover:text-white transition-colors"
                   >
-                    -
+                    070-4647-1493
                   </a>
                 </div>
               </div>
@@ -202,10 +202,10 @@ export default function Footer() {
               <div>
                 <span className="text-gray-400">전화번호:</span>
                 <a
-                  href="tel:044-000-000"
+                  href="tel:070-4647-1493"
                   className="ml-2 text-gray-300 hover:text-white transition-colors"
                 >
-                  -
+                  070-4647-1493
                 </a>
               </div>
             </div>

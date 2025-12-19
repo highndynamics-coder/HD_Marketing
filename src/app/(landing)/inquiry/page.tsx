@@ -132,10 +132,10 @@ export default function InquiryPage() {
                   <div>
                     <div className="text-[#1A3A5C] mb-1">전화</div>
                     <a
-                      href="tel:"
+                      href="tel:070-4647-1493"
                       className="text-gray-600 hover:text-[#7CB342]"
                     >
-                      -
+                      070-4647-1493
                     </a>
                   </div>
                 </div>
@@ -425,8 +425,8 @@ export default function InquiryPage() {
                 </div>
                 <div>
                   <div className="text-[#1A3A5C] mb-1">전화</div>
-                  <a href="tel:" className="text-gray-600 hover:text-[#7CB342]">
-                    -
+                  <a href="tel:070-4647-1493" className="text-gray-600 hover:text-[#7CB342]">
+                    070-4647-1493
                   </a>
                 </div>
               </div>
