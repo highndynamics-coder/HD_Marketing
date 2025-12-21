@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ import { useResponsive } from "@/lib/useResponsive";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
+  const router = useRouter();
   const imageList = [
     "/images/SelfWork.png",
     "/images/OnlineCommerce.png",
@@ -342,7 +344,10 @@ export default function WorkPage() {
             </div>
             <div className="text-center opacity-100 transform-none">
               <div className="relative inline-block">
-                <button className="relative px-16 py-6 bg-gradient-to-r from-[#001A4D] via-[#003D7A] to-[#0066CC] text-white rounded-full text-xl hover:shadow-2xl transition-all flex items-center gap-4 mx-auto group overflow-hidden">
+                <button
+                  className="relative px-16 py-6 bg-gradient-to-r from-[#001A4D] via-[#003D7A] to-[#0066CC] text-white rounded-full text-xl hover:shadow-2xl transition-all flex items-center gap-4 mx-auto group overflow-hidden"
+                  onClick={() => router.push("/inquiry")}
+                >
                   <span className="relative z-10">무료 상담 신청하기</span>
                 </button>
               </div>
@@ -630,7 +635,10 @@ export default function WorkPage() {
           )}
           <div className="text-center opacity-100 transform-none">
             <div className="relative inline-block">
-              <button className="relative px-16 py-6 bg-gradient-to-r from-[#001A4D] via-[#003D7A] to-[#0066CC] text-white rounded-full text-xl hover:shadow-2xl transition-all flex items-center gap-4 mx-auto group overflow-hidden">
+              <button
+                className="relative px-16 py-6 bg-gradient-to-r from-[#001A4D] via-[#003D7A] to-[#0066CC] text-white rounded-full text-xl hover:shadow-2xl transition-all flex items-center gap-4 mx-auto group overflow-hidden"
+                onClick={() => router.push("/inquiry")}
+              >
                 <span className="relative z-10">무료 상담 신청하기</span>
               </button>
             </div>
