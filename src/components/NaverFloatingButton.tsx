@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 
-interface KakaoFloatingButtonProps {
-  channelId?: string;
+interface NaverFloatingButtonProps {
+  username?: string;
 }
 
-export function KakaoFloatingButton({
-  channelId = "_qxceQn",
-}: KakaoFloatingButtonProps) {
+export function NaverFloatingButton({
+  username = "",
+}: NaverFloatingButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   function handleClick() {
     // 카카오톡 채널 채팅 페이지로 이동
-    window.open(`https://pf.kakao.com/${channelId}`, "_blank");
+    window.open(`https://blog.naver.com/${username}`, "_blank");
   }
 
   return (
@@ -21,7 +21,7 @@ export function KakaoFloatingButton({
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="fixed bottom-36 right-6 z-50 flex flex-row justify-center items-center gap-3 bg-[#FEE500] hover:bg-[#FFD600] text-[#3C1E1E] font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-out group p-2"
+      className="fixed bottom-52 right-6 z-50 flex flex-row justify-center items-center gap-3 bg-[#FEE500] hover:bg-[#FFD600] text-[#3C1E1E] font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-out group p-2"
       aria-label="카카오톡 채널 상담"
     >
       {/* 카카오톡 아이콘 */}
@@ -59,4 +59,4 @@ export function KakaoFloatingButton({
   );
 }
 
-export default KakaoFloatingButton;
+export default NaverFloatingButton;
