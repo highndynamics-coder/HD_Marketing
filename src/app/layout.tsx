@@ -68,7 +68,7 @@ export default function RootLayout({
             {children}
             {isMainPage && (
               <>
-                <NaverFloatingButton />
+                {/* <NaverFloatingButton /> */}
                 <KakaoFloatingButton />
                 <InstagramFloatingButton />
               </>

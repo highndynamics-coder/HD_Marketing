@@ -238,6 +238,14 @@ export default function Footer() {
           <p className="text-sm text-gray-500">
             © {new Date().getFullYear()} HD Company. All rights reserved.
           </p>
+          <p className="text-sm text-transparent">
+            <a
+              href="https://www.flaticon.com/kr/free-icons/instagram-"
+              title="instagram 로고 아이콘"
+            >
+              Instagram 로고 아이콘 제작자: riajulislam - Flaticon
+            </a>
+          </p>
         </div>
       </div>
     </footer>
