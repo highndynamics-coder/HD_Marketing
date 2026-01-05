@@ -954,18 +954,6 @@ export default function LandingPage() {
           <div className="relative z-10 w-full max-w-7xl px-8 space-y-24">
             {/* Results Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-              {/* Result 1 */}
-              <div className="border border-white/10 rounded-2xl p-4">
-                <div className="text-center space-y-4">
-                  <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
-                    <span className="text-5xl">🏆</span>
-                  </div>
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
-                    플레이스 1 페이지
-                  </h3>
-                </div>
-              </div>
-
               {/* Result 2 */}
               <div className="border border-white/10 rounded-2xl p-4">
                 <div className="text-center space-y-4">
@@ -1486,18 +1474,6 @@ export default function LandingPage() {
         <div className="relative z-10 w-full max-w-7xl px-8 space-y-48">
           {/* Results Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {/* Result 1 */}
-            <div className="border border-white/10 rounded-2xl p-4">
-              <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center">
-                  <span className="text-5xl">🏆</span>
-                </div>
-                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-white">
-                  플레이스 1 페이지
-                </h3>
-              </div>
-            </div>
-
             {/* Result 2 */}
             <div className="border border-white/10 rounded-2xl p-4">
               <div className="text-center space-y-4">
