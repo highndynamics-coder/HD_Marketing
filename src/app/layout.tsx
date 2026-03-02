@@ -59,20 +59,21 @@ export default function RootLayout({
               "min-h-screen",
               isMainPage &&
                 "bg-gradient-to-br from-[#001A4d] via-[#002D66] to-[#001A33]",
-              !isMainPage && "bg-black"
+              !isMainPage && "bg-black",
             )}
             style={{
               scrollBehavior: "smooth",
             }}
           >
-            {children}
-            {isMainPage && (
+            <MaintenancePage />
+            {/* {children} */}
+            {/* {isMainPage && (
               <>
-                {/* <NaverFloatingButton /> */}
+                <NaverFloatingButton />
                 <KakaoFloatingButton />
                 <InstagramFloatingButton />
               </>
-            )}
+            )} */}
           </main>
           <Footer />
         </QueryProvider>

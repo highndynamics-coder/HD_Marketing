@@ -60,7 +60,7 @@ export default function LandingPage() {
         opacity: 1,
         duration: 0.4,
         ease: "power2.out",
-      }
+      },
     );
 
     tl.to(titles, {
@@ -79,7 +79,7 @@ export default function LandingPage() {
         duration: 0.45,
         ease: "cubic-bezier(.43,1.14,.53,-0.51)",
       },
-      "-=0.15"
+      "-=0.15",
     );
 
     return () => {
@@ -137,7 +137,7 @@ export default function LandingPage() {
         opacity: 1,
         duration: 0.6,
         ease: "power3.out",
-      }
+      },
     );
 
     tl.fromTo(
@@ -152,7 +152,7 @@ export default function LandingPage() {
         duration: 0.45,
         ease: "power2.out",
       },
-      "-=0.15"
+      "-=0.15",
     );
 
     const cardElements = cards.children;
@@ -170,7 +170,7 @@ export default function LandingPage() {
         ease: "power2.out",
         stagger: 0.1,
       },
-      "-=0.1"
+      "-=0.1",
     );
     gsap.to(cardElements, {
       y: -6,
@@ -219,7 +219,7 @@ export default function LandingPage() {
           scale: 1,
           duration: 0.75,
           ease: "power3.out",
-        }
+        },
       );
 
       qaTl.fromTo(
@@ -237,7 +237,7 @@ export default function LandingPage() {
           ease: "power3.out",
           stagger: 0.25,
         },
-        "+=0.2"
+        "+=0.2",
       );
 
       gsap.fromTo(
@@ -257,7 +257,7 @@ export default function LandingPage() {
             end: "bottom 40%",
             scrub: true,
           },
-        }
+        },
       );
     }, thirdSectionRef);
 
@@ -293,7 +293,7 @@ export default function LandingPage() {
         duration: 0.45,
         ease: "power2.out",
       },
-      "-=0.15"
+      "-=0.15",
     );
 
     const cardElements = cards.children;
@@ -311,7 +311,7 @@ export default function LandingPage() {
         ease: "power2.out",
         stagger: 0.1,
       },
-      "-=0.1"
+      "-=0.1",
     );
     gsap.to(cardElements, {
       y: -6,
@@ -359,7 +359,7 @@ export default function LandingPage() {
         ease: "power2.out",
         stagger: 0.1,
       },
-      "-=0.1"
+      "-=0.1",
     );
     gsap.to(cardElements, {
       y: -6,
@@ -803,7 +803,7 @@ export default function LandingPage() {
                   aria-hidden
                   className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
                 />
-                매출 성장의 원동력
+                매출 성장의 출발점
               </span>
               이 되어야 합니다.
             </h3>
@@ -1309,7 +1309,7 @@ export default function LandingPage() {
                 aria-hidden
                 className="absolute left-1/2 top-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 bg-[#7CB342]/45 blur-2xl rounded-full -z-10"
               />
-              매출 성장의 원동력
+              매출 성장의 출발점
             </span>
             이 되어야 합니다.
           </h3>
